@@ -1,0 +1,134 @@
+# =========================================================================
+# THƯ MỤC BẮT BUỘC CỦA UNITY (Tuyệt đối không đưa lên Git)
+# =========================================================================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Cc]rash[Rr]eports/
+[Mm]emory[Cc]aptures/
+[Rr]ecordings/
+[Vv]ersion[Cc]ontrol/
+[Bb]uilds/
+[Bb]uild/
+.utmp/
+.gradle/
+
+# =========================================================================
+# FILE CẤU HÌNH CỦA CÁC IDE (Visual Studio, Rider, VS Code)
+# Tránh xung đột cài đặt cá nhân giữa các thành viên trong nhóm
+# =========================================================================
+.vs/
+.vsCode/
+.idea/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.DotSettings.user
+ExportedObj/
+
+# File meta tự động sinh ra kèm theo các file cấu hình trên
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# =========================================================================
+# FILE ĐẦU RA KHI BUILD GAME (Sản phẩm đóng gói)
+# =========================================================================
+/[Bb]uild/
+/[Bb]uilds/
+/Windows/
+/OSX/
+/Linux/
+/Android/
+/iOS/
+*.apk
+*.aab
+*.app
+*.unitypackage
+*.unitypackage.meta
+
+# =========================================================================
+# FILE DO HỆ ĐIỀU HÀNH SINH RA (File rác)
+# =========================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.log
+sysinfo.txt
+mono_crash.*
+crashlytics-build.properties
+
+# File nén lớn không cần thiết
+*.zip
+*.tar
+*.tgz
+
+# =========================================================================
+# THƯ MỤC ĐẶC BIỆT TRONG ASSETS (Packages / Plugins / Tools)
+# =========================================================================
+# Thư mục chứa asset tải về từ Asset Store (có thể tải lại, không cần đẩy lên Git)
+/[Aa]sset[Ss]/[Aa]sset[Ss]tore[Pp]ackages/
+
+# Plugin tự động sinh ra của JetBrains Rider
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+
+# File tạm từ phần mềm Blender (nếu có dùng)
+*.blend1
+*.blend1.meta
+
+# Addressables (Hệ thống quản lý tài nguyên của Unity)
+/ServerData/
+/[Aa]ssets/StreamingAssets/aa*
+/[Aa]ssets/AddressableAssetsData/link.xml*
+/[Aa]ssets/Addressables_Temp*
+/[Aa]ssets/AddressableAssetsData/*/*.bin*
+
+
+# Visual Scripting auto-generated files
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Flow/UnitOptions.db.meta
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers
+/[Aa]ssets/Unity.VisualScripting.Generated/VisualScripting.Core/Property Providers.meta
+
+# Visual Scripting (Bolt) tự động sinh file cấu hình
+/[Aa]ssets/Unity.VisualScripting.Generated/
+
+# File cảnh tạm sinh ra khi chạy Test Runner
+/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+InitTestScene*.unity*
+
+# =========================================================================
+# QUY TẮC QUẢN LÝ FILE .META (RẤT QUAN TRỌNG)
+# Quy tắc này đảm bảo không bỏ sót file .meta của các file code/asset quan trọng
+# =========================================================================
+/[Aa]sset[Ss]/**/*.meta
+!/[Aa]sset[Ss]/**/*.meta
+
+# MemoryCaptures can get excessive in size.
+# They also could contain extremely sensitive data
+/[Mm]emoryCaptures/
+
+# Recordings can get excessive in size
+/[Rr]ecordings/
+
+# Uncomment this line if you wish to ignore the asset store tools plugin
+# /[Aa]ssets/AssetStoreTools*

@@ -8,7 +8,7 @@ public class IchigoController : FighterBase
     public int playerNumber = 1;
     public GameObject rangedProjectilePrefab;
     public GameObject ultimateEffectPrefab;
-    public float ultimateDuration = 6.0f;
+    public float ultimateDuration = 1.0f;
 
     [Header("--- DYNAMIC BINDINGS ---")]
     private AnimeFighter.UI.KeybindingsData keys;
@@ -57,6 +57,7 @@ public class IchigoController : FighterBase
         // Grounded check and FSM state logics
         CheckGrounded();
         HandleStateLogic();
+        HandleStaminaRegen();
         UpdateAnimations();
 
         // Read direct keyboard inputs using dynamic bindings

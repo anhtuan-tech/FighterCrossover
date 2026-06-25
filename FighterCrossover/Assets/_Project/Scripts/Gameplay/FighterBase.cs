@@ -20,7 +20,8 @@ public struct FighterStats
     public float maxHp;
     public float currentHp;
     public int mana;
-    public int stamina;
+    public float maxStamina; // Thêm giới hạn Stamina
+    public float stamina;    // Đổi thành float để hồi mượt mà
     
     
 }
@@ -35,10 +36,16 @@ public class FighterBase : MonoBehaviour, IDamageable
         maxHp = 500f,
         currentHp = 500f,
         mana = 250,
-        stamina = 100
+        maxStamina = 100f, // Giới hạn tối đa
+        stamina = 100f
         
         
     };
+    [Header("--- STAMINA REGEN ---")]
+    public float staminaRegenRate = 15f; // Lượng stamina hồi mỗi giây
+    public float staminaRegenDelay = 1.2f; // Thời gian đợi (giây) sau khi Dash mới bắt đầu hồi
+
+    protected float lastStaminaUseTime; // Lưu lại mốc thời gian cuối cùng tiêu hao stamina
 
     [Header("--- MOVEMENT SETTINGS ---")]
     public float moveSpeed = 6f;
@@ -63,6 +70,8 @@ public class FighterBase : MonoBehaviour, IDamageable
     protected Rigidbody2D rb;
     protected Animator anim;
     protected PlayerInput playerInput;
+    protected BoxCollider2D playerCollider;
+    protected Collider2D groundCollider;
 
     protected Vector2 moveInput;
     protected bool isGrounded;
@@ -77,6 +86,7 @@ public class FighterBase : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
+        playerCollider = GetComponent<BoxCollider2D>();
 
         rb.gravityScale = 3.5f;
         rb.freezeRotation = true;
@@ -91,6 +101,7 @@ public class FighterBase : MonoBehaviour, IDamageable
 
         CheckGrounded();
         HandleStateLogic();
+        HandleStaminaRegen();
         UpdateAnimations();
     }
 
@@ -112,12 +123,21 @@ public class FighterBase : MonoBehaviour, IDamageable
             comboStep = 0;
         }
 
-        moveInput = playerInput.actions["Move"].ReadValue<Vector2>();
+        if (playerInput != null && playerInput.actions != null)
+        {
+            var moveAct = playerInput.actions.FindAction("Move");
+            if (moveAct != null) moveInput = moveAct.ReadValue<Vector2>();
+        }
 
         // Chỉ cho phép đổi trạng thái nếu không bị khóa bởi đòn đánh/choáng/lướt
         if (CanAct())
         {
-            bool isBlockingInput = playerInput.actions["Block"].IsPressed();
+            bool isBlockingInput = false;
+            if (playerInput != null && playerInput.actions != null)
+            {
+                var blockAct = playerInput.actions.FindAction("Block");
+                if (blockAct != null) isBlockingInput = blockAct.IsPressed();
+            }
 
             if (isBlockingInput && isGrounded)
             {
@@ -147,6 +167,20 @@ public class FighterBase : MonoBehaviour, IDamageable
         if (CurrentState == newState) return;
         CurrentState = newState;
     }
+    protected virtual void HandleStaminaRegen()
+    {
+        // Kiểm tra nếu stamina chưa đầy và đã qua thời gian chờ (delay) kể từ lần dùng cuối
+        if (stats.stamina < stats.maxStamina && Time.time - lastStaminaUseTime >= staminaRegenDelay)
+        {
+            stats.stamina += staminaRegenRate * Time.deltaTime;
+            
+            // Tránh việc hồi vượt mức tối đa
+            if (stats.stamina > stats.maxStamina)
+            {
+                stats.stamina = stats.maxStamina;
+            }
+        }
+    }
     #endregion
 
     #region MOVEMENT & ACTIONS
@@ -169,30 +203,75 @@ public class FighterBase : MonoBehaviour, IDamageable
     }
 
     
-    public virtual void OnJump(InputAction.CallbackContext context)
+    public virtual void OnJump()
     {
-        if (!context.performed || !CanAct()) return;
+        if (!CanAct()) return;
+
+        bool isPressingDown = false;
+        if (playerInput != null && playerInput.actions != null)
+        {
+            var blockAct = playerInput.actions.FindAction("Block");
+            if (blockAct != null) isPressingDown = blockAct.IsPressed();
+        }
+
+        if (isPressingDown)
+        {
+            TryDropDown(); // Thử nhảy xuống, nhưng dù thất bại cũng không nhảy lên
+            return;
+        }
+
+        ExecuteJump();
+    }
+
+    protected virtual void ExecuteJump()
+    {
+        if (!CanAct()) return;
 
         if (isGrounded || currentJumps < maxJumps)
         {
             ChangeState(FighterState.Jumping);
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0); 
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             currentJumps++;
+
+            if (anim != null)
+            {
+                anim.SetTrigger(currentJumps > 1 ? "DoubleJump" : "Jump");
+            }
         }
     }
 
-    public virtual void OnDash(InputAction.CallbackContext context)
+    public virtual void OnDash()
     {
-        if (!context.performed || !CanAct() || !isGrounded || stats.stamina < 20) return;
+        if (!CanAct()) return;
 
+        bool isPressingDown = false;
+        if (playerInput != null && playerInput.actions != null)
+        {
+            var blockAct = playerInput.actions.FindAction("Block");
+            if (blockAct != null) isPressingDown = blockAct.IsPressed();
+        }
+
+        if (isPressingDown && TryDropDown())
+        {
+            return;
+        }
+
+        TriggerDash();
+    }
+
+    protected virtual void TriggerDash()
+    {
+        if (!CanAct() || !isGrounded || stats.stamina < 20) return;
         StartCoroutine(DashRoutine());
     }
+
 
     protected virtual IEnumerator DashRoutine()
     {
         ChangeState(FighterState.Dashing);
         stats.stamina -= 20;
+        lastStaminaUseTime = Time.time; // Ghi nhận thời gian vừa xài stamina
 
         float dashDir = transform.localScale.x;
         rb.gravityScale = 0f;
@@ -207,10 +286,9 @@ public class FighterBase : MonoBehaviour, IDamageable
     #endregion
 
     #region COMBAT
-    public virtual void OnAttack(InputAction.CallbackContext context)
+    public virtual void OnAttack()
     {
-        if (!context.performed || !CanAct() || !isGrounded) return;
-
+        if (!CanAct() || !isGrounded) return;
         ExecuteAttack();
     }
 
@@ -225,8 +303,8 @@ public class FighterBase : MonoBehaviour, IDamageable
 
         // Kích hoạt Trigger Animation ở đây (Ví dụ: anim.SetTrigger("Attack" + comboStep))
         Debug.Log($"[COMBAT] Combo Hit {comboStep}");
-
     }
+
 
     // Hàm này sẽ được gán vào Animation Event tại khung hình vung vũ khí trúng mục tiêu
     public virtual void AnimationEvent_DealDamage()
@@ -262,7 +340,7 @@ public class FighterBase : MonoBehaviour, IDamageable
             // Block giảm 70% sát thương theo chuẩn thiết kế
             damage *= (1f - blockDamageReduction);
             Debug.Log($"[DEFENSE] Đỡ đòn thành công! Nhận {damage} sát thương.");
-            // anim.SetTrigger("BlockHit");
+            if (anim != null) anim.SetTrigger("BlockHit");
         }
         else
         {
@@ -272,12 +350,14 @@ public class FighterBase : MonoBehaviour, IDamageable
 
             if (hitReceivedCount % 4 == 0 || isHeavyAttack)
             {
+                CancelInvoke(nameof(ResetStun));
                 ApplyKnockback(attackerPosX);
             }
             else
             {
-                // anim.SetTrigger("Hit");
+                if (anim != null) anim.SetTrigger("Hit");
                 // Giả lập thời gian bị choáng (Hit Stun)
+                CancelInvoke(nameof(ResetStun));
                 Invoke(nameof(ResetStun), 0.4f);
             }
         }
@@ -295,7 +375,8 @@ public class FighterBase : MonoBehaviour, IDamageable
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(new Vector2(knockbackDir * knockbackForce.x, knockbackForce.y), ForceMode2D.Impulse);
 
-        // anim.SetTrigger("Knockback");
+        if (anim != null) anim.SetTrigger("Knockback");
+        CancelInvoke(nameof(ResetStun));
         Invoke(nameof(ResetStun), 0.8f); // Stun lâu hơn khi bị văng
     }
 
@@ -310,7 +391,7 @@ public class FighterBase : MonoBehaviour, IDamageable
         ChangeState(FighterState.Dead);
         rb.linearVelocity = Vector2.zero;
         rb.simulated = false; // Tắt va chạm vật lý
-        // anim.SetTrigger("Die");
+        if (anim != null) anim.SetTrigger("Die");
         Debug.Log("[SYSTEM] Player K.O");
     }
     #endregion
@@ -318,9 +399,22 @@ public class FighterBase : MonoBehaviour, IDamageable
     #region UTILITIES
     protected virtual void CheckGrounded()
     {
-        // Dùng Raycast thay vì OverlapCircle để check chạm đất chính xác hơn và tiết kiệm tài nguyên
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, groundLayer);
-        isGrounded = hit.collider != null;
+        // Start raycast slightly above feet (0.1f) and check 0.25f down (0.15f below feet) to ignore self-collision
+        Vector2 rayStart = (Vector2)transform.position + Vector2.up * 0.1f;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(rayStart, Vector2.down, 0.25f, groundLayer);
+        
+        isGrounded = false;
+        groundCollider = null;
+
+        foreach (var hit in hits)
+        {
+            if (hit.collider != null && hit.collider.gameObject != gameObject)
+            {
+                isGrounded = true;
+                groundCollider = hit.collider;
+                break;
+            }
+        }
 
         if (isGrounded && rb.linearVelocity.y <= 0.01f)
         {
@@ -328,14 +422,37 @@ public class FighterBase : MonoBehaviour, IDamageable
         }
     }
 
+    protected bool TryDropDown()
+    {
+        if (isGrounded && groundCollider != null)
+        {
+            if (groundCollider.usedByEffector)
+            {
+                StartCoroutine(DropDownRoutine(groundCollider));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private IEnumerator DropDownRoutine(Collider2D platformCollider)
+    {
+        Physics2D.IgnoreCollision(playerCollider, platformCollider, true);
+        yield return new WaitForSeconds(0.3f);
+        if (platformCollider != null && playerCollider != null)
+        {
+            Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
+        }
+    }
+
     protected virtual void UpdateAnimations()
     {
         if (anim == null) return;
         // Chuẩn hóa gửi parameter cho Animator
-        // anim.SetBool("IsMoving", CurrentState == FighterState.Moving);
-        // anim.SetBool("IsGrounded", isGrounded);
-        // anim.SetBool("IsBlocking", CurrentState == FighterState.Blocking);
-        // anim.SetFloat("VelocityY", rb.velocity.y);
+        anim.SetBool("IsMoving", CurrentState == FighterState.Moving);
+        anim.SetBool("IsGrounded", isGrounded);
+        anim.SetBool("IsBlocking", CurrentState == FighterState.Blocking);
+        anim.SetFloat("VelocityY", rb.linearVelocity.y);
     }
 
     private void OnDrawGizmosSelected()

@@ -1,58 +1,78 @@
 ﻿using UnityEngine;
+using UnityEngine.UI; // Cần thêm thư viện này để làm việc với Slider
 
 public class LoadCharacter : MonoBehaviour
 {
-    // Đây là 2 Object rỗng đóng vai trò định vị (Spawn Point) trên Scene
+    [Header("--- Spawn Points ---")]
     public GameObject p1;
     public GameObject p2;
 
+    [Header("--- UI Elements Player 1 ---")]
+    public Slider p1HealthSlider;
+    public Slider p1ManaSlider;
+    public Slider p1StaminaSlider;
+
+    [Header("--- UI Elements Player 2 ---")]
+    public Slider p2HealthSlider;
+    public Slider p2ManaSlider;
+    public Slider p2StaminaSlider;
+
     void Start()
     {
-        // 1. Thay thế cho Player 1
+        // 1. Tải và thiết lập cho Player 1
         if (p1 != null && !string.IsNullOrEmpty(SelectionData.characterPrefabUrl1))
         {
-            // Load bản vẽ từ thư mục Resources
-            GameObject p1Prefab = Resources.Load<GameObject>(SelectionData.characterPrefabUrl1);
-
-            if (p1Prefab != null)
-            {
-                // Khởi tạo nhân vật mới tại đúng vị trí và góc quay của object p1 rỗng
-                GameObject newP1 = Instantiate(p1Prefab, p1.transform.position, p1.transform.rotation);
-
-                // (Tùy chọn) Nếu p1 rỗng nằm trong cụm cha nào đó, đưa nhân vật mới vào cụm đó luôn
-                if (p1.transform.parent != null) newP1.transform.SetParent(p1.transform.parent);
-                newP1.name = "Player1";
-
-                // Xóa Object rỗng cũ đi để tránh rác Scene
-                Destroy(p1);
-
-                // Cập nhật lại biến p1 để giữ liên kết với nhân vật mới nếu cần quản lý sau này
-                p1 = newP1;
-            }
-            else
-            {
-                Debug.LogError($"Không tìm thấy Prefab P1 tại địa chỉ: {SelectionData.characterPrefabUrl1}");
-            }
+            p1 = SpawnAndSetupPlayer(SelectionData.characterPrefabUrl1, p1, "Player1", p1HealthSlider, p1ManaSlider, p1StaminaSlider);
         }
 
-        // 2. Thay thế cho Player 2
+        // 2. Tải và thiết lập cho Player 2
         if (p2 != null && !string.IsNullOrEmpty(SelectionData.characterPrefabUrl2))
         {
-            GameObject p2Prefab = Resources.Load<GameObject>(SelectionData.characterPrefabUrl2);
+            p2 = SpawnAndSetupPlayer(SelectionData.characterPrefabUrl2, p2, "Player2", p2HealthSlider, p2ManaSlider, p2StaminaSlider);
+        }
+    }
 
-            if (p2Prefab != null)
+    /// <summary>
+    /// Hàm phụ giúp tối ưu code: Khởi tạo nhân vật và liên kết các thanh UI
+    /// </summary>
+    private GameObject SpawnAndSetupPlayer(string prefabUrl, GameObject spawnPoint, string playerName, Slider hp, Slider mp, Slider stamina)
+    {
+        GameObject prefab = Resources.Load<GameObject>(prefabUrl);
+
+        if (prefab != null)
+        {
+            // Khởi tạo nhân vật mới tại vị trí spawn point
+            GameObject newPlayer = Instantiate(prefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+
+            // Giữ lại cấu trúc cha-con nếu có
+            if (spawnPoint.transform.parent != null)
+                newPlayer.transform.SetParent(spawnPoint.transform.parent);
+
+            newPlayer.name = playerName;
+
+            // --- ĐÂY LÀ PHẦN KẾT NỐI UI VÀO CƠ CHẾ CỦA NHÂN VẬT ---
+            // Giả sử trên Prefab của bạn có một Script tên là "PlayerStats" đảm nhận việc quản lý chỉ số.
+            // Bạn hãy thay thế "PlayerStats" bằng tên script thực tế của bạn (ví dụ: CharacterController, PlayerHealth,...)
+            PlayerStats stats = newPlayer.GetComponent<PlayerStats>();
+            if (stats != null)
             {
-                GameObject newP2 = Instantiate(p2Prefab, p2.transform.position, p2.transform.rotation);
-                if (p2.transform.parent != null) newP2.transform.SetParent(p2.transform.parent);
-                newP2.name = "Player2";
-
-                Destroy(p2);
-                p2 = newP2;
+                // Gọi hàm khởi tạo UI trên script của nhân vật
+                stats.SetupUI(hp, mp, stamina);
             }
             else
             {
-                Debug.LogError($"Không tìm thấy Prefab P2 tại địa chỉ: {SelectionData.characterPrefabUrl2}");
+                Debug.LogWarning($"Prefab {playerName} không chứa script PlayerStats để nhận dữ liệu Slider!");
             }
+            // ---------------------------------------------------
+
+            // Xóa Object định vị cũ
+            Destroy(spawnPoint);
+            return newPlayer;
+        }
+        else
+        {
+            Debug.LogError($"Không tìm thấy Prefab tại địa chỉ: {prefabUrl}");
+            return spawnPoint; // Trả về lại cái cũ nếu lỗi
         }
     }
 }

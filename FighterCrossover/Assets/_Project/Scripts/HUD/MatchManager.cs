@@ -17,28 +17,12 @@ public class MatchManager : MonoBehaviour
     [Header("--- Timer Script ---")]
     public SpriteTimer timerScript;
 
-    [Header("--- Avatar Script ---")]
-    public ChangeAvatarSprite avatar1;
-    public ChangeAvatarSprite avatar2;
-
-    public GameObject player1;
-    public GameObject player2;
-
     public static bool IsMatchStarted { get; private set; } = false;
     public static bool IsMatchEnded { get; private set; } = false;
 
     // SỬA LỖI: Hàm Start mặc định của Unity KHÔNG được chứa tham số
     void Start()
     {
-        // Tự động lấy dữ liệu đã parse từ Scene trước thông qua class static
-        //Sprite p1Sprite = CharacterSelectionContainer.SelectedAvatarP1;
-        //Sprite p2Sprite = CharacterSelectionContainer.SelectedAvatarP2;
-
-        Sprite p1Sprite = null;
-        Sprite p2Sprite = null;
-
-        InitMatch(p1Sprite, p2Sprite);
-
         IsMatchStarted = false;
         IsMatchEnded = false;
 
@@ -58,18 +42,6 @@ public class MatchManager : MonoBehaviour
         {
             EndMatch();
         }
-    }
-
-    void InitMatch(Sprite inputSprite1, Sprite inputSprite2)
-    {
-        ChangeAvatar(inputSprite1, inputSprite2);
-    }
-
-    void ChangeAvatar(Sprite inputSprite1, Sprite inputSprite2)
-    {
-        // Chỉ đổi nếu dữ liệu truyền vào không bị rỗng (tránh lỗi nếu bạn bật thẳng Scene này để test)
-        if (avatar1 != null && inputSprite1 != null) avatar1.ExecuteSpriteChange(inputSprite1);
-        if (avatar2 != null && inputSprite2 != null) avatar2.ExecuteSpriteChange(inputSprite2);
     }
 
     IEnumerator StartMatchRoutine()

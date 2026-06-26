@@ -3198,7 +3198,6 @@ GameObject:
   - component: {fileID: 2964083476189854801}
   - component: {fileID: 634737697567399811}
   - component: {fileID: 1171933328738658634}
-  - component: {fileID: 5729616386031976459}
   m_Layer: 5
   m_Name: EventManager
   m_TagString: Untagged
@@ -3245,10 +3244,6 @@ MonoBehaviour:
   letterDot: {fileID: 3747755828540389666}
   letterO: {fileID: 7669716405487953311}
   timerScript: {fileID: 2699387103018793901}
-  avatar1: {fileID: 0}
-  avatar2: {fileID: 0}
-  player1: {fileID: 0}
-  player2: {fileID: 0}
 --- !u!114 &1171933328738658634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3261,20 +3256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5ab3cd6a5accf4ba7d23c82c0d7a20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeAvatarSprite
-  targetImage: {fileID: 7877674968923373376}
---- !u!114 &5729616386031976459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5659782291354712875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef5ab3cd6a5accf4ba7d23c82c0d7a20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChangeAvatarSprite
-  targetImage: {fileID: 9173161058306530064}
+  player1: {fileID: 0}
+  player2: {fileID: 0}
 --- !u!1 &5757675575904001892
 GameObject:
   m_ObjectHideFlags: 0

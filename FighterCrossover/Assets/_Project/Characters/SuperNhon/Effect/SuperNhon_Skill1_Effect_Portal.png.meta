@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: 482a2f691f1310e4ab44ff29c68cca9b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -139349413362152839
+    second: SuperNhon_Skill1_Effect_Portal_0
+  - first:
+      213: 4037882358937955146
+    second: SuperNhon_Skill1_Effect_Portal_1
+  - first:
+      213: 7785064102223776485
+    second: SuperNhon_Skill1_Effect_Portal_2
+  - first:
+      213: -1658269629762391253
+    second: SuperNhon_Skill1_Effect_Portal_3
+  - first:
+      213: -6610465643206188707
+    second: SuperNhon_Skill1_Effect_Portal_4
+  - first:
+      213: -4035497605897091750
+    second: SuperNhon_Skill1_Effect_Portal_5
+  - first:
+      213: -196721412243480894
+    second: SuperNhon_Skill1_Effect_Portal_6
+  - first:
+      213: 6871548173586676435
+    second: SuperNhon_Skill1_Effect_Portal_7
+  - first:
+      213: -8878981098865575928
+    second: SuperNhon_Skill1_Effect_Portal_8
+  - first:
+      213: 6524468784889490982
+    second: SuperNhon_Skill1_Effect_Portal_9
+  - first:
+      213: -6606239824695779011
+    second: SuperNhon_Skill1_Effect_Portal_10
+  - first:
+      213: -6453947268778040324
+    second: SuperNhon_Skill1_Effect_Portal_11
+  - first:
+      213: 1912419644387490944
+    second: SuperNhon_Skill1_Effect_Portal_12
+  - first:
+      213: 4116639266399434731
+    second: SuperNhon_Skill1_Effect_Portal_13
+  - first:
+      213: 7966177775211776670
+    second: SuperNhon_Skill1_Effect_Portal_14
+  - first:
+      213: -5746239485725531811
+    second: SuperNhon_Skill1_Effect_Portal_15
+  - first:
+      213: 5200851872750456479
+    second: SuperNhon_Skill1_Effect_Portal_16
+  - first:
+      213: -5262908432981891503
+    second: SuperNhon_Skill1_Effect_Portal_17
+  - first:
+      213: -4574287136370260716
+    second: SuperNhon_Skill1_Effect_Portal_18
+  - first:
+      213: 6781920523340918774
+    second: SuperNhon_Skill1_Effect_Portal_19
+  - first:
+      213: -713565721536099391
+    second: SuperNhon_Skill1_Effect_Portal_20
+  - first:
+      213: 9120022523660224767
+    second: SuperNhon_Skill1_Effect_Portal_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_0
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 312
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97ac3e4627ee01ef0800000000000000
+      internalID: -139349413362152839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_1
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 313
+        width: 25
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4b2051ac90790830800000000000000
+      internalID: 4037882358937955146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_2
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 302
+        width: 44
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ea81becd8a1a0c60800000000000000
+      internalID: 7785064102223776485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_3
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 299
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b23b130ce84acf8e0800000000000000
+      internalID: -1658269629762391253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_4
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 294
+        width: 63
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5165c07588e244a0800000000000000
+      internalID: -6610465643206188707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_5
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 200
+        width: 69
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a558094fe480ff7c0800000000000000
+      internalID: -4035497605897091750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_6
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 200
+        width: 72
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ce9387faea154df0800000000000000
+      internalID: -196721412243480894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_7
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 198
+        width: 77
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3da3e9728a4ac5f50800000000000000
+      internalID: 6871548173586676435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_8
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 198
+        width: 73
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 808b5b2cbb587c480800000000000000
+      internalID: -8878981098865575928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_9
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 197
+        width: 82
+        height: 73
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62e667faac19b8a50800000000000000
+      internalID: 6524468784889490982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_10
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 198
+        width: 79
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3128fb71ebe154a0800000000000000
+      internalID: -6606239824695779011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_11
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 105
+        width: 80
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf3e16d4729fe66a0800000000000000
+      internalID: -6453947268778040324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_12
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 105
+        width: 76
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08cf13db8874a8a10800000000000000
+      internalID: 1912419644387490944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_13
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 105
+        width: 80
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be7b9261a9d312930800000000000000
+      internalID: 4116639266399434731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_14
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 105
+        width: 80
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9a0c1dda7c8d8e60800000000000000
+      internalID: 7966177775211776670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_15
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 108
+        width: 78
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d51a103f1a14140b0800000000000000
+      internalID: -5746239485725531811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_16
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 108
+        width: 74
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9e47b419332d2840800000000000000
+      internalID: 5200851872750456479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_17
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 15
+        width: 74
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 156e4be0aa466f6b0800000000000000
+      internalID: -5262908432981891503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_18
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 18
+        width: 66
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4150308c51ed480c0800000000000000
+      internalID: -4574287136370260716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_19
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 20
+        width: 60
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ffaaa8a8c83e1e50800000000000000
+      internalID: 6781920523340918774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_20
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 28
+        width: 39
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cb02f3c1c7e816f0800000000000000
+      internalID: -713565721536099391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_Portal_21
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 40
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff844525a24d09e70800000000000000
+      internalID: 9120022523660224767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SuperNhon_Skill1_Effect_Portal_0: -139349413362152839
+      SuperNhon_Skill1_Effect_Portal_1: 4037882358937955146
+      SuperNhon_Skill1_Effect_Portal_10: -6606239824695779011
+      SuperNhon_Skill1_Effect_Portal_11: -6453947268778040324
+      SuperNhon_Skill1_Effect_Portal_12: 1912419644387490944
+      SuperNhon_Skill1_Effect_Portal_13: 4116639266399434731
+      SuperNhon_Skill1_Effect_Portal_14: 7966177775211776670
+      SuperNhon_Skill1_Effect_Portal_15: -5746239485725531811
+      SuperNhon_Skill1_Effect_Portal_16: 5200851872750456479
+      SuperNhon_Skill1_Effect_Portal_17: -5262908432981891503
+      SuperNhon_Skill1_Effect_Portal_18: -4574287136370260716
+      SuperNhon_Skill1_Effect_Portal_19: 6781920523340918774
+      SuperNhon_Skill1_Effect_Portal_2: 7785064102223776485
+      SuperNhon_Skill1_Effect_Portal_20: -713565721536099391
+      SuperNhon_Skill1_Effect_Portal_21: 9120022523660224767
+      SuperNhon_Skill1_Effect_Portal_3: -1658269629762391253
+      SuperNhon_Skill1_Effect_Portal_4: -6610465643206188707
+      SuperNhon_Skill1_Effect_Portal_5: -4035497605897091750
+      SuperNhon_Skill1_Effect_Portal_6: -196721412243480894
+      SuperNhon_Skill1_Effect_Portal_7: 6871548173586676435
+      SuperNhon_Skill1_Effect_Portal_8: -8878981098865575928
+      SuperNhon_Skill1_Effect_Portal_9: 6524468784889490982
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

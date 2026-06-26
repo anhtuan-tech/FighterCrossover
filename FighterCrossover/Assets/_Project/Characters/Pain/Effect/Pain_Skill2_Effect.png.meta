@@ -114,10 +114,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 126
-        height: 134
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 36
+        height: 53
+      alignment: 9
+      pivot: {x: 0.5046115, y: 0.34651494}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -134,12 +134,12 @@ TextureImporter:
       name: Pain_Skill2_Effect_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 130
         y: 0
-        width: 37
-        height: 51
+        width: 34
+        height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -156,12 +156,12 @@ TextureImporter:
       name: Pain_Skill2_Effect_2
       rect:
         serializedVersion: 2
-        x: 164
+        x: 166
         y: 0
-        width: 46
-        height: 66
+        width: 42
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,12 +178,12 @@ TextureImporter:
       name: Pain_Skill2_Effect_3
       rect:
         serializedVersion: 2
-        x: 210
+        x: 211
         y: 0
-        width: 42
-        height: 134
+        width: 41
+        height: 133
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -196,11 +196,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Pain_Skill2_Effect_4
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 0
+        width: 43
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aa8b55e811c9bd478cdb949028831b3
+      internalID: 1265867583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pain_Skill2_Effect_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 0
+        width: 45
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c06c8578cd93d545a32a335cd3b425a
+      internalID: -1820457332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 692366d4b17a4cf429f287eaae16d4df
     internalID: 0
     vertices: []
     indices: 
@@ -208,12 +252,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":39.0,"y":140.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Pain_Skill2_Effect_0: -4074715721848054150
       Pain_Skill2_Effect_1: 7464213398650101641
       Pain_Skill2_Effect_2: 4084056019156563650
       Pain_Skill2_Effect_3: -7017752949018817685
+      Pain_Skill2_Effect_4: 1265867583
+      Pain_Skill2_Effect_5: -1820457332
+      Pain_Skill2_Effect_6: -1796774165
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

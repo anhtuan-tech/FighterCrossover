@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class MatchManager : MonoBehaviour
 {
+    // THÊM: Tạo Instance để các script khác (như UI Monitor) có thể gọi trực tiếp
+    public static MatchManager Instance { get; private set; }
+
     [Header("--- Start HUD ---")]
     public GameObject letter3;
     public GameObject letter2;
@@ -20,7 +23,17 @@ public class MatchManager : MonoBehaviour
     public static bool IsMatchStarted { get; private set; } = false;
     public static bool IsMatchEnded { get; private set; } = false;
 
-    // SỬA LỖI: Hàm Start mặc định của Unity KHÔNG được chứa tham số
+    // THÊM: Lưu trữ tham chiếu tới 2 nhân vật để check máu trong Update
+    private FighterBase player1;
+    private FighterBase player2;
+
+    private void Awake()
+    {
+        // Khởi tạo Instance
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     void Start()
     {
         IsMatchStarted = false;
@@ -33,12 +46,34 @@ public class MatchManager : MonoBehaviour
         StartCoroutine(StartMatchRoutine());
     }
 
+    /// <summary>
+    /// Hàm này để LoadCharacter truyền tham chiếu nhân vật sang sau khi spawn xong
+    /// </summary>
+    public void SetPlayers(FighterBase p1, FighterBase p2)
+    {
+        player1 = p1;
+        player2 = p2;
+    }
+
     private void Update()
     {
-        // Nếu mà player1 hoặc 2 hết máu thì out game.
+        // Nếu trận đấu chưa bắt đầu hoặc đã kết thúc rồi thì không check nữa
+        if (!IsMatchStarted || IsMatchEnded) return;
 
-        // Nếu hết giờ.
-        if (timerScript.IsEnd())
+        // XỬ LÝ: Nếu player1 hoặc 2 hết máu thì kết thúc trận đấu
+        if (player1 != null && player1.stats.currentHp <= 0)
+        {
+            Debug.Log("[MATCH] Player 1 hết máu -> Kết thúc trận!");
+            EndMatch();
+        }
+        else if (player2 != null && player2.stats.currentHp <= 0)
+        {
+            Debug.Log("[MATCH] Player 2 hết máu -> Kết thúc trận!");
+            EndMatch();
+        }
+
+        // Nếu hết giờ
+        if (timerScript != null && timerScript.IsEnd())
         {
             EndMatch();
         }
@@ -51,23 +86,24 @@ public class MatchManager : MonoBehaviour
         letter2.SetActive(true); yield return new WaitForSeconds(1f); letter2.SetActive(false);
         letter1.SetActive(true); yield return new WaitForSeconds(1f); letter1.SetActive(false);
 
-        // Hiện chữ GO!
         letterGo.SetActive(true);
         IsMatchStarted = true;
 
-        if (timerScript != null) timerScript.enabled = true; // Hoặc timerScript.RunTimer() tùy bạn viết bên SpriteTimer
+        if (timerScript != null) timerScript.enabled = true;
 
-        // Chờ 1 giây rồi ẩn chữ GO đi
         yield return new WaitForSeconds(1f);
         letterGo.SetActive(false);
 
-        timerScript.RunTimer();
+        if (timerScript != null) timerScript.RunTimer();
     }
 
     public void EndMatch()
     {
+        if (IsMatchEnded) return; // Tránh việc gọi trùng lặp nhiều lần
+        IsMatchEnded = true;
+
         StartCoroutine(EndMatchRoutine());
-        this.enabled = false;
+        this.enabled = false; // Tắt Update đi
     }
 
     IEnumerator EndMatchRoutine()

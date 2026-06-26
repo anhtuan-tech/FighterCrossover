@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI; // Cần thêm thư viện này để làm việc với Slider
 
 public class LoadCharacter : MonoBehaviour
 {
@@ -7,72 +6,52 @@ public class LoadCharacter : MonoBehaviour
     public GameObject p1;
     public GameObject p2;
 
-    [Header("--- UI Elements Player 1 ---")]
-    public Slider p1HealthSlider;
-    public Slider p1ManaSlider;
-    public Slider p1StaminaSlider;
+    [Header("--- UI Monitors ---")]
+    public FighterStatMonitor p1UiMonitor;
+    public FighterStatMonitor p2UiMonitor;
 
-    [Header("--- UI Elements Player 2 ---")]
-    public Slider p2HealthSlider;
-    public Slider p2ManaSlider;
-    public Slider p2StaminaSlider;
+    [Header("--- Match Manager ---")]
+    public MatchManager matchManager; // Kéo thả MatchManager vào đây
 
     void Start()
     {
+        FighterBase p1Fighter = null;
+        FighterBase p2Fighter = null;
+
         // 1. Tải và thiết lập cho Player 1
         if (p1 != null && !string.IsNullOrEmpty(SelectionData.characterPrefabUrl1))
         {
-            p1 = SpawnAndSetupPlayer(SelectionData.characterPrefabUrl1, p1, "Player1", p1HealthSlider, p1ManaSlider, p1StaminaSlider);
+            p1Fighter = SpawnPlayer(SelectionData.characterPrefabUrl1, p1, "Player1");
+            if (p1Fighter != null && p1UiMonitor != null) p1UiMonitor.Initialize(p1Fighter);
         }
 
         // 2. Tải và thiết lập cho Player 2
         if (p2 != null && !string.IsNullOrEmpty(SelectionData.characterPrefabUrl2))
         {
-            p2 = SpawnAndSetupPlayer(SelectionData.characterPrefabUrl2, p2, "Player2", p2HealthSlider, p2ManaSlider, p2StaminaSlider);
+            p2Fighter = SpawnPlayer(SelectionData.characterPrefabUrl2, p2, "Player2");
+            if (p2Fighter != null && p2UiMonitor != null) p2UiMonitor.Initialize(p2Fighter);
+        }
+
+        // KẾT NỐI SANG MATCH MANAGER
+        if (matchManager != null)
+        {
+            matchManager.SetPlayers(p1Fighter, p2Fighter);
         }
     }
 
-    /// <summary>
-    /// Hàm phụ giúp tối ưu code: Khởi tạo nhân vật và liên kết các thanh UI
-    /// </summary>
-    private GameObject SpawnAndSetupPlayer(string prefabUrl, GameObject spawnPoint, string playerName, Slider hp, Slider mp, Slider stamina)
+    private FighterBase SpawnPlayer(string prefabUrl, GameObject spawnPoint, string playerName)
     {
         GameObject prefab = Resources.Load<GameObject>(prefabUrl);
-
         if (prefab != null)
         {
-            // Khởi tạo nhân vật mới tại vị trí spawn point
             GameObject newPlayer = Instantiate(prefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
-
-            // Giữ lại cấu trúc cha-con nếu có
-            if (spawnPoint.transform.parent != null)
-                newPlayer.transform.SetParent(spawnPoint.transform.parent);
-
+            if (spawnPoint.transform.parent != null) newPlayer.transform.SetParent(spawnPoint.transform.parent);
             newPlayer.name = playerName;
 
-            // --- ĐÂY LÀ PHẦN KẾT NỐI UI VÀO CƠ CHẾ CỦA NHÂN VẬT ---
-            // Giả sử trên Prefab của bạn có một Script tên là "PlayerStats" đảm nhận việc quản lý chỉ số.
-            // Bạn hãy thay thế "PlayerStats" bằng tên script thực tế của bạn (ví dụ: CharacterController, PlayerHealth,...)
-            PlayerStats stats = newPlayer.GetComponent<PlayerStats>();
-            if (stats != null)
-            {
-                // Gọi hàm khởi tạo UI trên script của nhân vật
-                stats.SetupUI(hp, mp, stamina);
-            }
-            else
-            {
-                Debug.LogWarning($"Prefab {playerName} không chứa script PlayerStats để nhận dữ liệu Slider!");
-            }
-            // ---------------------------------------------------
-
-            // Xóa Object định vị cũ
+            FighterBase fighterScript = newPlayer.GetComponent<FighterBase>();
             Destroy(spawnPoint);
-            return newPlayer;
+            return fighterScript;
         }
-        else
-        {
-            Debug.LogError($"Không tìm thấy Prefab tại địa chỉ: {prefabUrl}");
-            return spawnPoint; // Trả về lại cái cũ nếu lỗi
-        }
+        return null;
     }
 }

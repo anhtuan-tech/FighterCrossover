@@ -7,6 +7,11 @@ public class ChangeSupportAvatarSprite : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
 
+    void Start()
+    {
+        ExecuteSpriteChange();
+    }
+
     /// <summary>
     /// Hàm thay đổi Sprite cho một GameObject UI dựa trên đường dẫn từ thư mục Resources
     /// </summary>

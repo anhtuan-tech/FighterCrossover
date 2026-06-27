@@ -916,6 +916,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1990319132}
     - target: {fileID: 3484432408222244594, guid: 328eab49b8f7bfb4890be905e07ce6e5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484432408222244594, guid: 328eab49b8f7bfb4890be905e07ce6e5, type: 3}
       propertyPath: p1UiMonitor
       value: 
       objectReference: {fileID: 1054321991}

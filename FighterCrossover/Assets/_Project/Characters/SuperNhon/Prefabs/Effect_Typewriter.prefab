@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 5781368118090644060}
   - component: {fileID: 7408855637196489318}
   m_Layer: 5
-  m_Name: SuperNhon_Rewrite_Reality_Canvas
+  m_Name: Effect_Typewriter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

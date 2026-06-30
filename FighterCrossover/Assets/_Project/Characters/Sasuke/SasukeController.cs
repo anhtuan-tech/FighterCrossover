@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class SasukeController : FighterBase
 {
     [Header("--- SASUKE SETTINGS ---")]
-    public int playerNumber = 2; 
     public GameObject fireballPrefab; // Kỹ năng tầm xa (U)
     public GameObject chidoriEffectPrefab; // Kỹ năng đặc biệt (I)
     public float chidoriDuration = 1.5f;
@@ -17,7 +16,7 @@ public class SasukeController : FighterBase
     #region INITIALIZATION
     protected override void Awake()
     {
-        base.Awake(); 
+        base.Awake();
         LoadKeybindings();
     }
 
@@ -135,7 +134,7 @@ public class SasukeController : FighterBase
     // Ghi đè hàm gửi Animation để hỗ trợ Blend Tree di chuyển ngang
     protected override void UpdateAnimations()
     {
-        base.UpdateAnimations(); 
+        base.UpdateAnimations();
 
         if (anim != null)
         {
@@ -189,7 +188,7 @@ public class SasukeController : FighterBase
 
         if (anim != null)
         {
-            anim.SetTrigger("SkillRanged"); 
+            anim.SetTrigger("SkillRanged");
         }
         CancelInvoke(nameof(AnimationEvent_EndAttack));
         Invoke(nameof(AnimationEvent_EndAttack), 1.5f);
@@ -203,7 +202,7 @@ public class SasukeController : FighterBase
 
         if (anim != null)
         {
-            anim.SetTrigger("SkillUltimate"); 
+            anim.SetTrigger("SkillUltimate");
         }
         CancelInvoke(nameof(AnimationEvent_EndAttack));
         Invoke(nameof(AnimationEvent_EndAttack), 1.2f);
@@ -223,7 +222,7 @@ public class SasukeController : FighterBase
 
         // Cơ chế lướt chống xuyên tường
         Vector2 startPos = rb.position;
-        float dashDist = 5.0f; 
+        float dashDist = 5.0f;
         Vector2 targetPos = startPos + new Vector2(dashDir * dashDist, 0f);
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(startPos, new Vector2(dashDir, 0f), dashDist, groundLayer);

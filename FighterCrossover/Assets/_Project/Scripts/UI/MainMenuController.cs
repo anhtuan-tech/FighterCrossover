@@ -52,6 +52,7 @@ namespace AnimeFighter.UI
 
         private GameSettingsData settingsData;
         private string saveFilePath;
+        public GameModeController gameModePopup;
 
         // Rebinding State
         private bool isListening = false;
@@ -93,7 +94,7 @@ namespace AnimeFighter.UI
 
             // Apply loaded settings to UI components
             ApplySettingsToUI();
-            
+
             // Start playing background music if it exists
             if (bgmSource != null && !bgmSource.isPlaying)
             {
@@ -144,8 +145,7 @@ namespace AnimeFighter.UI
         // --- Main Menu Navigation ---
         public void StartGame()
         {
-            Debug.Log("Loading Pre_Match_Scene...");
-            SceneManager.LoadScene("Pre_Match_Scene");
+            gameModePopup.OpenPopup();
         }
 
         public void OpenSettings()
@@ -176,7 +176,8 @@ namespace AnimeFighter.UI
             SaveSettings();
             if (settingsPopup != null)
             {
-                StartCoroutine(ScalePanel(settingsPopup, Vector3.zero, 0.2f, () => {
+                StartCoroutine(ScalePanel(settingsPopup, Vector3.zero, 0.2f, () =>
+                {
                     settingsPopup.SetActive(false);
                 }));
             }
@@ -184,11 +185,11 @@ namespace AnimeFighter.UI
 
         public void ExitGame()
         {
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
-            #else
+#else
             Application.Quit();
-            #endif
+#endif
         }
 
         private IEnumerator ScalePanel(GameObject panel, Vector3 targetScale, float duration, System.Action onComplete = null)
@@ -418,7 +419,7 @@ namespace AnimeFighter.UI
             if (volumeSlider != null)
             {
                 volumeSlider.value = settingsData.masterVolume;
-                
+
                 // Color slider handle to orange, fill to purple
                 if (volumeSlider.handleRect != null)
                 {
@@ -427,7 +428,7 @@ namespace AnimeFighter.UI
                     {
                         handleImage.color = new Color(1f, 0.5f, 0f, 1f); // Vibrant orange
                     }
-                    
+
                     // Rotate based on initial volume
                     float rotationAngle = settingsData.masterVolume * -720f;
                     volumeSlider.handleRect.localRotation = Quaternion.Euler(0f, 0f, rotationAngle);

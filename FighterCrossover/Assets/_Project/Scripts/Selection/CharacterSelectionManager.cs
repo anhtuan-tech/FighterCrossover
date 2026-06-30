@@ -25,8 +25,8 @@ public class CharacterSelectionManager : MonoBehaviour
     public GameObject charSlotPrefab;
 
     [Header("--- CON TRỎ (MŨI TÊN/KHUNG) ---")]
-    public RectTransform p1Cursor; // Kéo thả UI Image con trỏ của P1 vào đây
-    public RectTransform p2Cursor; // Kéo thả UI Image con trỏ của P2 vào đây
+    public RectTransform p1Cursor;
+    public RectTransform p2Cursor;
 
     private List<Image> spawnedSlots = new List<Image>();
     private float timeRemaining = 30f;
@@ -73,7 +73,6 @@ public class CharacterSelectionManager : MonoBehaviour
             }
         }
 
-        // Đảm bảo con trỏ hiển thị đè lên trên các slot
         if (p1Cursor != null) p1Cursor.SetAsLastSibling();
         if (p2Cursor != null) p2Cursor.SetAsLastSibling();
 
@@ -94,39 +93,62 @@ public class CharacterSelectionManager : MonoBehaviour
 
     void HandleNewInputSystem()
     {
+        if (allCharacters.Count == 0) return;
+
         int columns = 4;
+        int maxIndex = allCharacters.Count - 1;
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
 
-        // --- PLAYER 1 ---
+        // --- PLAYER 1 (WASD + J) ---
         if (!p1Locked)
         {
-            if (keyboard.aKey.wasPressedThisFrame) p1Index = (p1Index % columns == 0) ? p1Index + (columns - 1) : p1Index - 1;
-            if (keyboard.dKey.wasPressedThisFrame) p1Index = (p1Index % columns == columns - 1) ? p1Index - (columns - 1) : p1Index + 1;
-            if (keyboard.wKey.wasPressedThisFrame && p1Index - columns >= 0) p1Index -= columns;
-            if (keyboard.sKey.wasPressedThisFrame && p1Index + columns < allCharacters.Count) p1Index += columns;
+            // Trái
+            if (keyboard.aKey.wasPressedThisFrame)
+            {
+                if (p1Index % columns == 0) p1Index = Mathf.Min(p1Index + columns - 1, maxIndex);
+                else p1Index--;
+            }
+            // Phải
+            if (keyboard.dKey.wasPressedThisFrame)
+            {
+                if (p1Index % columns == columns - 1 || p1Index == maxIndex) p1Index -= (p1Index % columns);
+                else p1Index++;
+            }
+            // Lên
+            if (keyboard.wKey.wasPressedThisFrame && p1Index >= columns) p1Index -= columns;
+            // Xuống
+            if (keyboard.sKey.wasPressedThisFrame && p1Index + columns <= maxIndex) p1Index += columns;
 
+            // Khóa
             if (keyboard.jKey.wasPressedThisFrame) { p1Locked = true; }
         }
-        else if (keyboard.escapeKey.wasPressedThisFrame)
-        {
-            p1Locked = false;
-        }
+        else if (keyboard.escapeKey.wasPressedThisFrame) { p1Locked = false; }
 
-        // --- PLAYER 2 ---
+        // --- PLAYER 2 (MŨI TÊN + ENTER) ---
         if (!p2Locked)
         {
-            if (keyboard.leftArrowKey.wasPressedThisFrame) p2Index = (p2Index % columns == 0) ? p2Index + (columns - 1) : p2Index - 1;
-            if (keyboard.rightArrowKey.wasPressedThisFrame) p2Index = (p2Index % columns == columns - 1) ? p2Index - (columns - 1) : p2Index + 1;
-            if (keyboard.upArrowKey.wasPressedThisFrame && p2Index - columns >= 0) p2Index -= columns;
-            if (keyboard.downArrowKey.wasPressedThisFrame && p2Index + columns < allCharacters.Count) p2Index += columns;
+            // Trái
+            if (keyboard.leftArrowKey.wasPressedThisFrame)
+            {
+                if (p2Index % columns == 0) p2Index = Mathf.Min(p2Index + columns - 1, maxIndex);
+                else p2Index--;
+            }
+            // Phải
+            if (keyboard.rightArrowKey.wasPressedThisFrame)
+            {
+                if (p2Index % columns == columns - 1 || p2Index == maxIndex) p2Index -= (p2Index % columns);
+                else p2Index++;
+            }
+            // Lên
+            if (keyboard.upArrowKey.wasPressedThisFrame && p2Index >= columns) p2Index -= columns;
+            // Xuống
+            if (keyboard.downArrowKey.wasPressedThisFrame && p2Index + columns <= maxIndex) p2Index += columns;
 
+            // Khóa
             if (keyboard.enterKey.wasPressedThisFrame) { p2Locked = true; }
         }
-        else if (keyboard.backspaceKey.wasPressedThisFrame)
-        {
-            p2Locked = false;
-        }
+        else if (keyboard.backspaceKey.wasPressedThisFrame) { p2Locked = false; }
 
         UpdateVisuals();
 
@@ -137,30 +159,27 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         if (allCharacters.Count == 0) return;
 
-        // Cập nhật Preview Image
+        // Giới hạn index an toàn tuyệt đối
+        p1Index = Mathf.Clamp(p1Index, 0, allCharacters.Count - 1);
+        p2Index = Mathf.Clamp(p2Index, 0, allCharacters.Count - 1);
+
         if (p1Preview != null && allCharacters[p1Index].avatarSprite != null)
             p1Preview.sprite = allCharacters[p1Index].avatarSprite;
 
         if (p2Preview != null && allCharacters[p2Index].avatarSprite != null)
             p2Preview.sprite = allCharacters[p2Index].avatarSprite;
 
-        // Reset màu tất cả các slot về trắng (không còn tô xanh đỏ nữa)
         for (int i = 0; i < spawnedSlots.Count; i++)
         {
             if (spawnedSlots[i] == null) continue;
             spawnedSlots[i].color = Color.white;
         }
 
-        // DI CHUYỂN CON TRỎ P1 & P2 ĐẾN VỊ TRÍ ĐANG CHỌN
         if (p1Cursor != null && spawnedSlots.Count > p1Index)
-        {
             p1Cursor.position = spawnedSlots[p1Index].rectTransform.position;
-        }
 
         if (p2Cursor != null && spawnedSlots.Count > p2Index)
-        {
             p2Cursor.position = spawnedSlots[p2Index].rectTransform.position;
-        }
     }
 
     string GetResourcesPath(Object obj)

@@ -119,6 +119,111 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &144057785
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 791866841552190526, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_Name
+      value: Sasuke
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.98364
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.958
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.000018170102
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 791866841552190526, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 144057787}
+  m_SourcePrefab: {fileID: 100100000, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+--- !u!1 &144057786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 791866841552190526, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+  m_PrefabInstance: {fileID: 144057785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &144057787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144057786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af9041aee939f24d911ec1d52fbc090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SasukeController
+  stats:
+    maxHp: 500
+    currentHp: 500
+    mana: 250
+    maxStamina: 100
+    stamina: 100
+  staminaRegenRate: 20
+  staminaRegenDelay: 1
+  moveSpeed: 6.5
+  jumpForce: 11
+  dashForce: 25
+  dashDuration: 0.1
+  maxJumps: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  blockDamageReduction: 0.7
+  knockbackForce: {x: 8, y: 4}
+  comboResetTime: 0.8
+  attackHitbox: {fileID: 0}
+  attackRadius: 0.8
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  playerNumber: 1
+  fireballPrefab: {fileID: 0}
+  chidoriEffectPrefab: {fileID: 0}
+  chidoriDuration: 1.5
 --- !u!1 &155576071
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,63 +341,6 @@ PhysicsMaterial2D:
   bounciness: 0
   m_FrictionCombine: 1
   m_BounceCombine: 4
---- !u!1001 &872716544
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 791866841552190526, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_Name
-      value: Sasuke
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.8428371
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887564340182165937, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
 --- !u!1 &1207925938
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,4 +998,4 @@ SceneRoots:
   - {fileID: 1207925942}
   - {fileID: 155576074}
   - {fileID: 1335337015}
-  - {fileID: 872716544}
+  - {fileID: 144057785}

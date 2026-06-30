@@ -594,7 +594,7 @@ PlayerSettings:
     PS5: UNITY_MCP_READY
     QNX: UNITY_MCP_READY
     Server: UNITY_MCP_READY
-    Standalone: UNITY_MCP_READY
+    Standalone: UNITY_MCP_READY;SENTIS_ANALYTICS_ENABLED;APP_UI_EDITOR_ONLY
     VisionOS: UNITY_MCP_READY
     WebGL: UNITY_MCP_READY
     Windows Store Apps: UNITY_MCP_READY
@@ -677,7 +677,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -700,11 +706,11 @@ PlayerSettings:
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
   enableDirectStorage: 0
-  cloudProjectId: 2861da50-17b8-4ee3-8665-da15dc0a487b
+  cloudProjectId: 9bff16b6-2f0f-4b86-a73e-eecaf8cc1076
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: FighterCrossover 2026-06-23_13-26-48
-  organizationId: tuanlace180905
+  projectName: FighterCrossover
+  organizationId: unity_c718b1a5f3c0778de051
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

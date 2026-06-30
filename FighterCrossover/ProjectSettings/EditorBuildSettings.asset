@@ -8,16 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/MainMenu_Scene.unity
     guid: a746603050deace4f89fc35f1900ff8e
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Pre_Match_Scene.unity
     guid: 11eecb7581a32d9458c43d1f25d66be7
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Gameplay_Map01_Scene.unity
     guid: 42e0a67b99784004bbe8e9c8802b68cf
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Gameplay_Map02_Scene.unity
     guid: 2b2075345bdb5cb43a4913da1a81ce36
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Project/Scenes/Gameplay_Map03_Scene.unity
     guid: aee621e2516cb464490fbe15f6d7e010
   m_configObjects:

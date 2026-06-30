@@ -1,0 +1,850 @@
+fileFormatVersion: 2
+guid: ad524ac35c57f1847b0e2af09b5e6956
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2612855929873045217
+    second: Chidori 6_0
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Chidori 6_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 542
+        width: 86
+        height: 48
+      alignment: 9
+      pivot: {x: 0.50461924, y: 0.0040368866}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f19e4a210654dbbd0800000000000000
+      internalID: -2612855929873045217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_1
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 542
+        width: 110
+        height: 50
+      alignment: 9
+      pivot: {x: 0.5047114, y: 0.0040368866}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bc85a51167ba5a478cb1f8561e34cf8
+      internalID: 1105072990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_2
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 542
+        width: 108
+        height: 50
+      alignment: 9
+      pivot: {x: 0.4999998, y: 0.0040368866}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f609937293e92cb4192f85fb7cfd75c9
+      internalID: 289300896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_3
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 489
+        width: 104
+        height: 42
+      alignment: 9
+      pivot: {x: 0.49999985, y: -0.015336354}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce3e1e27b05c59c4aa921375df50e719
+      internalID: -301183152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_4
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 488
+        width: 109
+        height: 43
+      alignment: 9
+      pivot: {x: 0.5048078, y: -0.004819286}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b12eaf93d16f754fb507043601462d0
+      internalID: -551572791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_5
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 489
+        width: 127
+        height: 44
+      alignment: 9
+      pivot: {x: 0.4999998, y: 0.0052770996}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 481789c1d65c16f47becad0ca26f873a
+      internalID: 957919648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_6
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 435
+        width: 131
+        height: 43
+      alignment: 9
+      pivot: {x: 0.5045303, y: 0.01071343}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0160a939315efd4bba79d5948a92d54
+      internalID: -1542654954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_7
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 435
+        width: 136
+        height: 43
+      alignment: 9
+      pivot: {x: 0.5, y: 0.01071343}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a81484c210ac4984eac75abe16764bd7
+      internalID: -1259501164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_8
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 435
+        width: 139
+        height: 44
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0066102226}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a3b48d5034741c46b06fd565ebd3cb8
+      internalID: 244986571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_9
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 381
+        width: 145
+        height: 43
+      alignment: 9
+      pivot: {x: 0.4999999, y: 0.009604318}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b06b9a4d0bfeb854d9daba20b349836a
+      internalID: 388676333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_10
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 381
+        width: 141
+        height: 43
+      alignment: 9
+      pivot: {x: 0.5, y: 0.0052770996}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbc2ba058391bc4eac0d8e709bcbcf1
+      internalID: 2025703620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_11
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 381
+        width: 148
+        height: 42
+      alignment: 9
+      pivot: {x: 0.5, y: 0.014977548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 440631c0470a13747bfdd548ac8f20f8
+      internalID: -1574378239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_12
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 327
+        width: 148
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5045596, y: 0.0052770996}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe881500eb6c1c64c9d5b689a875e76f
+      internalID: -409023957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_13
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 327
+        width: 146
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5047115, y: 0.0052770996}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 186bc0466ffbad64f91e7a8482deaac9
+      internalID: -1398511096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_14
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 327
+        width: 143
+        height: 45
+      alignment: 9
+      pivot: {x: 0.5048075, y: 0.00960494}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7402b6755d2aec340bd2b04ac27d3fad
+      internalID: 1021167138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_15
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 274
+        width: 141
+        height: 40
+      alignment: 9
+      pivot: {x: 0.49999985, y: 0.0052770996}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f150c17862498c342975300e06cfc264
+      internalID: -1784959833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_16
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 274
+        width: 142
+        height: 41
+      alignment: 9
+      pivot: {x: 0.49522462, y: 0.014977548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe719ad6e5147c043808bdfdef50069c
+      internalID: -608013332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_17
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 274
+        width: 140
+        height: 41
+      alignment: 9
+      pivot: {x: 0.49522483, y: 0.0011195763}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ced4bec686498774eb9e28876e81a931
+      internalID: -67227884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_18
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 219
+        width: 148
+        height: 41
+      alignment: 9
+      pivot: {x: 0.5045303, y: 0.0011201747}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99d80956480f5294488cc682a7203c4e
+      internalID: -1820059953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_19
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 219
+        width: 140
+        height: 42
+      alignment: 9
+      pivot: {x: 0.49522462, y: 0.014977548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f22e2e6f03e3f46a93a10fc7021813
+      internalID: -572951058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_20
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 219
+        width: 144
+        height: 43
+      alignment: 9
+      pivot: {x: 0.4999998, y: 0.0011195763}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e06a74e9fa6736449d6cecd6b29df85
+      internalID: 785534922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_21
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 166
+        width: 145
+        height: 48
+      alignment: 9
+      pivot: {x: 0.49999985, y: 0.015747353}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 959b63df0f246bf44a19cbfa3ec11455
+      internalID: -821180366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_22
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 166
+        width: 142
+        height: 48
+      alignment: 9
+      pivot: {x: 0.49522462, y: 0.015747353}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57f64b51cdf31d04d812cc9a26e2b910
+      internalID: -538152042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_23
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 166
+        width: 143
+        height: 48
+      alignment: 9
+      pivot: {x: 0.49522483, y: 0.0026595504}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea473b02c1585b45b1c168ea1616ac3
+      internalID: -1623676691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_24
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 112
+        width: 145
+        height: 46
+      alignment: 9
+      pivot: {x: 0.5045303, y: 0.009604318}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85cc3a3956721274490d823a0ad7ba45
+      internalID: 1115942313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_25
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 111
+        width: 143
+        height: 47
+      alignment: 9
+      pivot: {x: 0.5, y: 0.009604318}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1004c6def77a1da49adb9fe1f1ea07e1
+      internalID: 1367258648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_26
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 111
+        width: 144
+        height: 46
+      alignment: 9
+      pivot: {x: 0.49522483, y: 0.014111836}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f35aec6db9389db4e88d9ea58ae1ba98
+      internalID: 379033702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_27
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 58
+        width: 144
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efbe73c52561d5a48b705a27669ff0cd
+      internalID: 1712319114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_28
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 58
+        width: 141
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81bd4ffd1a34f674994360107b593698
+      internalID: -1216465765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_29
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 58
+        width: 143
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc6c5a71012d16042801df28e9f70158
+      internalID: 1361121893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 6_30
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 3
+        width: 144
+        height: 43
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa54ad004ff3f684795d5671fd62f871
+      internalID: 469556842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 0faf7b497a495ec4fb108c367ae330b2
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceOnImport
+        value: False
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Chidori 6_0: -2612855929873045217
+      Chidori 6_1: 1105072990
+      Chidori 6_10: 2025703620
+      Chidori 6_11: -1574378239
+      Chidori 6_12: -409023957
+      Chidori 6_13: -1398511096
+      Chidori 6_14: 1021167138
+      Chidori 6_15: -1784959833
+      Chidori 6_16: -608013332
+      Chidori 6_17: -67227884
+      Chidori 6_18: -1820059953
+      Chidori 6_19: -572951058
+      Chidori 6_2: 289300896
+      Chidori 6_20: 785534922
+      Chidori 6_21: -821180366
+      Chidori 6_22: -538152042
+      Chidori 6_23: -1623676691
+      Chidori 6_24: 1115942313
+      Chidori 6_25: 1367258648
+      Chidori 6_26: 379033702
+      Chidori 6_27: 1712319114
+      Chidori 6_28: -1216465765
+      Chidori 6_29: 1361121893
+      Chidori 6_3: -301183152
+      Chidori 6_30: 469556842
+      Chidori 6_4: -551572791
+      Chidori 6_5: 957919648
+      Chidori 6_6: -1542654954
+      Chidori 6_7: -1259501164
+      Chidori 6_8: 244986571
+      Chidori 6_9: 388676333
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

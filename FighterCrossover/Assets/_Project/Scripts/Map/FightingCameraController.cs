@@ -7,19 +7,19 @@ public class FightingCameraController : MonoBehaviour
     [SerializeField] private float updateInterval = 0.5f;
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private float yOffset = 1.0f;
-    [SerializeField] private float minY = -2.7f;
-    [SerializeField] private float maxY = 15f;
-    [SerializeField] private float minX = -15f;
-    [SerializeField] private float maxX = 15f;
+    [SerializeField] private float moveSpeed = 100f;
+    [SerializeField] private float yOffset = 2f;
+    [SerializeField] private float minY = -2f;
+    [SerializeField] private float maxY = 3f;
+    [SerializeField] private float minX = -1.17f;
+    [SerializeField] private float maxX = 1.17f;
 
     [Header("Zoom")]
-    [SerializeField] private float minSize = 2f;
+    [SerializeField] private float minSize = 3f;
     [SerializeField] private float maxSize = 8f;
-    [SerializeField] private float zoomSpeed = 5f;
-    [SerializeField] private float paddingX = 1.5f;
-    [SerializeField] private float paddingY = 1.5f;
+    [SerializeField] private float zoomSpeed = 100f;
+    [SerializeField] private float paddingX = 0.5f;
+    [SerializeField] private float paddingY = 0.5f;
 
     private Camera cam;
     private float nextUpdateTime;
@@ -100,7 +100,7 @@ public class FightingCameraController : MonoBehaviour
 
         // Dùng adjustedMinY thay cho minY gốc
         float targetY = Mathf.Clamp(midpoint.y + yOffset, adjustedMinY, maxY);
-        
+
         Vector3 targetPos = new Vector3(targetX, targetY, transform.position.z);
         transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
     }

@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class IchigoController : FighterBase
 {
     [Header("--- ICHIGO SETTINGS ---")]
-    public int playerNumber = 1;
     public GameObject rangedProjectilePrefab;
     public GameObject ultimateEffectPrefab;
     public float ultimateDuration = 1.0f;
@@ -18,6 +17,14 @@ public class IchigoController : FighterBase
     {
         base.Awake();
         LoadKeybindings();
+        SetupPlayerInputBindings();
+    }
+
+    public override void InitializePlayer(int num)
+    {
+        base.InitializePlayer(num);
+        LoadKeybindings();
+        SetupPlayerInputBindings();
     }
 
     private void LoadKeybindings()
@@ -50,130 +57,136 @@ public class IchigoController : FighterBase
         Debug.Log($"[IchigoController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}");
     }
 
-    protected override void Update()
+    private void SetupPlayerInputBindings()
     {
-        if (CurrentState == FighterState.Dead) return;
+        if (playerInput == null || playerInput.actions == null) return;
 
-        // Grounded check and FSM state logics
-        CheckGrounded();
-        HandleStateLogic();
-        HandleStaminaRegen();
-        UpdateAnimations();
+        // Disable all actions before changing bindings to avoid InvalidOperationException
+        playerInput.actions.Disable();
 
-        // Read direct keyboard inputs using dynamic bindings
-        if (initializedBindings)
+        var playerMap = playerInput.actions.FindActionMap("Player");
+        if (playerMap != null)
         {
-            bool isDefenseHeld = GetKey(keys.defense);
-
-            if (isDefenseHeld)
+            // 1. Setup Move Action (Composite)
+            var moveAction = playerMap.FindAction("Move");
+            if (moveAction != null)
             {
-                // Khi giữ defense: chỉ nhảy xuống platform, không bao giờ nhảy lên
-                if (GetKeyDown(keys.jump) || GetKeyDown(keys.dodge))
+                moveAction.RemoveAllBindingOverrides();
+                for (int i = 0; i < moveAction.bindings.Count; i++)
                 {
-                    TryDropDown();
+                    var binding = moveAction.bindings[i];
+                    if (binding.isPartOfComposite)
+                    {
+                        if (binding.name == "left")
+                        {
+                            moveAction.ApplyBindingOverride(i, GetBindingPath(keys.moveLeft));
+                        }
+                        else if (binding.name == "right")
+                        {
+                            moveAction.ApplyBindingOverride(i, GetBindingPath(keys.moveRight));
+                        }
+                    }
                 }
             }
-            else
-            {
-                if (GetKeyDown(keys.jump))
-                {
-                    ExecuteJump();
-                }
 
-                if (GetKeyDown(keys.dodge))
-                {
-                    TriggerDash();
-                }
+            // 2. Setup Jump Action
+            var jumpAction = playerMap.FindAction("Jump");
+            if (jumpAction != null)
+            {
+                jumpAction.RemoveAllBindingOverrides();
+                jumpAction.ApplyBindingOverride(GetBindingPath(keys.jump));
             }
 
-            if (GetKeyDown(keys.attack))
+            // 3. Setup Attack Action
+            var attackAction = playerMap.FindAction("Attack");
+            if (attackAction != null)
             {
-                TriggerAttack();
+                attackAction.RemoveAllBindingOverrides();
+                attackAction.ApplyBindingOverride(GetBindingPath(keys.attack));
             }
 
-            if (GetKeyDown(keys.rangedAttack))
+            // 4. Setup Block Action
+            var blockAction = playerMap.FindAction("Block");
+            if (blockAction != null)
             {
-                TriggerRanged();
+                blockAction.RemoveAllBindingOverrides();
+                blockAction.ApplyBindingOverride(GetBindingPath(keys.defense));
             }
 
-            if (GetKeyDown(keys.specialMove))
+            // 5. Setup Dash Action
+            var dashAction = playerMap.FindAction("Dash");
+            if (dashAction != null)
             {
-                TriggerUltimate();
+                dashAction.RemoveAllBindingOverrides();
+                dashAction.ApplyBindingOverride(GetBindingPath(keys.dodge));
+                dashAction.performed += ctx => OnDash();
             }
+
+            // 6. Setup Ranged Action
+            var rangedAction = playerMap.FindAction("Ranged");
+            if (rangedAction != null)
+            {
+                rangedAction.RemoveAllBindingOverrides();
+                rangedAction.ApplyBindingOverride(GetBindingPath(keys.rangedAttack));
+                rangedAction.performed += ctx => OnRanged();
+            }
+
+            // 7. Setup Special Action
+            var specialAction = playerMap.FindAction("Special");
+            if (specialAction != null)
+            {
+                specialAction.RemoveAllBindingOverrides();
+                specialAction.ApplyBindingOverride(GetBindingPath(keys.specialMove));
+                specialAction.performed += ctx => OnSpecial();
+            }
+        }
+
+        // Re-enable all actions
+        playerInput.actions.Enable();
+    }
+
+    private string GetBindingPath(KeyCode keyCode)
+    {
+        switch (keyCode)
+        {
+            case KeyCode.LeftArrow: return "<Keyboard>/leftArrow";
+            case KeyCode.RightArrow: return "<Keyboard>/rightArrow";
+            case KeyCode.UpArrow: return "<Keyboard>/upArrow";
+            case KeyCode.DownArrow: return "<Keyboard>/downArrow";
+            case KeyCode.Keypad0: return "<Keyboard>/numpad0";
+            case KeyCode.Keypad1: return "<Keyboard>/numpad1";
+            case KeyCode.Keypad2: return "<Keyboard>/numpad2";
+            case KeyCode.Keypad3: return "<Keyboard>/numpad3";
+            case KeyCode.Keypad4: return "<Keyboard>/numpad4";
+            case KeyCode.Keypad5: return "<Keyboard>/numpad5";
+            case KeyCode.Keypad6: return "<Keyboard>/numpad6";
+            case KeyCode.Keypad7: return "<Keyboard>/numpad7";
+            case KeyCode.Keypad8: return "<Keyboard>/numpad8";
+            case KeyCode.Keypad9: return "<Keyboard>/numpad9";
+            case KeyCode.Space: return "<Keyboard>/space";
+            case KeyCode.Return: return "<Keyboard>/enter";
+            case KeyCode.Escape: return "<Keyboard>/escape";
+            case KeyCode.Tab: return "<Keyboard>/tab";
+            case KeyCode.LeftShift: return "<Keyboard>/leftShift";
+            case KeyCode.RightShift: return "<Keyboard>/rightShift";
+            case KeyCode.LeftControl: return "<Keyboard>/leftCtrl";
+            case KeyCode.RightControl: return "<Keyboard>/rightCtrl";
+            case KeyCode.LeftAlt: return "<Keyboard>/leftAlt";
+            case KeyCode.RightAlt: return "<Keyboard>/rightAlt";
+            default:
+                string name = keyCode.ToString();
+                if (name.StartsWith("Alpha")) name = name.Substring(5);
+                return $"<Keyboard>/{name.ToLower()}";
         }
     }
 
-    protected override void HandleStateLogic()
-    {
-        // Reset combo if attack delay exceeds threshold
-        if (comboStep > 0 && Time.time - lastAttackTime > comboResetTime && CurrentState != FighterState.Attacking)
-        {
-            comboStep = 0;
-        }
-
-        // Horizontal movement control
-        float horizontal = 0f;
-        if (initializedBindings)
-        {
-            if (GetKey(keys.moveLeft)) horizontal -= 1f;
-            if (GetKey(keys.moveRight)) horizontal += 1f;
-        }
-        else
-        {
-            // Fallback to PlayerInput if bindings not yet initialized
-            if (playerInput != null && playerInput.actions != null)
-            {
-                var moveAct = playerInput.actions.FindAction("Move");
-                if (moveAct != null) horizontal = moveAct.ReadValue<Vector2>().x;
-            }
-        }
-        moveInput = new Vector2(horizontal, 0f);
-
-        if (CanAct())
-        {
-            bool isBlockingInput = false;
-            if (initializedBindings)
-            {
-                isBlockingInput = GetKey(keys.defense);
-            }
-            else
-            {
-                if (playerInput != null && playerInput.actions != null)
-                {
-                    var blockAct = playerInput.actions.FindAction("Block");
-                    if (blockAct != null) isBlockingInput = blockAct.IsPressed();
-                }
-            }
-
-            if (isBlockingInput && isGrounded)
-            {
-                ChangeState(FighterState.Blocking);
-            }
-            else if (Mathf.Abs(moveInput.x) > 0.1f)
-            {
-                ChangeState(FighterState.Moving);
-            }
-            else
-            {
-                ChangeState(isGrounded ? FighterState.Idle : FighterState.Jumping);
-            }
-        }
-    }
-
-    // --- COMBAT EXECUTION ---
-    private void TriggerAttack()
-    {
-        if (!CanAct() || !isGrounded) return;
-        ExecuteAttack();
-    }
-
-    private void TriggerRanged()
+    public void OnRanged()
     {
         if (!CanAct() || !isGrounded) return;
         ExecuteRanged();
     }
 
-    private void TriggerUltimate()
+    public void OnSpecial()
     {
         if (!CanAct() || !isGrounded) return;
         ExecuteUltimate();
@@ -406,93 +419,5 @@ public class IchigoController : FighterBase
         return null;
     }
 
-    // --- NEW INPUT SYSTEM COMPATIBILITY HELPERS ---
-    private bool GetKey(KeyCode keyCode)
-    {
-        if (Keyboard.current == null) return false;
-        Key key = GetInputSystemKey(keyCode);
-        if (key == Key.None) return false;
-        return Keyboard.current[key].isPressed;
-    }
-
-    private bool GetKeyDown(KeyCode keyCode)
-    {
-        if (Keyboard.current == null) return false;
-        Key key = GetInputSystemKey(keyCode);
-        if (key == Key.None) return false;
-        return Keyboard.current[key].wasPressedThisFrame;
-    }
-
-    private Key GetInputSystemKey(KeyCode keyCode)
-    {
-        switch (keyCode)
-        {
-            case KeyCode.A: return Key.A;
-            case KeyCode.B: return Key.B;
-            case KeyCode.C: return Key.C;
-            case KeyCode.D: return Key.D;
-            case KeyCode.E: return Key.E;
-            case KeyCode.F: return Key.F;
-            case KeyCode.G: return Key.G;
-            case KeyCode.H: return Key.H;
-            case KeyCode.I: return Key.I;
-            case KeyCode.J: return Key.J;
-            case KeyCode.K: return Key.K;
-            case KeyCode.L: return Key.L;
-            case KeyCode.M: return Key.M;
-            case KeyCode.N: return Key.N;
-            case KeyCode.O: return Key.O;
-            case KeyCode.P: return Key.P;
-            case KeyCode.Q: return Key.Q;
-            case KeyCode.R: return Key.R;
-            case KeyCode.S: return Key.S;
-            case KeyCode.T: return Key.T;
-            case KeyCode.U: return Key.U;
-            case KeyCode.V: return Key.V;
-            case KeyCode.W: return Key.W;
-            case KeyCode.X: return Key.X;
-            case KeyCode.Y: return Key.Y;
-            case KeyCode.Z: return Key.Z;
-
-            case KeyCode.Alpha0: return Key.Digit0;
-            case KeyCode.Alpha1: return Key.Digit1;
-            case KeyCode.Alpha2: return Key.Digit2;
-            case KeyCode.Alpha3: return Key.Digit3;
-            case KeyCode.Alpha4: return Key.Digit4;
-            case KeyCode.Alpha5: return Key.Digit5;
-            case KeyCode.Alpha6: return Key.Digit6;
-            case KeyCode.Alpha7: return Key.Digit7;
-            case KeyCode.Alpha8: return Key.Digit8;
-            case KeyCode.Alpha9: return Key.Digit9;
-
-            case KeyCode.LeftArrow: return Key.LeftArrow;
-            case KeyCode.RightArrow: return Key.RightArrow;
-            case KeyCode.UpArrow: return Key.UpArrow;
-            case KeyCode.DownArrow: return Key.DownArrow;
-
-            case KeyCode.Keypad0: return Key.Numpad0;
-            case KeyCode.Keypad1: return Key.Numpad1;
-            case KeyCode.Keypad2: return Key.Numpad2;
-            case KeyCode.Keypad3: return Key.Numpad3;
-            case KeyCode.Keypad4: return Key.Numpad4;
-            case KeyCode.Keypad5: return Key.Numpad5;
-            case KeyCode.Keypad6: return Key.Numpad6;
-            case KeyCode.Keypad7: return Key.Numpad7;
-            case KeyCode.Keypad8: return Key.Numpad8;
-            case KeyCode.Keypad9: return Key.Numpad9;
-
-            case KeyCode.Space: return Key.Space;
-            case KeyCode.Return: return Key.Enter;
-            case KeyCode.Escape: return Key.Escape;
-            case KeyCode.Tab: return Key.Tab;
-            case KeyCode.LeftShift: return Key.LeftShift;
-            case KeyCode.RightShift: return Key.RightShift;
-            case KeyCode.LeftControl: return Key.LeftCtrl;
-            case KeyCode.RightControl: return Key.RightCtrl;
-            case KeyCode.LeftAlt: return Key.LeftAlt;
-            case KeyCode.RightAlt: return Key.RightAlt;
-
-            default: return Key.None;
-        }
-    }
+    // Compatibility helpers replaced by dynamic PlayerInput bindings
 }

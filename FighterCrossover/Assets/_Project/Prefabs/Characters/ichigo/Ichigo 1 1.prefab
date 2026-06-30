@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2659541560867625069}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.1, y: 0.2, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 7496560017347569153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.073, y: -0.966, z: 0}
+  m_LocalPosition: {x: -2.35, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -166,7 +166,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 3.5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5defc9e4746f6184daa57b7699c5526a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -211,7 +211,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.009191155, y: 0.43015495}
+  m_Offset: {x: -0.011711001, y: 0.43015495}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -221,7 +221,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7772057, y: 0.8603099}
+  m_Size: {x: 0.505059, y: 0.8603099}
   m_EdgeRadius: 0
 --- !u!114 &449525559573176644
 MonoBehaviour:
@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05706e1f16a0c25499e18d9ef2e19438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IchigoController
+  playerNumber: 1
   stats:
     maxHp: 500
     currentHp: 500
@@ -282,14 +283,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   blockDamageReduction: 0.7
-  knockbackForce: {x: 8, y: 4}
+  knockbackForce: {x: 4, y: 6}
   comboResetTime: 0.8
   attackHitbox: {fileID: 5806680445033539967}
-  attackRadius: 0.8
+  attackRadius: 0.1
   targetLayer:
     serializedVersion: 2
     m_Bits: 1
-  playerNumber: 1
-  rangedProjectilePrefab: {fileID: 1653119312080273460, guid: 18a94652512ba1a4c9756248b0965eba, type: 3}
-  ultimateEffectPrefab: {fileID: 318895026318304720, guid: fce4b3dc7ece1274eb7ce8d0c23bc2e6, type: 3}
+  rangedProjectilePrefab: {fileID: 1653119312080273460, guid: 127d8d22ce977054984ab09157f7fb34, type: 3}
+  ultimateEffectPrefab: {fileID: 318895026318304720, guid: a7a58815a78fc5943b6c723dbc9089bf, type: 3}
   ultimateDuration: 1

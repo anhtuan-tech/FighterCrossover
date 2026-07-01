@@ -136,10 +136,17 @@ public class FighterBase : MonoBehaviour, IDamageable
     #endregion
 
     #region FSM & LOGIC
+    private bool IsGameplayActive()
+    {
+        // Nếu không có MatchManager trong scene (cảnh test độc lập), mặc định cho phép di chuyển/đánh tự do
+        if (MatchManager.Instance == null) return true;
+        return MatchManager.IsMatchStarted && !MatchManager.IsMatchEnded;
+    }
+
     protected virtual void HandleStateLogic()
     {
         // Kiểm tra xem trận đấu đã bắt đầu chưa hoặc đã kết thúc chưa
-        if (!MatchManager.IsMatchStarted || MatchManager.IsMatchEnded)
+        if (!IsGameplayActive())
         {
             moveInput = Vector2.zero;
             if (CurrentState != FighterState.Dead)
@@ -188,7 +195,7 @@ public class FighterBase : MonoBehaviour, IDamageable
 
     protected bool CanAct()
     {
-        if (!MatchManager.IsMatchStarted || MatchManager.IsMatchEnded)
+        if (!IsGameplayActive())
         {
             return false;
         }
@@ -370,7 +377,7 @@ public class FighterBase : MonoBehaviour, IDamageable
     // Giao diện nhận sát thương
     public virtual void TakeDamage(float damage, float attackerPosX, bool isHeavyAttack = false)
     {
-        if (!MatchManager.IsMatchStarted || MatchManager.IsMatchEnded) return;
+        if (!IsGameplayActive()) return;
         if (CurrentState == FighterState.Dead) return;
 
         if (CurrentState == FighterState.Blocking)

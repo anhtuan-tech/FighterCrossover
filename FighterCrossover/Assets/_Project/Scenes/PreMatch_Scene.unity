@@ -305,22 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c56585311e2ee44901fe7f66e8411d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionManager
-  allCharacters:
-  - characterName: Ichigo
-    avatarSprite: {fileID: 21300000, guid: 9762ddee11a71634788c79d4c3cac3a0, type: 3}
-    characterPrefab: {fileID: 7496560017347569153, guid: 719a0686b215e2045bc23af875c499f6, type: 3}
-  - characterName: 2Ichigo
-    avatarSprite: {fileID: 21300000, guid: 9762ddee11a71634788c79d4c3cac3a0, type: 3}
-    characterPrefab: {fileID: 7496560017347569153, guid: 719a0686b215e2045bc23af875c499f6, type: 3}
-  - characterName: Ichigo3
-    avatarSprite: {fileID: 21300000, guid: 9762ddee11a71634788c79d4c3cac3a0, type: 3}
-    characterPrefab: {fileID: 7496560017347569153, guid: 719a0686b215e2045bc23af875c499f6, type: 3}
-  - characterName: Ichig5
-    avatarSprite: {fileID: 21300000, guid: 9762ddee11a71634788c79d4c3cac3a0, type: 3}
-    characterPrefab: {fileID: 7496560017347569153, guid: 719a0686b215e2045bc23af875c499f6, type: 3}
-  - characterName: chigo
-    avatarSprite: {fileID: 21300000, guid: 9762ddee11a71634788c79d4c3cac3a0, type: 3}
-    characterPrefab: {fileID: 7496560017347569153, guid: 719a0686b215e2045bc23af875c499f6, type: 3}
+  allCharacters: []
   p1Preview: {fileID: 963416509}
   p2Preview: {fileID: 2142987440}
   gridContainer: {fileID: 1388687983}
@@ -470,7 +455,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -6451177073030502646, guid: 44886cee37d72d946a9cb228d8d38f16, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -502,11 +487,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 647866804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 51, y: 166}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 35.82185, y: -18}
+  m_SizeDelta: {x: 69.8219, y: 73.9371}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &963416507
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,10 +524,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 647866804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -362, y: -2}
-  m_SizeDelta: {x: 284.1792, y: 405.8634}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 225.275, y: 0}
+  m_SizeDelta: {x: 450.55, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &963416509
 MonoBehaviour:
@@ -967,7 +952,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -3404720862713131802, guid: fd99bbdde9132a04bb5acd776fc241e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -999,11 +984,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 647866804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -49, y: 166}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -34, y: -18}
+  m_SizeDelta: {x: 69.8219, y: 73.9371}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &2142987439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,10 +1059,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 647866804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 360, y: -1}
-  m_SizeDelta: {x: 284.1792, y: 405.8634}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -226.91, y: 0}
+  m_SizeDelta: {x: 453.82, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

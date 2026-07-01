@@ -10,7 +10,8 @@ public class CharacterSelectionManager : MonoBehaviour
     public class CharacterInfoData
     {
         public string characterName;
-        public Sprite avatarSprite;
+        public Sprite avatarSprite;         // Ảnh nhỏ hiển thị trong ô chọn
+        public Sprite standeeSprite;        // ẢNH MỚI: Ảnh lớn hiển thị ở 2 bên Preview
         public GameObject characterPrefab;
     }
 
@@ -38,7 +39,7 @@ public class CharacterSelectionManager : MonoBehaviour
     public Vector3 cursorOffset = new Vector3(0, 70f, 0);
 
     private List<Image> spawnedSlots = new List<Image>();
-    private float timeRemaining = 30f; // Thời gian chọn tướng (30 giây)
+    private float timeRemaining = 30f;
 
     private int p1Index = 0;
     private int p2Index = 0;
@@ -66,6 +67,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
             Image slotImage = newSlot.GetComponent<Image>();
 
+            // Vẫn dùng Avatar Sprite cho các ô nhỏ trong Grid
             if (slotImage != null && allCharacters[i].avatarSprite != null)
             {
                 slotImage.sprite = allCharacters[i].avatarSprite;
@@ -86,7 +88,7 @@ public class CharacterSelectionManager : MonoBehaviour
         if (p2Cursor != null) p2Cursor.SetAsLastSibling();
 
         UpdateVisuals();
-        UpdateTimerUI(timeRemaining); // Cập nhật hình ảnh đồng hồ ngay khi bắt đầu
+        UpdateTimerUI(timeRemaining);
     }
 
     void Update()
@@ -107,7 +109,6 @@ public class CharacterSelectionManager : MonoBehaviour
         HandleNewInputSystem();
     }
 
-    // HÀM XỬ LÝ HÌNH ẢNH ĐỒNG HỒ
     void UpdateTimerUI(float timeToDisplay)
     {
         if (numberSprites == null || numberSprites.Length < 10) return;
@@ -184,11 +185,12 @@ public class CharacterSelectionManager : MonoBehaviour
         p1Index = Mathf.Clamp(p1Index, 0, allCharacters.Count - 1);
         p2Index = Mathf.Clamp(p2Index, 0, allCharacters.Count - 1);
 
-        if (p1Preview != null && allCharacters[p1Index].avatarSprite != null)
-            p1Preview.sprite = allCharacters[p1Index].avatarSprite;
+        // THAY ĐỔI: Dùng Standee Sprite để show lên P1 và P2 Preview thay vì Avatar Sprite
+        if (p1Preview != null && allCharacters[p1Index].standeeSprite != null)
+            p1Preview.sprite = allCharacters[p1Index].standeeSprite;
 
-        if (p2Preview != null && allCharacters[p2Index].avatarSprite != null)
-            p2Preview.sprite = allCharacters[p2Index].avatarSprite;
+        if (p2Preview != null && allCharacters[p2Index].standeeSprite != null)
+            p2Preview.sprite = allCharacters[p2Index].standeeSprite;
 
         for (int i = 0; i < spawnedSlots.Count; i++)
         {
@@ -229,6 +231,7 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         isCounting = false;
 
+        // Lưu đường dẫn của Avatar, nếu sau này bạn muốn đổi sang load đường dẫn của Standee thì sửa avatarSprite thành standeeSprite nhé
         SelectionData.characterImageUrl1 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
         SelectionData.characterPrefabUrl1 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
 

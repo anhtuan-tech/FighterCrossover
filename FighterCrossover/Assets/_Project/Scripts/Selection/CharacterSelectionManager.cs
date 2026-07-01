@@ -17,19 +17,28 @@ public class CharacterSelectionManager : MonoBehaviour
     [Header("--- DATA NHÂN VẬT ---")]
     public List<CharacterInfoData> allCharacters = new List<CharacterInfoData>();
 
-    [Header("--- GIAO DIỆN UI ---")]
-    public Text timerText;
+    [Header("--- GIAO DIỆN UI CHÍNH ---")]
     public Image p1Preview;
     public Image p2Preview;
     public Transform gridContainer;
     public GameObject charSlotPrefab;
 
+    [Header("--- UI THỜI GIAN (SPRITE) ---")]
+    [Tooltip("Kéo thả 10 ảnh số từ 0 đến 9 vào đây (đúng thứ tự)")]
+    public Sprite[] numberSprites;
+    [Tooltip("Ô Image hiển thị hàng chục")]
+    public Image tensImage;
+    [Tooltip("Ô Image hiển thị hàng đơn vị")]
+    public Image onesImage;
+
     [Header("--- CON TRỎ (MŨI TÊN/KHUNG) ---")]
     public RectTransform p1Cursor;
     public RectTransform p2Cursor;
+    [Tooltip("Khoảng cách lệch của con trỏ so với Avatar (X, Y, Z)")]
+    public Vector3 cursorOffset = new Vector3(0, 70f, 0);
 
     private List<Image> spawnedSlots = new List<Image>();
-    private float timeRemaining = 30f;
+    private float timeRemaining = 30f; // Thời gian chọn tướng (30 giây)
 
     private int p1Index = 0;
     private int p2Index = 0;
@@ -77,6 +86,7 @@ public class CharacterSelectionManager : MonoBehaviour
         if (p2Cursor != null) p2Cursor.SetAsLastSibling();
 
         UpdateVisuals();
+        UpdateTimerUI(timeRemaining); // Cập nhật hình ảnh đồng hồ ngay khi bắt đầu
     }
 
     void Update()
@@ -84,11 +94,33 @@ public class CharacterSelectionManager : MonoBehaviour
         if (isCounting)
         {
             timeRemaining -= Time.deltaTime;
-            if (timerText != null) timerText.text = Mathf.CeilToInt(timeRemaining).ToString();
-            if (timeRemaining <= 0) { LockAndProceed(); }
+            UpdateTimerUI(timeRemaining);
+
+            if (timeRemaining <= 0)
+            {
+                timeRemaining = 0;
+                UpdateTimerUI(0);
+                LockAndProceed();
+            }
         }
 
         HandleNewInputSystem();
+    }
+
+    // HÀM XỬ LÝ HÌNH ẢNH ĐỒNG HỒ
+    void UpdateTimerUI(float timeToDisplay)
+    {
+        if (numberSprites == null || numberSprites.Length < 10) return;
+
+        int totalSeconds = Mathf.CeilToInt(timeToDisplay);
+        if (totalSeconds > 99) totalSeconds = 99;
+        if (totalSeconds < 0) totalSeconds = 0;
+
+        int tens = (totalSeconds / 10) % 10;
+        int ones = totalSeconds % 10;
+
+        if (tensImage != null) tensImage.sprite = numberSprites[tens];
+        if (onesImage != null) onesImage.sprite = numberSprites[ones];
     }
 
     void HandleNewInputSystem()
@@ -103,24 +135,19 @@ public class CharacterSelectionManager : MonoBehaviour
         // --- PLAYER 1 (WASD + J) ---
         if (!p1Locked)
         {
-            // Trái
             if (keyboard.aKey.wasPressedThisFrame)
             {
                 if (p1Index % columns == 0) p1Index = Mathf.Min(p1Index + columns - 1, maxIndex);
                 else p1Index--;
             }
-            // Phải
             if (keyboard.dKey.wasPressedThisFrame)
             {
                 if (p1Index % columns == columns - 1 || p1Index == maxIndex) p1Index -= (p1Index % columns);
                 else p1Index++;
             }
-            // Lên
             if (keyboard.wKey.wasPressedThisFrame && p1Index >= columns) p1Index -= columns;
-            // Xuống
             if (keyboard.sKey.wasPressedThisFrame && p1Index + columns <= maxIndex) p1Index += columns;
 
-            // Khóa
             if (keyboard.jKey.wasPressedThisFrame) { p1Locked = true; }
         }
         else if (keyboard.escapeKey.wasPressedThisFrame) { p1Locked = false; }
@@ -128,24 +155,19 @@ public class CharacterSelectionManager : MonoBehaviour
         // --- PLAYER 2 (MŨI TÊN + ENTER) ---
         if (!p2Locked)
         {
-            // Trái
             if (keyboard.leftArrowKey.wasPressedThisFrame)
             {
                 if (p2Index % columns == 0) p2Index = Mathf.Min(p2Index + columns - 1, maxIndex);
                 else p2Index--;
             }
-            // Phải
             if (keyboard.rightArrowKey.wasPressedThisFrame)
             {
                 if (p2Index % columns == columns - 1 || p2Index == maxIndex) p2Index -= (p2Index % columns);
                 else p2Index++;
             }
-            // Lên
             if (keyboard.upArrowKey.wasPressedThisFrame && p2Index >= columns) p2Index -= columns;
-            // Xuống
             if (keyboard.downArrowKey.wasPressedThisFrame && p2Index + columns <= maxIndex) p2Index += columns;
 
-            // Khóa
             if (keyboard.enterKey.wasPressedThisFrame) { p2Locked = true; }
         }
         else if (keyboard.backspaceKey.wasPressedThisFrame) { p2Locked = false; }
@@ -159,7 +181,6 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         if (allCharacters.Count == 0) return;
 
-        // Giới hạn index an toàn tuyệt đối
         p1Index = Mathf.Clamp(p1Index, 0, allCharacters.Count - 1);
         p2Index = Mathf.Clamp(p2Index, 0, allCharacters.Count - 1);
 
@@ -176,10 +197,10 @@ public class CharacterSelectionManager : MonoBehaviour
         }
 
         if (p1Cursor != null && spawnedSlots.Count > p1Index)
-            p1Cursor.position = spawnedSlots[p1Index].rectTransform.position;
+            p1Cursor.position = spawnedSlots[p1Index].rectTransform.position + cursorOffset;
 
         if (p2Cursor != null && spawnedSlots.Count > p2Index)
-            p2Cursor.position = spawnedSlots[p2Index].rectTransform.position;
+            p2Cursor.position = spawnedSlots[p2Index].rectTransform.position + cursorOffset;
     }
 
     string GetResourcesPath(Object obj)

@@ -5,9 +5,26 @@ using UnityEngine.InputSystem;
 public class SasukeController : FighterBase
 {
     [Header("--- SASUKE SETTINGS ---")]
-    public GameObject fireballPrefab; // Kỹ năng tầm xa (U)
-    public GameObject chidoriEffectPrefab; // Kỹ năng đặc biệt (I)
+    public GameObject fireballPrefab;       // Kỹ năng tầm xa (U)
+    public GameObject chidoriEffectPrefab;  // Kỹ năng đặc biệt (I)
     public float chidoriDuration = 1.5f;
+
+    [Tooltip("Vị trí spawn cầu lửa (tạo empty child trên Sasuke đặt ở miệng/tay). Nếu để trống sẽ dùng offset mặc định.")]
+    public Transform fireballSpawnPoint;
+
+
+    [Header("--- CHIDORI DASH ---")]
+    [Tooltip("Tốc độ lao (velocity) khi đâm nhanh ban đầu.")]
+    public float chidoriDashSpeed = 18f;
+
+    [Tooltip("Thời gian duy trì phase đâm nhanh (giây).")]
+    public float chidoriDashDuration = 0.3f;
+
+    [Tooltip("Tốc độ chạy trong phase kéo lê tiế́t (units/second).")]
+    public float chidoriDragSpeed = 7f;
+
+    [Tooltip("Thời gian kéo lê sau khi đâm (giây).")]
+    public float chidoriDragDuration = 1.4f;
 
     [Header("--- DYNAMIC BINDINGS ---")]
     private AnimeFighter.UI.KeybindingsData keys;
@@ -205,7 +222,7 @@ public class SasukeController : FighterBase
             anim.SetTrigger("SkillUltimate");
         }
         CancelInvoke(nameof(AnimationEvent_EndAttack));
-        Invoke(nameof(AnimationEvent_EndAttack), 1.2f);
+        Invoke(nameof(AnimationEvent_EndAttack), 3.5f);
     }
 
     // Lướt 
@@ -270,15 +287,21 @@ public class SasukeController : FighterBase
         if (fireballPrefab == null) return;
 
         float dir = transform.localScale.x;
-        Vector2 spawnPos = (attackHitbox != null) ? (Vector2)attackHitbox.position : (Vector2)transform.position + new Vector2(dir * 1.0f, 0.2f);
+
+        // Ưu tiên fireballSpawnPoint được gán trong Inspector
+        // Nếu chưa gán: fallback về offset thủ công (x=hướng*1.0, y=0.5)
+        Vector2 spawnPos = (fireballSpawnPoint != null)
+            ? (Vector2)fireballSpawnPoint.position
+            : (Vector2)transform.position + new Vector2(dir * 1.0f, 0.5f);
 
         GameObject projObj = Instantiate(fireballPrefab, spawnPos, Quaternion.identity);
-        RangedProjectile proj = projObj.GetComponent<RangedProjectile>();
+        SasukeFireball proj = projObj.GetComponent<SasukeFireball>();
         if (proj != null)
         {
             proj.Setup(new Vector2(dir, 0f), gameObject, targetLayer);
         }
     }
+
 
     // Chidori
     public void AnimationEvent_SpawnChidori()
@@ -288,11 +311,41 @@ public class SasukeController : FighterBase
         Vector2 spawnPos = transform.position;
         GameObject ultObj = Instantiate(chidoriEffectPrefab, spawnPos, Quaternion.identity);
 
-        UltimateEffect effect = ultObj.GetComponent<UltimateEffect>();
+        SasukeChidoriEffect effect = ultObj.GetComponent<SasukeChidoriEffect>();
         if (effect != null)
         {
             effect.Setup(gameObject, targetLayer, chidoriDuration);
         }
+    }
+
+    /// <summary>
+    /// Gán vào Animation Event tại frame bắt đầu đâm tia sét của Chidori.
+    /// Đẩy Sasuke lao nhanh về phía đang nhìn một đoạn ngắn, khắc phục pivot tĩnh Sprite 2D.
+    /// </summary>
+    public void AnimationEvent_ChidoriDash()
+    {
+        StartCoroutine(ChidoriDashRoutine());
+    }
+
+    private System.Collections.IEnumerator ChidoriDashRoutine()
+    {
+        float dashDir = transform.localScale.x; // 1 = phải, -1 = trái
+
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        // ── Phase 1: Đâm nhanh (burst) ─────────────────────────────────────────
+        rb.linearVelocity = new Vector2(dashDir * chidoriDashSpeed, 0f);
+        yield return new WaitForSeconds(chidoriDashDuration);
+
+        // ── Phase 2: Kéo lê tiế́t (sustained drag) ─────────────────────────────
+        // Tốc độ chạm hơn, đủ để nhìn thấy tia sét kéo theo
+        rb.linearVelocity = new Vector2(dashDir * chidoriDragSpeed, 0f);
+        yield return new WaitForSeconds(chidoriDragDuration);
+
+        // Dừng lại và khôi phục gravity
+        rb.linearVelocity = Vector2.zero;
+        rb.gravityScale   = originalGravity;
     }
     #endregion
 

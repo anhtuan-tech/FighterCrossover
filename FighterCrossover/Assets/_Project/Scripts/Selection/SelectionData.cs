@@ -2,14 +2,19 @@ using UnityEngine;
 
 public static class SelectionData
 {
-    public static string characterImageUrl1 { get; set; } = "Ichigo/avatar/ichigo_zero";
+    // Player 1 Selections
+    public static string characterImageUrl1 { get; set; }
+    public static string characterPrefabUrl1 { get; set; }
     public static string supportImageUrl1 { get; set; }
-    public static string characterPrefabUrl1 { get; set; } = "Ichigo/prefabs/Ichigo 1 1";
     public static string supportPrefabUrl1 { get; set; }
-    public static string characterImageUrl2 { get; set; } = "Ichigo/avatar/ichigo_zero";
+
+    // Player 2 Selections
+    public static string characterImageUrl2 { get; set; }
+    public static string characterPrefabUrl2 { get; set; }
     public static string supportImageUrl2 { get; set; }
-    public static string characterPrefabUrl2 { get; set; } = "Ichigo/prefabs/Ichigo 1 1";
     public static string supportPrefabUrl2 { get; set; }
-    public static string background { get; set; } = "map_anhtuan/Background";
-    public static string mapLocation { get; set; } = "map_anhtuan/StagePlatform";
+
+    // Map Details (If you decide to extract background/platforms dynamically later)
+    public static string background { get; set; }
+    public static string mapLocation { get; set; }
 }

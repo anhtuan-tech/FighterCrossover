@@ -124,10 +124,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionManager
   allCharacters: []
+  allSupports: []
+  allMaps: []
   p1Preview: {fileID: 7079595634696077072}
   p2Preview: {fileID: 8764510241668716362}
   gridContainer: {fileID: 9208425728619333063}
   charSlotPrefab: {fileID: 781653286070853091, guid: d718ff5ac16741647bd2f41e0d1a30a8, type: 3}
+  mapSlotPrefab: {fileID: 6875255160989153572, guid: 272bc473dadc81345a31f26b8c7e9b60, type: 3}
+  characterCellSize: {x: 110, y: 110}
+  characterSpacing: {x: 20, y: 20}
+  mapCellSize: {x: 800, y: 200}
+  mapSpacing: {x: 0, y: 100}
   numberSprites:
   - {fileID: -6451177073030502646, guid: 44886cee37d72d946a9cb228d8d38f16, type: 3}
   - {fileID: -3101786277394333769, guid: 6ecaa5bd9e5081e449a69ae7dcaa7ad3, type: 3}

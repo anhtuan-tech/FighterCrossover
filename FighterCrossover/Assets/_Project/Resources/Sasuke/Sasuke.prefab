@@ -356,5 +356,5 @@ MonoBehaviour:
   fireballSpawnPoint: {fileID: 0}
   chidoriDashSpeed: 10
   chidoriDashDuration: 0.3
-  chidoriDragSpeed: 5
+  chidoriDragSpeed: 7
   chidoriDragDuration: 1.4

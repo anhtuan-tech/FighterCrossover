@@ -50,9 +50,9 @@ public class FighterBase : MonoBehaviour, IDamageable
     protected float lastStaminaUseTime; // Lưu lại mốc thời gian cuối cùng tiêu hao stamina
 
     [Header("--- MOVEMENT SETTINGS ---")]
-    public float moveSpeed = 6.5f;
-    public float jumpForce = 11f;
-    public float dashForce = 25f;
+    public float moveSpeed = 5f;
+    public float jumpForce = 10f;
+    public float dashForce = 15f;
     public float dashDuration = 0.10f;
     public int maxJumps = 2;
     public LayerMask groundLayer;
@@ -136,8 +136,26 @@ public class FighterBase : MonoBehaviour, IDamageable
     #endregion
 
     #region FSM & LOGIC
+    private bool IsGameplayActive()
+    {
+        // Nếu không có MatchManager trong scene (cảnh test độc lập), mặc định cho phép di chuyển/đánh tự do
+        if (MatchManager.Instance == null) return true;
+        return MatchManager.IsMatchStarted && !MatchManager.IsMatchEnded;
+    }
+
     protected virtual void HandleStateLogic()
     {
+        // Kiểm tra xem trận đấu đã bắt đầu chưa hoặc đã kết thúc chưa
+        if (!IsGameplayActive())
+        {
+            moveInput = Vector2.zero;
+            if (CurrentState != FighterState.Dead)
+            {
+                ChangeState(isGrounded ? FighterState.Idle : FighterState.Jumping);
+            }
+            return;
+        }
+
         // Reset combo nếu để quá lâu
         if (comboStep > 0 && Time.time - lastAttackTime > comboResetTime && CurrentState != FighterState.Attacking)
         {
@@ -177,6 +195,11 @@ public class FighterBase : MonoBehaviour, IDamageable
 
     protected bool CanAct()
     {
+        if (!IsGameplayActive())
+        {
+            return false;
+        }
+
         return CurrentState != FighterState.Attacking &&
             CurrentState != FighterState.Dashing &&
             CurrentState != FighterState.Stunned &&
@@ -354,6 +377,7 @@ public class FighterBase : MonoBehaviour, IDamageable
     // Giao diện nhận sát thương
     public virtual void TakeDamage(float damage, float attackerPosX, bool isHeavyAttack = false)
     {
+        if (!IsGameplayActive()) return;
         if (CurrentState == FighterState.Dead) return;
 
         if (CurrentState == FighterState.Blocking)

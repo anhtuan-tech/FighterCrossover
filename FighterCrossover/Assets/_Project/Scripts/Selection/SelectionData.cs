@@ -8,6 +8,7 @@ public static class SelectionData
     public static string supportImageUrl1 { get; set; }
     public static string supportPrefabUrl1 { get; set; }
 
+
     // Player 2 Selections
     public static string characterImageUrl2 { get; set; }
     public static string characterPrefabUrl2 { get; set; }

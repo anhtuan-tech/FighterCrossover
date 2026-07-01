@@ -4,10 +4,14 @@ using UnityEngine.InputSystem;
 
 public class IchigoController : FighterBase
 {
-    [Header("--- ICHIGO SETTINGS ---")]
-    public GameObject rangedProjectilePrefab;
-    public GameObject ultimateEffectPrefab;
-    public float ultimateDuration = 1.0f;
+    [Header("--- ICHIGO SKILLS ---")]
+    public IchigoRangedSkill rangedSkill;
+    public IchigoUltimateSkill ultimateSkill;
+
+    // Obsolete migration fields to prevent breaking existing assignments in inspectors
+    [HideInInspector, System.Obsolete] public GameObject rangedProjectilePrefab;
+    [HideInInspector, System.Obsolete] public GameObject ultimateEffectPrefab;
+    [HideInInspector, System.Obsolete] public float ultimateDuration = 1.0f;
 
     [Header("--- DYNAMIC BINDINGS ---")]
     private AnimeFighter.UI.KeybindingsData keys;
@@ -16,6 +20,42 @@ public class IchigoController : FighterBase
     protected override void Awake()
     {
         base.Awake();
+
+        // Auto-acquire or add skill components if not assigned
+        if (rangedSkill == null)
+        {
+            rangedSkill = GetComponent<IchigoRangedSkill>();
+            if (rangedSkill == null)
+            {
+                rangedSkill = gameObject.AddComponent<IchigoRangedSkill>();
+#pragma warning disable 0618
+                if (rangedProjectilePrefab != null)
+                {
+                    rangedSkill.projectilePrefab = rangedProjectilePrefab;
+                }
+#pragma warning restore 0618
+            }
+        }
+
+        if (ultimateSkill == null)
+        {
+            ultimateSkill = GetComponent<IchigoUltimateSkill>();
+            if (ultimateSkill == null)
+            {
+                ultimateSkill = gameObject.AddComponent<IchigoUltimateSkill>();
+#pragma warning disable 0618
+                if (ultimateEffectPrefab != null)
+                {
+                    ultimateSkill.ultimateEffectPrefab = ultimateEffectPrefab;
+                }
+                if (ultimateDuration > 0)
+                {
+                    ultimateSkill.ultimateDuration = ultimateDuration;
+                }
+#pragma warning restore 0618
+            }
+        }
+
         LoadKeybindings();
         SetupPlayerInputBindings();
     }
@@ -219,6 +259,11 @@ public class IchigoController : FighterBase
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
 
+        if (rangedSkill != null)
+        {
+            rangedSkill.StartCast(this);
+        }
+
         if (anim != null)
         {
             anim.SetTrigger("Ranged");
@@ -312,84 +357,21 @@ public class IchigoController : FighterBase
 
     public void AnimationEvent_SpawnProjectile()
     {
-        float dir = transform.localScale.x;
-        Vector2 spawnPos = (attackHitbox != null) ? (Vector2)attackHitbox.position : (Vector2)transform.position + new Vector2(dir * 1.0f, 0.2f);
-
-        if (rangedProjectilePrefab != null)
+        if (rangedSkill != null)
         {
-            GameObject projObj = Instantiate(rangedProjectilePrefab, spawnPos, Quaternion.identity);
-            RangedProjectile proj = projObj.GetComponent<RangedProjectile>();
-            if (proj != null)
-            {
-                proj.Setup(new Vector2(dir, 0f), gameObject, targetLayer);
-            }
-        }
-        else
-        {
-            // Dynamic fallback projectile if prefab is unassigned
-            Debug.LogWarning("[IchigoController] Ranged Projectile Prefab not assigned! Creating a dynamic projectile.");
-            GameObject projObj = new GameObject("DynamicProjectile");
-            projObj.transform.position = spawnPos;
-            
-            var col = projObj.AddComponent<BoxCollider2D>();
-            col.isTrigger = true;
-            col.size = new Vector2(0.8f, 0.4f);
-
-            var rbProj = projObj.AddComponent<Rigidbody2D>();
-            rbProj.bodyType = RigidbodyType2D.Kinematic;
-
-            // Inner layer
-            GameObject inner = new GameObject("Inner");
-            inner.transform.SetParent(projObj.transform);
-            inner.transform.localPosition = Vector3.zero;
-            var srInner = inner.AddComponent<SpriteRenderer>();
-            srInner.color = new Color(0f, 0.8f, 1f, 0.9f); // Cyan energy
-            srInner.sprite = LoadIchigoSprite("image-removebg-preview_1");
-
-            // Outer layer
-            GameObject outer = new GameObject("Outer");
-            outer.transform.SetParent(projObj.transform);
-            outer.transform.localPosition = Vector3.zero;
-            var srOuter = outer.AddComponent<SpriteRenderer>();
-            srOuter.color = new Color(0f, 0.4f, 1f, 0.7f); // Blue energy
-            srOuter.sprite = LoadIchigoSprite("image-removebg-preview_1");
-            outer.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-
-            RangedProjectile proj = projObj.AddComponent<RangedProjectile>();
-            proj.Setup(new Vector2(dir, 0f), gameObject, targetLayer);
+            rangedSkill.SpawnProjectile(this, targetLayer);
         }
     }
 
     public void AnimationEvent_SpawnUltimate()
     {
-        Vector2 spawnPos = transform.position;
-
-        if (ultimateEffectPrefab != null)
+        if (ultimateSkill != null)
         {
-            GameObject ultObj = Instantiate(ultimateEffectPrefab, spawnPos, Quaternion.identity);
-            UltimateEffect effect = ultObj.GetComponent<UltimateEffect>();
-            if (effect != null)
-            {
-                effect.Setup(gameObject, targetLayer, ultimateDuration);
-            }
-        }
-        else
-        {
-            // Dynamic fallback ultimate effect if prefab is unassigned
-            Debug.LogWarning("[IchigoController] Ultimate Effect Prefab not assigned! Creating a dynamic effect.");
-            GameObject ultObj = new GameObject("DynamicUltimate");
-            ultObj.transform.position = spawnPos;
-
-            var sr = ultObj.AddComponent<SpriteRenderer>();
-            sr.sprite = LoadIchigoSprite("image-removebg-preview (7)_0");
-            sr.color = new Color(0.9f, 0.1f, 0.1f, 0.8f); // Red energy blade aura
-
-            UltimateEffect effect = ultObj.AddComponent<UltimateEffect>();
-            effect.Setup(gameObject, targetLayer, ultimateDuration);
+            ultimateSkill.SpawnUltimate(this, targetLayer);
         }
     }
 
-    private Sprite LoadIchigoSprite(string spriteName)
+    public Sprite LoadIchigoSprite(string spriteName)
     {
         // Utility to load sprite dynamically in case prefab isn't fully configured
         string sheet = "bankai";
@@ -408,6 +390,7 @@ public class IchigoController : FighterBase
         }
 
         string path = $"Assets/_Project/Characters/Ichigo/ichigo/{sheet}.png";
+#if UNITY_EDITOR
         Object[] assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(path);
         foreach (var a in assets)
         {
@@ -416,6 +399,7 @@ public class IchigoController : FighterBase
                 return s;
             }
         }
+#endif
         return null;
     }
 

@@ -617,7 +617,7 @@ PrefabInstance:
       objectReference: {fileID: 933662776}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: selectFighterSprite

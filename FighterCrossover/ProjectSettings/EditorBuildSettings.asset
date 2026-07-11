@@ -8,6 +8,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/MainMenu_Scene.unity
     guid: a746603050deace4f89fc35f1900ff8e
+  - enabled: 1
+    path: Assets/_Project/Scenes/PreMatch_Scene.unity
+    guid: 3d82216ac334d5a4689166ecc95bd98c
+  - enabled: 1
+    path: Assets/_Project/Scenes/Map_Orochimaru.unity
+    guid: bd9423956ba48294e961ced6d9c16884
   - enabled: 0
     path: Assets/_Project/Scenes/Pre_Match_Scene.unity
     guid: 11eecb7581a32d9458c43d1f25d66be7

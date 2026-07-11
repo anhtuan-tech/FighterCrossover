@@ -1,8 +1,11 @@
 using UnityEngine;
-
+public enum GameMode { Training, DeathBattle, PvP }
 public static class SelectionData
 {
+    public static string hudUiPrefabUrl;
+    public static GameMode CurrentGameMode = GameMode.PvP; // Mặc định
     // Player 1 Selections
+
     public static string characterImageUrl1 { get; set; }
     public static string characterPrefabUrl1 { get; set; }
     public static string supportImageUrl1 { get; set; }

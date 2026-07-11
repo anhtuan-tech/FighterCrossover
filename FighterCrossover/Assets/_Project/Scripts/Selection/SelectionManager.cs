@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
+// Thêm cấu trúc Phase chi tiết để phân chia lượt chọn
+public enum SelectionPhase { P1_MainCharacter, P2_MainCharacter, P1_SupportCharacter, P2_SupportCharacter, MapSelection }
+
 public class CharacterSelectionManager : MonoBehaviour
 {
-    public enum SelectionPhase { MainCharacter, SupportCharacter, MapSelection }
-    private SelectionPhase currentPhase = SelectionPhase.MainCharacter;
+    private SelectionPhase currentPhase = SelectionPhase.P1_MainCharacter;
 
     [System.Serializable]
     public class CharacterInfoData
@@ -21,10 +23,8 @@ public class CharacterSelectionManager : MonoBehaviour
     [System.Serializable]
     public class MapInfoData
     {
-        [HideInInspector]
-        public string mapName;
+        [HideInInspector] public string mapName;
         public Sprite mapThumbnail;
-
 #if UNITY_EDITOR
         [Tooltip("KÉO THẢ TRỰC TIẾP FILE SCENE VÀO ĐÂY")]
         public UnityEditor.SceneAsset mapSceneFile; 
@@ -40,22 +40,32 @@ public class CharacterSelectionManager : MonoBehaviour
     [Header("--- DATA CHỌN MAP ---")]
     public List<MapInfoData> allMaps = new List<MapInfoData>();
 
+    [Header("--- HUD UI PREFAB ---")]
+    [Tooltip("Kéo thả file Prefab HUD_UI trực tiếp vào đây")]
+    public GameObject hudUiPrefab;
+
     [Header("--- GIAO DIỆN UI CHÍNH ---")]
     public Image p1Preview;
     public Image p2Preview;
+    public Image bigMapPreview;
+    public Text mapNameText;
     public Transform gridContainer;
     public GameObject charSlotPrefab;
     public GameObject mapSlotPrefab;
+
+    [Header("--- UI THÔNG BÁO PHASE (MỚI THÊM) ---")]
+    public Image phaseTextImage;
+    public Sprite selectFighterSprite;
+    public Sprite supportSprite;
+    public Sprite mapSprite;
 
     [Header("--- TÙY CHỈNH KÍCH THƯỚC GRID ---")]
     public Vector2 characterCellSize = new Vector2(110f, 110f);
     public Vector2 characterSpacing = new Vector2(20f, 20f);
 
     [Space(10)]
-    [Tooltip("Kích thước của thẻ Map khi xếp dọc")]
-    public Vector2 mapCellSize = new Vector2(550f, 135f);
-    [Tooltip("Khoảng cách DỌC giữa các map")]
-    public Vector2 mapSpacing = new Vector2(0f, 25f);
+    public Vector2 mapCellSize = new Vector2(160f, 90f);
+    public Vector2 mapSpacing = new Vector2(15f, 15f);
 
     [Header("--- UI THANH TIMER PHÍA TRÊN (30S) ---")]
     public Sprite[] numberSprites;
@@ -93,32 +103,33 @@ public class CharacterSelectionManager : MonoBehaviour
 
     void Start()
     {
-        currentPhase = SelectionPhase.MainCharacter;
+        currentPhase = SelectionPhase.P1_MainCharacter;
         SetupSelectionPhase();
     }
 
     void SetupSelectionPhase()
     {
+        UpdatePhaseTextVisual();
+
         foreach (Transform child in gridContainer) { Destroy(child.gameObject); }
         spawnedSlots.Clear();
 
         int totalItems = GetCurrentItemCount();
         if (totalItems == 0) return;
 
-        p1Index = 0;
-        p2Index = totalItems - 1;
         p1Locked = false;
         p2Locked = false;
 
-        if (currentPhase == SelectionPhase.MapSelection)
+        if (SelectionData.CurrentGameMode == GameMode.Training)
         {
-            if (p1Preview != null) p1Preview.gameObject.SetActive(false);
-            if (p2Preview != null) p2Preview.gameObject.SetActive(false);
+            p1Index = 0;
+            if (p2Cursor != null) p2Cursor.gameObject.SetActive(false);
         }
         else
         {
-            if (p1Preview != null) p1Preview.gameObject.SetActive(true);
-            if (p2Preview != null) p2Preview.gameObject.SetActive(true);
+            p1Index = 0;
+            p2Index = totalItems - 1;
+            if (p2Cursor != null) p2Cursor.gameObject.SetActive(true);
         }
 
         GridLayoutGroup gridLayout = gridContainer.GetComponent<GridLayoutGroup>();
@@ -126,39 +137,47 @@ public class CharacterSelectionManager : MonoBehaviour
 
         if (gridLayout != null && gridRect != null)
         {
-            // --- KHÓA CỨNG ANCHOR VÀ PIVOT VỀ TRUNG TÂM BẰNG CODE (CHỐNG LỆCH TUYỆT ĐỐI) ---
             gridRect.anchorMin = new Vector2(0.5f, 0.5f);
             gridRect.anchorMax = new Vector2(0.5f, 0.5f);
             gridRect.pivot = new Vector2(0.5f, 0.5f);
-            gridRect.anchoredPosition = Vector2.zero; // Trả về tâm (0,0) màn hình góc chuẩn
 
             if (currentPhase == SelectionPhase.MapSelection)
             {
+                if (p1Preview != null) p1Preview.gameObject.SetActive(false);
+                if (p2Preview != null) p2Preview.gameObject.SetActive(false);
+                if (bigMapPreview != null) bigMapPreview.gameObject.SetActive(true);
+                if (mapNameText != null) mapNameText.gameObject.SetActive(true);
+
+                int mapColumns = 6;
                 gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-                gridLayout.constraintCount = 1;
+                gridLayout.constraintCount = mapColumns;
                 gridLayout.cellSize = mapCellSize;
                 gridLayout.spacing = mapSpacing;
                 gridLayout.childAlignment = TextAnchor.MiddleCenter;
 
-                // Tính toán chiều cao
-                float requiredHeight = (mapCellSize.y * totalItems) + (mapSpacing.y * (totalItems - 1)) + 40f;
-                gridRect.sizeDelta = new Vector2(mapCellSize.x + 40f, requiredHeight);
+                int totalRows = Mathf.CeilToInt((float)totalItems / mapColumns);
+                float requiredWidth = (mapCellSize.x * mapColumns) + (mapSpacing.x * (mapColumns - 1)) + 20f;
+                float requiredHeight = (mapCellSize.y * totalRows) + (mapSpacing.y * (totalRows - 1)) + 20f;
+                gridRect.sizeDelta = new Vector2(requiredWidth, requiredHeight);
+                gridRect.anchoredPosition = new Vector2(0f, -150f);
             }
             else
             {
+                if (p1Preview != null) p1Preview.gameObject.SetActive(true);
+                if (p2Preview != null) p2Preview.gameObject.SetActive(true);
+                if (bigMapPreview != null) bigMapPreview.gameObject.SetActive(false);
+                if (mapNameText != null) mapNameText.gameObject.SetActive(false);
+
                 gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
                 gridLayout.constraintCount = 4;
                 gridLayout.cellSize = characterCellSize;
                 gridLayout.spacing = characterSpacing;
                 gridLayout.childAlignment = TextAnchor.MiddleCenter;
 
-                // Tính toán chiều rộng
                 float requiredWidth = (characterCellSize.x * 4) + (characterSpacing.x * 3) + 20f;
                 gridRect.sizeDelta = new Vector2(requiredWidth, characterCellSize.y + 20f);
+                gridRect.anchoredPosition = Vector2.zero;
             }
-
-            // Ép thêm một lần nữa sau khi đổi sizeDelta để chắc chắn không bị trôi vị trí
-            gridRect.anchoredPosition = Vector2.zero;
         }
 
         GameObject prefabToUse = (currentPhase == SelectionPhase.MapSelection) ? mapSlotPrefab : charSlotPrefab;
@@ -172,14 +191,7 @@ public class CharacterSelectionManager : MonoBehaviour
                 Image slotImage = newSlot.GetComponent<Image>();
                 if (slotImage == null) slotImage = newSlot.GetComponentInChildren<Image>();
                 if (slotImage != null) slotImage.sprite = allMaps[i].mapThumbnail;
-
                 spawnedSlots.Add(slotImage);
-
-                Text mapText = newSlot.GetComponentInChildren<Text>();
-                if (mapText != null)
-                {
-                    mapText.text = allMaps[i].mapName.ToUpper();
-                }
             }
             else
             {
@@ -205,6 +217,24 @@ public class CharacterSelectionManager : MonoBehaviour
         if (gridRect != null) LayoutRebuilder.ForceRebuildLayoutImmediate(gridRect);
 
         UpdateVisuals();
+    }
+
+    void UpdatePhaseTextVisual()
+    {
+        if (phaseTextImage == null) return;
+
+        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter)
+        {
+            if (selectFighterSprite != null) phaseTextImage.sprite = selectFighterSprite;
+        }
+        else if (currentPhase == SelectionPhase.P1_SupportCharacter || currentPhase == SelectionPhase.P2_SupportCharacter)
+        {
+            if (supportSprite != null) phaseTextImage.sprite = supportSprite;
+        }
+        else if (currentPhase == SelectionPhase.MapSelection)
+        {
+            if (mapSprite != null) phaseTextImage.sprite = mapSprite;
+        }
     }
 
     void Update()
@@ -249,37 +279,34 @@ public class CharacterSelectionManager : MonoBehaviour
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
 
-        if (currentPhase == SelectionPhase.MapSelection)
+        int columns = (currentPhase == SelectionPhase.MapSelection) ? 6 : 4;
+
+        if (SelectionData.CurrentGameMode == GameMode.Training)
         {
             if (!p1Locked)
             {
-                if (keyboard.aKey.wasPressedThisFrame || keyboard.wKey.wasPressedThisFrame)
+                if (keyboard.aKey.wasPressedThisFrame)
                 {
-                    p1Index = (p1Index == 0) ? maxIndex : p1Index - 1;
+                    if (p1Index % columns == 0) p1Index = Mathf.Min(p1Index + columns - 1, maxIndex);
+                    else p1Index--;
                 }
-                if (keyboard.dKey.wasPressedThisFrame || keyboard.sKey.wasPressedThisFrame)
+                if (keyboard.dKey.wasPressedThisFrame)
                 {
-                    p1Index = (p1Index == maxIndex) ? 0 : p1Index + 1;
+                    if (p1Index % columns == columns - 1 || p1Index == maxIndex) p1Index -= (p1Index % columns);
+                    else p1Index++;
                 }
-                if (keyboard.jKey.wasPressedThisFrame) { p1Locked = true; }
-            }
+                if (keyboard.wKey.wasPressedThisFrame && p1Index >= columns) p1Index -= columns;
+                if (keyboard.sKey.wasPressedThisFrame && p1Index + columns <= maxIndex) p1Index += columns;
 
-            if (!p2Locked)
-            {
-                if (keyboard.leftArrowKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame)
+                if (keyboard.jKey.wasPressedThisFrame)
                 {
-                    p2Index = (p2Index == 0) ? maxIndex : p2Index - 1;
+                    p1Locked = true;
+                    LockAndProceed();
                 }
-                if (keyboard.rightArrowKey.wasPressedThisFrame || keyboard.downArrowKey.wasPressedThisFrame)
-                {
-                    p2Index = (p2Index == maxIndex) ? 0 : p2Index + 1;
-                }
-                if (keyboard.enterKey.wasPressedThisFrame) { p2Locked = true; }
             }
         }
         else
         {
-            int columns = 4;
             if (!p1Locked)
             {
                 if (keyboard.aKey.wasPressedThisFrame)
@@ -313,13 +340,13 @@ public class CharacterSelectionManager : MonoBehaviour
                 if (keyboard.upArrowKey.wasPressedThisFrame && p2Index >= columns) p2Index -= columns;
                 if (keyboard.downArrowKey.wasPressedThisFrame && p2Index + columns <= maxIndex) p2Index += columns;
 
-                if (keyboard.enterKey.wasPressedThisFrame) { p2Locked = true; }
+                if (keyboard.numpad1Key.wasPressedThisFrame) { p2Locked = true; }
             }
+
+            if (p1Locked && p2Locked) { LockAndProceed(); }
         }
 
         UpdateVisuals();
-
-        if (p1Locked && p2Locked) { LockAndProceed(); }
     }
 
     void UpdateVisuals()
@@ -332,8 +359,30 @@ public class CharacterSelectionManager : MonoBehaviour
 
         if (currentPhase != SelectionPhase.MapSelection)
         {
-            if (p1Preview != null) p1Preview.sprite = GetPreviewSpriteAt(p1Index);
-            if (p2Preview != null) p2Preview.sprite = GetPreviewSpriteAt(p2Index);
+            if (SelectionData.CurrentGameMode == GameMode.Training)
+            {
+                if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P1_SupportCharacter)
+                {
+                    if (p1Preview != null) p1Preview.sprite = GetPreviewSpriteAt(p1Index);
+                }
+                else
+                {
+                    if (p2Preview != null) p2Preview.sprite = GetPreviewSpriteAt(p1Index);
+                }
+            }
+            else
+            {
+                if (p1Preview != null) p1Preview.sprite = GetPreviewSpriteAt(p1Index);
+                if (p2Preview != null) p2Preview.sprite = GetPreviewSpriteAt(p2Index);
+            }
+        }
+        else
+        {
+            if (allMaps.Count > p1Index && allMaps[p1Index] != null)
+            {
+                if (bigMapPreview != null) bigMapPreview.sprite = allMaps[p1Index].mapThumbnail;
+                if (mapNameText != null) mapNameText.text = allMaps[p1Index].mapName.ToUpper();
+            }
         }
 
         for (int i = 0; i < spawnedSlots.Count; i++)
@@ -345,27 +394,30 @@ public class CharacterSelectionManager : MonoBehaviour
         if (p1Cursor != null && spawnedSlots.Count > p1Index)
             p1Cursor.position = spawnedSlots[p1Index].rectTransform.position + cursorOffset;
 
-        if (p2Cursor != null && spawnedSlots.Count > p2Index)
-            p2Cursor.position = spawnedSlots[p2Index].rectTransform.position + cursorOffset;
+        if (SelectionData.CurrentGameMode != GameMode.Training)
+        {
+            if (p2Cursor != null && spawnedSlots.Count > p2Index)
+                p2Cursor.position = spawnedSlots[p2Index].rectTransform.position + cursorOffset;
+        }
     }
 
     private int GetCurrentItemCount()
     {
-        if (currentPhase == SelectionPhase.MainCharacter) return allCharacters.Count;
-        if (currentPhase == SelectionPhase.SupportCharacter) return allSupports.Count;
+        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter) return allCharacters.Count;
+        if (currentPhase == SelectionPhase.P1_SupportCharacter || currentPhase == SelectionPhase.P2_SupportCharacter) return allSupports.Count;
         return allMaps.Count;
     }
 
     private Sprite GetAvatarSpriteAt(int index)
     {
-        if (currentPhase == SelectionPhase.MainCharacter) return allCharacters[index].avatarSprite;
+        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter) return allCharacters[index].avatarSprite;
         return allSupports[index].avatarSprite;
     }
 
     private Sprite GetPreviewSpriteAt(int index)
     {
-        if (currentPhase == SelectionPhase.MainCharacter) return allCharacters[index].standeeSprite;
-        if (currentPhase == SelectionPhase.SupportCharacter) return allSupports[index].standeeSprite;
+        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter) return allCharacters[index].standeeSprite;
+        if (currentPhase == SelectionPhase.P1_SupportCharacter || currentPhase == SelectionPhase.P2_SupportCharacter) return allSupports[index].standeeSprite;
         return null;
     }
 
@@ -392,41 +444,87 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         isCounting = false;
 
-        if (currentPhase == SelectionPhase.MainCharacter)
+        if (SelectionData.CurrentGameMode == GameMode.Training)
         {
-            SelectionData.characterImageUrl1 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
-            SelectionData.characterPrefabUrl1 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
-            SelectionData.characterImageUrl2 = GetResourcesPath(allCharacters[p2Index].avatarSprite);
-            SelectionData.characterPrefabUrl2 = GetResourcesPath(allCharacters[p2Index].characterPrefab);
-
-            currentPhase = SelectionPhase.SupportCharacter;
-            timeRemaining = 30f;
-            isCounting = true;
-            SetupSelectionPhase();
-        }
-        else if (currentPhase == SelectionPhase.SupportCharacter)
-        {
-            SelectionData.supportImageUrl1 = GetResourcesPath(allSupports[p1Index].avatarSprite);
-            SelectionData.supportPrefabUrl1 = GetResourcesPath(allSupports[p1Index].characterPrefab);
-            SelectionData.supportImageUrl2 = GetResourcesPath(allSupports[p2Index].avatarSprite);
-            SelectionData.supportPrefabUrl2 = GetResourcesPath(allSupports[p2Index].characterPrefab);
-
-            currentPhase = SelectionPhase.MapSelection;
-            timeRemaining = 30f;
-            isCounting = true;
-            SetupSelectionPhase();
-        }
-        else if (currentPhase == SelectionPhase.MapSelection)
-        {
-            int finalMapIndex = p1Index;
-
-            if (p1Index != p2Index)
+            switch (currentPhase)
             {
-                finalMapIndex = (Random.value > 0.5f) ? p1Index : p2Index;
-                Debug.Log($"[GACHA MAP] Kết quả: {allMaps[finalMapIndex].mapName}");
-            }
+                case SelectionPhase.P1_MainCharacter:
+                    SelectionData.characterImageUrl1 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
+                    SelectionData.characterPrefabUrl1 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
+                    currentPhase = SelectionPhase.P2_MainCharacter;
+                    break;
 
-            SceneManager.LoadScene(allMaps[finalMapIndex].mapName);
+                case SelectionPhase.P2_MainCharacter:
+                    SelectionData.characterImageUrl2 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
+                    SelectionData.characterPrefabUrl2 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
+                    currentPhase = SelectionPhase.P1_SupportCharacter;
+                    break;
+
+                case SelectionPhase.P1_SupportCharacter:
+                    SelectionData.supportImageUrl1 = GetResourcesPath(allSupports[p1Index].avatarSprite);
+                    SelectionData.supportPrefabUrl1 = GetResourcesPath(allSupports[p1Index].characterPrefab);
+                    currentPhase = SelectionPhase.P2_SupportCharacter;
+                    break;
+
+                case SelectionPhase.P2_SupportCharacter:
+                    SelectionData.supportImageUrl2 = GetResourcesPath(allSupports[p1Index].avatarSprite);
+                    SelectionData.supportPrefabUrl2 = GetResourcesPath(allSupports[p1Index].characterPrefab);
+                    currentPhase = SelectionPhase.MapSelection;
+                    break;
+
+                case SelectionPhase.MapSelection:
+                    // Sinh HUD UI ra luôn và giữ lại qua màn chơi mới
+                    if (hudUiPrefab != null)
+                    {
+                        GameObject hudInstance = Instantiate(hudUiPrefab);
+                        DontDestroyOnLoad(hudInstance);
+                    }
+                    SceneManager.LoadScene(allMaps[p1Index].mapName);
+                    return;
+            }
         }
+        else
+        {
+            if (currentPhase == SelectionPhase.P1_MainCharacter)
+            {
+                SelectionData.characterImageUrl1 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
+                SelectionData.characterPrefabUrl1 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
+                SelectionData.characterImageUrl2 = GetResourcesPath(allCharacters[p2Index].avatarSprite);
+                SelectionData.characterPrefabUrl2 = GetResourcesPath(allCharacters[p2Index].characterPrefab);
+
+                currentPhase = SelectionPhase.P1_SupportCharacter;
+            }
+            else if (currentPhase == SelectionPhase.P1_SupportCharacter)
+            {
+                SelectionData.supportImageUrl1 = GetResourcesPath(allSupports[p1Index].avatarSprite);
+                SelectionData.supportPrefabUrl1 = GetResourcesPath(allSupports[p1Index].characterPrefab);
+                SelectionData.supportImageUrl2 = GetResourcesPath(allSupports[p2Index].avatarSprite);
+                SelectionData.supportPrefabUrl2 = GetResourcesPath(allSupports[p2Index].characterPrefab);
+
+                currentPhase = SelectionPhase.MapSelection;
+            }
+            else if (currentPhase == SelectionPhase.MapSelection)
+            {
+                int finalMapIndex = p1Index;
+                if (p1Index != p2Index)
+                {
+                    finalMapIndex = (Random.value > 0.5f) ? p1Index : p2Index;
+                }
+
+                // Sinh HUD UI ra luôn và giữ lại qua màn chơi mới
+                if (hudUiPrefab != null)
+                {
+                    GameObject hudInstance = Instantiate(hudUiPrefab);
+                    DontDestroyOnLoad(hudInstance);
+                }
+
+                SceneManager.LoadScene(allMaps[finalMapIndex].mapName);
+                return;
+            }
+        }
+
+        timeRemaining = 30f;
+        isCounting = true;
+        SetupSelectionPhase();
     }
 }

@@ -617,7 +617,7 @@ PrefabInstance:
       objectReference: {fileID: 933662776}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: selectFighterSprite
@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[1].mapName
-      value: Map_Orochimaru
+      value: Map_DeathBattle
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[2].mapName
@@ -666,11 +666,11 @@ PrefabInstance:
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[1].mapSceneFile
       value: 
-      objectReference: {fileID: 102900000, guid: bd9423956ba48294e961ced6d9c16884, type: 3}
+      objectReference: {fileID: 102900000, guid: dffe7f621cedb1349aec5037e9dc383c, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[1].mapThumbnail
       value: 
-      objectReference: {fileID: -761314762009460688, guid: a58c15cc7496bef4699ea0479cc183b2, type: 3}
+      objectReference: {fileID: -6975022464567490374, guid: 373d3023be8f9c2468f6a149899612d6, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[2].mapSceneFile
       value: 

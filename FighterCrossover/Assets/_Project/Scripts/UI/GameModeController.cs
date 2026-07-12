@@ -12,9 +12,9 @@ namespace AnimeFighter.UI
         [SerializeField] private Button pvp1v1Btn;
         [SerializeField] private Button closeBtn;
 
-        private const string TrainingSceneName = "Training_Scene";
-        private const string DeathBattleSceneName = "DeathBattle_Scene";
-        private const string PvpLocalSceneName = "PvpLocal_Scene";
+        private const string TrainingSceneName = "Prematch_Scene";
+        private const string DeathBattleSceneName = "Prematch_Scene";
+        private const string PvpLocalSceneName = "Prematch_Scene";
 
         private void Start()
         {
@@ -78,16 +78,19 @@ namespace AnimeFighter.UI
 
         private void OnTrainingModeClicked()
         {
+            SelectionData.CurrentGameMode = GameMode.Training; // <--- LƯU LẠI MODE
             LoadGameMode(TrainingSceneName);
         }
 
         private void OnDeathBattleModeClicked()
         {
+            SelectionData.CurrentGameMode = GameMode.DeathBattle; // <--- LƯU LẠI MODE
             LoadGameMode(DeathBattleSceneName);
         }
 
         private void OnPvp1v1Clicked()
         {
+            SelectionData.CurrentGameMode = GameMode.PvP; // <--- LƯU LẠI MODE
             LoadGameMode(PvpLocalSceneName);
         }
 

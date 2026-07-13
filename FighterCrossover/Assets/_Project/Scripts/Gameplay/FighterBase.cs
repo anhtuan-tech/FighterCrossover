@@ -19,7 +19,8 @@ public struct FighterStats
 {
     public float maxHp;
     public float currentHp;
-    public int mana;
+    public float maxMana;
+    public float currentMana;
     public float maxStamina;
     public float stamina;
 
@@ -37,11 +38,10 @@ public class FighterBase : MonoBehaviour, IDamageable
     {
         maxHp = 500f,
         currentHp = 500f,
-        mana = 250,
+        maxMana = 100f,
+        currentMana = 50f,
         maxStamina = 100f,
         stamina = 100f
-
-
     };
     [Header("--- STAMINA REGEN ---")]
     public float staminaRegenRate = 20f; // Lượng stamina hồi mỗi giây
@@ -242,6 +242,43 @@ public class FighterBase : MonoBehaviour, IDamageable
             }
         }
     }
+
+    // ===================== MANA SYSTEM =====================
+
+    /// <summary>Hồi mana theo % thanh mana tối đa.</summary>
+    protected void GainMana(float percent)
+    {
+        stats.currentMana = Mathf.Min(stats.currentMana + stats.maxMana * percent / 100f, stats.maxMana);
+    }
+
+    /// <summary>Tiêu mana theo % thanh mana tối đa. Trả false nếu không đủ mana.</summary>
+    protected bool SpendMana(float percent)
+    {
+        float cost = stats.maxMana * percent / 100f;
+        if (stats.currentMana < cost - 0.01f)
+        {
+            Debug.Log($"[MANA] Không đủ mana! Cần {percent}%, hiện có {stats.currentMana / stats.maxMana * 100f:F0}%");
+            return false;
+        }
+        stats.currentMana = Mathf.Max(0f, stats.currentMana - cost);
+        return true;
+    }
+
+    /// <summary>Kiểm tra có đủ mana không (không tiêu).</summary>
+    public bool HasMana(float percent)
+    {
+        return stats.currentMana >= stats.maxMana * percent / 100f - 0.01f;
+    }
+
+    /// <summary>Gọi từ subclass khi skill tầm xa trúng: hồi 20% mana.</summary>
+    public void GainManaOnRangedHit()
+    {
+        GainMana(20f);
+        Debug.Log($"[MANA] Ranged hit! +20% mana. Hiện: {stats.currentMana / stats.maxMana * 100f:F0}%");
+    }
+
+    public virtual void OnUltimateMana() { }
+    // ========================================================
     #endregion
 
     #region MOVEMENT & ACTIONS

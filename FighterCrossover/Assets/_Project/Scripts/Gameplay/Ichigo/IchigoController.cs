@@ -247,6 +247,11 @@ public class IchigoController : FighterBase
     public void OnSpecial()
     {
         if (!CanAct() || !isGrounded) return;
+        if (!HasMana(50f))
+        {
+            Debug.Log("[MANA] Không đủ mana dùng Ultimate!");
+            return;
+        }
         ExecuteUltimate();
     }
 
@@ -296,6 +301,7 @@ public class IchigoController : FighterBase
 
     private void ExecuteUltimate()
     {
+        SpendMana(50f); // Tiêu 50% mana
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;

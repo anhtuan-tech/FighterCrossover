@@ -122,6 +122,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Support",
+                    "type": "Button",
+                    "id": "879fb1b6-b4ef-4c36-9307-f16f6ca9b5ef",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -562,6 +571,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea0ab1b6-d2ef-4c12-8703-a16f6ca9b7ef",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Support",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -65,6 +65,11 @@ public class FighterBase : MonoBehaviour, IDamageable
     public float attackRadius = 0.3f;
     public LayerMask targetLayer;
 
+    [HideInInspector] public KeyCode supportKey = KeyCode.None;
+    [HideInInspector] public string supportPrefabUrl = "";
+    protected float lastSupportTime;
+    private const float SUPPORT_COOLDOWN = 0f;
+
     // --- FSM STATE ---
     public FighterState CurrentState { get; protected set; } = FighterState.Idle;
 
@@ -116,6 +121,18 @@ public class FighterBase : MonoBehaviour, IDamageable
     #endregion
 
     #region GAME LOOPS
+    protected virtual void Start()
+    {
+        // Load selected support prefab URL
+        supportPrefabUrl = (playerNumber == 1) ? SelectionData.supportPrefabUrl1 : SelectionData.supportPrefabUrl2;
+        
+        // Auto-assign default keys if not overridden by child controllers
+        if (supportKey == KeyCode.None)
+        {
+            supportKey = (playerNumber == 1) ? KeyCode.O : KeyCode.Keypad6;
+        }
+    }
+
     protected virtual void Update()
     {
         if (CurrentState == FighterState.Dead) return;
@@ -509,4 +526,45 @@ public class FighterBase : MonoBehaviour, IDamageable
         }
     }
     #endregion
+
+    // --- SUPPORT SUMMON LOGIC ---
+    public virtual void OnSupport()
+    {
+        TrySummonSupport();
+    }
+
+    private void TrySummonSupport()
+    {
+        if (!CanAct()) return;
+        if (Time.time - lastSupportTime < SUPPORT_COOLDOWN) return;
+
+        // Try to load the prefab from Resources
+        if (string.IsNullOrEmpty(supportPrefabUrl))
+        {
+            // Default fallback to Lucy if not assigned
+            supportPrefabUrl = "Support_Lucy/prefabs/Support_Lucy";
+        }
+
+        GameObject supportPrefab = Resources.Load<GameObject>(supportPrefabUrl);
+        if (supportPrefab == null)
+        {
+            Debug.LogError($"[Support] Could not find support prefab at Resources/{supportPrefabUrl}!");
+            return;
+        }
+
+        lastSupportTime = Time.time;
+
+        // Instantiate the prefab
+        GameObject supportGo = Instantiate(supportPrefab);
+        supportGo.name = "SupportSummon_" + gameObject.name;
+        
+        SupportLucy lucy = supportGo.GetComponent<SupportLucy>();
+        if (lucy != null)
+        {
+            float facingDir = transform.localScale.x;
+            lucy.Setup(this, playerNumber, targetLayer, facingDir);
+        }
+        
+        Debug.Log($"[Support] Summoned support Lucy prefab for Player {playerNumber}!");
+    }
 }

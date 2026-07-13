@@ -100,9 +100,10 @@ public class IchigoController : FighterBase
         }
 
         keys = (playerNumber == 1) ? settingsData.player1Keys : settingsData.player2Keys;
+        supportKey = keys.support;
         initializedBindings = true;
         
-        Debug.Log($"[IchigoController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}");
+        Debug.Log($"[IchigoController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}, Support: {supportKey}");
     }
 
     private void SetupPlayerInputBindings()
@@ -186,6 +187,15 @@ public class IchigoController : FighterBase
                 specialAction.RemoveAllBindingOverrides();
                 specialAction.ApplyBindingOverride(GetBindingPath(keys.specialMove));
                 specialAction.performed += ctx => OnSpecial();
+            }
+
+            // 8. Setup Support Action
+            var supportAction = playerMap.FindAction("Support");
+            if (supportAction != null)
+            {
+                supportAction.RemoveAllBindingOverrides();
+                supportAction.ApplyBindingOverride(GetBindingPath(keys.support));
+                supportAction.performed += ctx => OnSupport();
             }
         }
 

@@ -714,15 +714,15 @@ PrefabInstance:
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].avatarSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 9762ddee11a71634788c79d4c3cac3a0, type: 3}
+      objectReference: {fileID: 2004181404358828230, guid: b211cf9a5cac1e442b0f738e04420cc4, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterName
-      value: Ichigo
+      value: Lucy
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].standeeSprite
       value: 
-      objectReference: {fileID: -5327133817424080073, guid: 27011673863e5dc48b3631dd19e3f902, type: 3}
+      objectReference: {fileID: 6682878493859446307, guid: 9eb8607a208c7894fb483f588168d7a2, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].avatarSprite
       value: 
@@ -762,7 +762,7 @@ PrefabInstance:
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterPrefab
       value: 
-      objectReference: {fileID: 7496560017347569153, guid: 719a0686b215e2045bc23af875c499f6, type: 3}
+      objectReference: {fileID: 6913803890692420520, guid: 20190196d1157804caa982172329b372, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterPrefab
       value: 

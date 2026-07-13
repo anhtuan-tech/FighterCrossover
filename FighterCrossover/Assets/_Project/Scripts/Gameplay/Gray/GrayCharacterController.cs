@@ -9,6 +9,8 @@ public class GrayCharacterController : FighterBase
     public GrayUltimateSkill ultimateSkill;
 
     [Header("--- ULTIMATE FLASH CUTSCENE ---")]
+    [Tooltip("Ảnh hiển thị khi dùng Ultimate (Nếu để trống sẽ tự động load mặc định)")]
+    public Sprite ultimateFlashSprite;
     [Tooltip("Kích thước ảnh theo tỉ lệ chiều cao màn hình (0.6 = 60% màn hình)")]
     public float ultimateFlashSizeFactor = 0.6f;
     [Tooltip("Vị trí ảnh so với tâm màn hình (pixel), ví dụ (0, 100) = lên trên 100px")]
@@ -280,7 +282,7 @@ public class GrayCharacterController : FighterBase
         if (flashSprite != null)
         {
             // Show flash; onComplete fires AFTER the entire flash animation ends
-            UltimateFlashEffect.Show(this, flashSprite, ultimateFlashSizeFactor, ultimateFlashOffset, () =>
+            UltimateFlashEffect.Show(this, flashSprite, ultimateFlashSizeFactor, ultimateFlashOffset, new Color(0f, 0.7f, 1f), () =>
             {
                 flashDone = true;
             });
@@ -310,6 +312,8 @@ public class GrayCharacterController : FighterBase
 
     private Sprite LoadUltimateAvatar()
     {
+        if (ultimateFlashSprite != null) return ultimateFlashSprite;
+
         string avatarPath = "Assets/_Project/Resources/Gray/avatar/Ultil_Gray.jpg";
 #if UNITY_EDITOR
         var assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(avatarPath);

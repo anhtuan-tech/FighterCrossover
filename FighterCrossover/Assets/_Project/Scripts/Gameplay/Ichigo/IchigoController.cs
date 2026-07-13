@@ -14,6 +14,8 @@ public class IchigoController : FighterBase
     [HideInInspector, System.Obsolete] public float ultimateDuration = 1.0f;
 
     [Header("--- ULTIMATE FLASH CUTSCENE ---")]
+    [Tooltip("Ảnh hiển thị khi dùng Ultimate (Nếu để trống sẽ tự động load mặc định)")]
+    public Sprite ultimateFlashSprite;
     [Tooltip("Kích thước ảnh theo tỉ lệ chiều cao màn hình (0.6 = 60% màn hình)")]
     public float ultimateFlashSizeFactor = 0.6f;
     [Tooltip("Vị trí ảnh so với tâm màn hình (pixel), ví dụ (0, 100) = lên trên 100px")]
@@ -300,7 +302,7 @@ public class IchigoController : FighterBase
         if (flashSprite != null)
         {
             // Show flash; onComplete fires AFTER the entire flash animation ends
-            UltimateFlashEffect.Show(this, flashSprite, ultimateFlashSizeFactor, ultimateFlashOffset, () =>
+            UltimateFlashEffect.Show(this, flashSprite, ultimateFlashSizeFactor, ultimateFlashOffset, new Color(1f, 0.3f, 0f), () =>
             {
                 flashDone = true;
             });
@@ -330,6 +332,8 @@ public class IchigoController : FighterBase
 
     private Sprite LoadUltimateAvatar()
     {
+        if (ultimateFlashSprite != null) return ultimateFlashSprite;
+
         string avatarPath = "Assets/_Project/Resources/Ichigo/avatar/until_ichigo.jpg";
 #if UNITY_EDITOR
         var assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(avatarPath);

@@ -216,7 +216,7 @@ BoxCollider2D:
   m_Offset: {x: -0.011711001, y: 0.43015495}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 0.34666666, y: 0.93333334}
     newSize: {x: 0.73846155, y: 0.84615386}
     adaptiveTilingThreshold: 0.5
@@ -294,6 +294,9 @@ MonoBehaviour:
     m_Bits: 1
   rangedSkill: {fileID: 2553668415592583215}
   ultimateSkill: {fileID: 3312166166759251108}
+  ultimateFlashSprite: {fileID: -3874904671510300912, guid: ad8e45c49c1d2a949823ccec5963a14e, type: 3}
+  ultimateFlashSizeFactor: 0.6
+  ultimateFlashOffset: {x: 0, y: 100}
 --- !u!114 &2553668415592583215
 MonoBehaviour:
   m_ObjectHideFlags: 0

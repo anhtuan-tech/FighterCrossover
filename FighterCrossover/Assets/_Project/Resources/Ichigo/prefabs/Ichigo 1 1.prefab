@@ -297,6 +297,7 @@ MonoBehaviour:
   rangedProjectilePrefab: {fileID: 1653119312080273460, guid: 814569c9d82c4154ba1561fe2acaba2d, type: 3}
   ultimateEffectPrefab: {fileID: 318895026318304720, guid: 35b046d0ec9df9e42b2fa5238aa6ef23, type: 3}
   ultimateDuration: 1
+  ultimateFlashSprite: {fileID: 1059095395321442622, guid: 027fcd82cf0c6ad4ca24f16e5c0765a4, type: 3}
   ultimateFlashSizeFactor: 0.6
   ultimateFlashOffset: {x: 0, y: 100}
 --- !u!114 &2942048912427827080

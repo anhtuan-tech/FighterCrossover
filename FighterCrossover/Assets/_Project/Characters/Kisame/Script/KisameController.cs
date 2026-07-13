@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 
 /// <summary>
 /// Controller nhân vật Kisame - kế thừa FighterBase, tuân theo cấu trúc SasukeController.
-/// Skill 1 (U): Vung kiếm → phóng luồng sóng nước (WaterSlashProjectile).
-/// Skill 2 (I): Kết ấn → triệu hồi Cá Mập Nước khổng lồ (SharkUltimate).
+/// Skill 1 (U): Vung kiếm đập xuống đất → bộc phát AoE sóng nước tại chỗ (WaterSlashArea).
+/// Skill 2 (I): Kết ấn → triệu hồi Cá Mập Nước khổng lồ (SharkUltimate) 2 pha.
 /// </summary>
 public class KisameController : FighterBase
 {
@@ -13,7 +13,8 @@ public class KisameController : FighterBase
     //  INSPECTOR FIELDS
     // ────────────────────────────────────────────────────────────────────────────
     [Header("─── KISAME SKILLS ───")]
-    [Tooltip("Prefab luồng sóng nước (Skill 1 – phím U). Gắn WaterSlashProjectile.cs.")]
+    [Tooltip("Prefab vùng sóng nước AoE (Skill 1 – phím U). Gắn WaterSlashArea.cs. " +
+             "Hiệu ứng xuất hiện TẠI CHỖ attackHitbox, không bay đi.")]
     public GameObject waterSlashPrefab;
 
     [Tooltip("Prefab cá mập nước khổng lồ (Skill 2 – phím I). Gắn SharkUltimate.cs.")]
@@ -270,8 +271,9 @@ public class KisameController : FighterBase
     #region AnimationEvents
 
     /// <summary>
-    /// Gọi từ Animation Event trên clip Skill1 (tại frame Kisame vung kiếm tiếp đất).
-    /// Instantiate WaterSlashProjectile và truyền hướng + targetLayer.
+    /// Gọi từ Animation Event trên clip Skill1 tại frame Kisame vung kiếm CHẠM ĐẤT.
+    /// Instantiate WaterSlashArea (AoE đứng yên) ngay trước mặt Kisame.
+    /// Hiệu ứng KHÔNG bay – chỉ bộc phát tại chỗ và tự hủy sau animation.
     /// </summary>
     public void AnimationEvent_SpawnWaterSlash()
     {
@@ -283,18 +285,19 @@ public class KisameController : FighterBase
 
         float dir = transform.localScale.x; // 1 = phải, -1 = trái
 
-        // Ưu tiên SpawnPoint được gán thủ công, fallback offset phía trước mặt
+        // Spawn tại SpawnPoint (nếu có) hoặc ngay trước mặt Kisame (sát mặt đất)
         Vector2 spawnPos = (waterSlashSpawnPoint != null)
             ? (Vector2)waterSlashSpawnPoint.position
-            : (Vector2)transform.position + new Vector2(dir * 0.8f, 0.3f);
+            : (Vector2)transform.position + new Vector2(dir * 0.8f, 0f);
 
         GameObject obj  = Instantiate(waterSlashPrefab, spawnPos, Quaternion.identity);
-        var         proj = obj.GetComponent<WaterSlashProjectile>();
+        var        area = obj.GetComponent<WaterSlashArea>();
 
-        if (proj != null)
-            proj.Setup(new Vector2(dir, 0f), gameObject, targetLayer);
+        if (area != null)
+            area.Setup(dir, gameObject, targetLayer);
         else
-            Debug.LogError("[KisameController] WaterSlashProjectile.cs không tìm thấy trên Prefab!");
+            Debug.LogError("[KisameController] WaterSlashArea.cs không tìm thấy trên Prefab! " +
+                           "Hãy đảm bảo WaterSlash_Prefab có component WaterSlashArea.");
     }
 
     /// <summary>

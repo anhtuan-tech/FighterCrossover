@@ -45,11 +45,11 @@ GameObject:
   - component: {fileID: 8675886841844450627}
   - component: {fileID: 5295773043176306474}
   - component: {fileID: 449525559573176644}
-  - component: {fileID: 7275729391570848583}
-  - component: {fileID: 2942048912427827080}
-  - component: {fileID: -1819670259356539933}
+  - component: {fileID: 6616612307590324318}
+  - component: {fileID: 2553668415592583215}
+  - component: {fileID: 3312166166759251108}
   m_Layer: 0
-  m_Name: Ichigo 1 1
+  m_Name: BoaHancock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,8 +64,8 @@ Transform:
   m_GameObject: {fileID: 7496560017347569153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.35, y: -0.75, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2.189, y: -0.991, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5806680445033539967}
@@ -120,7 +120,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -6938140136178389128, guid: e24e947130787544e8fe278a0982aa67, type: 3}
+  m_Sprite: {fileID: 4723107735738678597, guid: 9e59e455558bcad4caad5255b74075ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -140,7 +140,7 @@ Animator:
   m_GameObject: {fileID: 7496560017347569153}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fafdfa2ecbe079d4b8898ee2975d6457, type: 2}
+  m_Controller: {fileID: 9100000, guid: 491beb8ffb9484b40a6f442d5672f50c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -168,7 +168,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 3.5
-  m_Material: {fileID: 6200000, guid: 5defc9e4746f6184daa57b7699c5526a, type: 2}
+  m_Material: {fileID: 6200000, guid: 8d9c5957be13d584fb4e439df1a4350c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -216,8 +216,8 @@ BoxCollider2D:
   m_Offset: {x: -0.011711001, y: 0.43015495}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.9230769, y: 0.84615386}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.34666666, y: 0.93333334}
     newSize: {x: 0.73846155, y: 0.84615386}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7275729391570848583
+--- !u!114 &6616612307590324318
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,9 +264,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7496560017347569153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05706e1f16a0c25499e18d9ef2e19438, type: 3}
+  m_Script: {fileID: 11500000, guid: 99d10ed926d1632478834743b49d1596, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IchigoController
+  m_EditorClassIdentifier: Assembly-CSharp::BoaHancockController
   playerNumber: 1
   stats:
     maxHp: 500
@@ -292,14 +292,9 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 1
-  rangedSkill: {fileID: 2942048912427827080}
-  ultimateSkill: {fileID: -1819670259356539933}
-  rangedProjectilePrefab: {fileID: 1653119312080273460, guid: 814569c9d82c4154ba1561fe2acaba2d, type: 3}
-  ultimateEffectPrefab: {fileID: 318895026318304720, guid: 35b046d0ec9df9e42b2fa5238aa6ef23, type: 3}
-  ultimateDuration: 1
-  ultimateFlashSizeFactor: 0.6
-  ultimateFlashOffset: {x: 0, y: 100}
---- !u!114 &2942048912427827080
+  rangedSkill: {fileID: 2553668415592583215}
+  ultimateSkill: {fileID: 3312166166759251108}
+--- !u!114 &2553668415592583215
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,16 +303,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 7496560017347569153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3e63e3d0649f68459b1c00b0bc6d9b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5725a9c82b81fc540b976a12c0517d78, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IchigoRangedSkill
-  projectilePrefab: {fileID: 1653119312080273460, guid: 814569c9d82c4154ba1561fe2acaba2d, type: 3}
+  m_EditorClassIdentifier: Assembly-CSharp::BoaHancockRangedSkill
+  projectilePrefab: {fileID: 8852522466585513913, guid: 324246b76b5930b4ab7fcb7b94a239ac, type: 3}
   projectileSpeed: 12
   projectileDamage: 35
   projectileLifetime: 2.5
-  spawnHeightOffset: 0.2
+  spawnHeightOffset: 0.7
   spawnForwardOffset: 1
---- !u!114 &-1819670259356539933
+  magicCirclePrefab: {fileID: 0}
+  magicCircleDuration: 0.5
+--- !u!114 &3312166166759251108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -326,12 +323,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7496560017347569153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2912eb907850854d967a3768d5bdcec, type: 3}
+  m_Script: {fileID: 11500000, guid: f7bb26a173c5b9e4da3c4f2a2b9e46d8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::IchigoUltimateSkill
-  ultimateDuration: 1
-  ultimateRadius: 1
-  ultimateDamagePerTick: 15
-  ultimateTickInterval: 0.4
-  ultimateSpinSpeed: 540
+  m_EditorClassIdentifier: Assembly-CSharp::BoaHancockUltimateSkill
+  detectionRadius: 1
+  searchOffset: 0
+  tickInterval: 0.25
   ultimateEffectPrefab: {fileID: 0}

@@ -629,7 +629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[0].mapName
@@ -724,6 +724,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3834447393891019062, guid: 8e3810588646dda48a87a6971a58e1d4, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[2].avatarSprite
+      value: 
+      objectReference: {fileID: -7813942303564636085, guid: 509bd564996126645b99eade347795fb, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterName
       value: Ichigo
       objectReference: {fileID: 0}
@@ -740,6 +744,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3875611747302722107, guid: 231a32636aadac545b2787fba53475fd, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[2].characterName
+      value: Boa Hancock
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[2].standeeSprite
+      value: 
+      objectReference: {fileID: 5488978148602928628, guid: 62050f9faf455c746bc04ce2ace6c946, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterPrefab
       value: 
       objectReference: {fileID: 7496560017347569153, guid: 719a0686b215e2045bc23af875c499f6, type: 3}
@@ -751,6 +763,10 @@ PrefabInstance:
       propertyPath: allCharacters.Array.data[1].characterPrefab
       value: 
       objectReference: {fileID: 7496560017347569153, guid: 731472eff19472b4bb6268f013b9e763, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[2].characterPrefab
+      value: 
+      objectReference: {fileID: 7496560017347569153, guid: 2d91083c190ef9a4e815842dfde09c13, type: 3}
     - target: {fileID: 3996436108390766984, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: m_Name
       value: Grid

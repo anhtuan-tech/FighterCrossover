@@ -326,7 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5fe64a1abe84d4c92bc989c50718cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrayUltimateSkill
-  detectionRadius: 2.5
-  searchOffset: 1
+  detectionRadius: 1
+  searchOffset: 0
   tickInterval: 0.25
   ultimateEffectPrefab: {fileID: 0}

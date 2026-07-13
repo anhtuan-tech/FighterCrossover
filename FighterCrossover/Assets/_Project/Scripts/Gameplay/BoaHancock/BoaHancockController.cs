@@ -2,16 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class IchigoController : FighterBase
+public class BoaHancockController : FighterBase
 {
-    [Header("--- ICHIGO SKILLS ---")]
-    public IchigoRangedSkill rangedSkill;
-    public IchigoUltimateSkill ultimateSkill;
-
-    // Obsolete migration fields to prevent breaking existing assignments in inspectors
-    [HideInInspector, System.Obsolete] public GameObject rangedProjectilePrefab;
-    [HideInInspector, System.Obsolete] public GameObject ultimateEffectPrefab;
-    [HideInInspector, System.Obsolete] public float ultimateDuration = 1.0f;
+    [Header("--- BOA HANCOCK SKILLS ---")]
+    public BoaHancockRangedSkill rangedSkill;
+    public BoaHancockUltimateSkill ultimateSkill;
 
     [Header("--- ULTIMATE FLASH CUTSCENE ---")]
     [Tooltip("Kích thước ảnh theo tỉ lệ chiều cao màn hình (0.6 = 60% màn hình)")]
@@ -26,39 +21,23 @@ public class IchigoController : FighterBase
     protected override void Awake()
     {
         base.Awake();
-
+        
         // Auto-acquire or add skill components if not assigned
         if (rangedSkill == null)
         {
-            rangedSkill = GetComponent<IchigoRangedSkill>();
+            rangedSkill = GetComponent<BoaHancockRangedSkill>();
             if (rangedSkill == null)
             {
-                rangedSkill = gameObject.AddComponent<IchigoRangedSkill>();
-#pragma warning disable 0618
-                if (rangedProjectilePrefab != null)
-                {
-                    rangedSkill.projectilePrefab = rangedProjectilePrefab;
-                }
-#pragma warning restore 0618
+                rangedSkill = gameObject.AddComponent<BoaHancockRangedSkill>();
             }
         }
 
         if (ultimateSkill == null)
         {
-            ultimateSkill = GetComponent<IchigoUltimateSkill>();
+            ultimateSkill = GetComponent<BoaHancockUltimateSkill>();
             if (ultimateSkill == null)
             {
-                ultimateSkill = gameObject.AddComponent<IchigoUltimateSkill>();
-#pragma warning disable 0618
-                if (ultimateEffectPrefab != null)
-                {
-                    ultimateSkill.ultimateEffectPrefab = ultimateEffectPrefab;
-                }
-                if (ultimateDuration > 0)
-                {
-                    ultimateSkill.ultimateDuration = ultimateDuration;
-                }
-#pragma warning restore 0618
+                ultimateSkill = gameObject.AddComponent<BoaHancockUltimateSkill>();
             }
         }
 
@@ -87,7 +66,7 @@ public class IchigoController : FighterBase
             }
             catch (System.Exception ex)
             {
-                Debug.LogWarning($"[IchigoController] Failed to parse settings.json: {ex.Message}");
+                Debug.LogWarning($"[BoaHancockController] Failed to parse settings.json: {ex.Message}");
             }
         }
 
@@ -100,20 +79,19 @@ public class IchigoController : FighterBase
         keys = (playerNumber == 1) ? settingsData.player1Keys : settingsData.player2Keys;
         initializedBindings = true;
         
-        Debug.Log($"[IchigoController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}");
+        Debug.Log($"[BoaHancockController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}");
     }
 
     private void SetupPlayerInputBindings()
     {
         if (playerInput == null || playerInput.actions == null) return;
 
-        // Disable all actions before changing bindings to avoid InvalidOperationException
         playerInput.actions.Disable();
 
         var playerMap = playerInput.actions.FindActionMap("Player");
         if (playerMap != null)
         {
-            // 1. Setup Move Action (Composite)
+            // 1. Setup Move Action
             var moveAction = playerMap.FindAction("Move");
             if (moveAction != null)
             {
@@ -187,7 +165,6 @@ public class IchigoController : FighterBase
             }
         }
 
-        // Re-enable all actions
         playerInput.actions.Enable();
     }
 
@@ -253,8 +230,10 @@ public class IchigoController : FighterBase
         }
         else
         {
-            // Fallback if no Animator
-            Debug.LogWarning($"[IchigoController] Execute attack combo hit {comboStep}");
+            Debug.LogWarning($"[BoaHancockController] Execute attack combo hit {comboStep}");
+            
+            // Execute fallback damage immediately since there's no animation event
+            AnimationEvent_DealDamage();
             Invoke(nameof(AnimationEvent_EndAttack), 0.4f);
         }
     }
@@ -265,6 +244,7 @@ public class IchigoController : FighterBase
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
 
+        // Visual casting logic starting frame
         if (rangedSkill != null)
         {
             rangedSkill.StartCast(this);
@@ -276,7 +256,7 @@ public class IchigoController : FighterBase
         }
         else
         {
-            Debug.LogWarning("[IchigoController] Execute ranged attack");
+            Debug.LogWarning("[BoaHancockController] Execute ranged attack (Fallback)");
             AnimationEvent_SpawnProjectile();
             Invoke(nameof(AnimationEvent_EndAttack), 0.5f);
         }
@@ -322,15 +302,15 @@ public class IchigoController : FighterBase
         }
         else
         {
-            Debug.LogWarning("[IchigoController] Execute ultimate skill");
+            Debug.LogWarning("[BoaHancockController] Execute ultimate skill (Fallback)");
             AnimationEvent_SpawnUltimate();
-            Invoke(nameof(AnimationEvent_EndAttack), 1.0f);
+            Invoke(nameof(AnimationEvent_EndAttack), 1.5f);
         }
     }
 
     private Sprite LoadUltimateAvatar()
     {
-        string avatarPath = "Assets/_Project/Resources/Ichigo/avatar/until_ichigo.jpg";
+        string avatarPath = "Assets/_Project/Resources/BoaHancock/avatar/ultil.png";
 #if UNITY_EDITOR
         var assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(avatarPath);
         foreach (var a in assets)
@@ -345,7 +325,7 @@ public class IchigoController : FighterBase
         }
 #else
         // Runtime: load from Resources folder
-        Sprite s = Resources.Load<Sprite>("Ichigo/avatar/until_ichigo");
+        Sprite s = Resources.Load<Sprite>("BoaHancock/avatar/ultil");
         return s;
 #endif
         return null;
@@ -356,6 +336,7 @@ public class IchigoController : FighterBase
     {
         ChangeState(FighterState.Dashing);
         stats.stamina -= 20;
+        lastStaminaUseTime = Time.time;
 
         float dashDir = transform.localScale.x;
         rb.gravityScale = 0f;
@@ -371,13 +352,11 @@ public class IchigoController : FighterBase
         float dashDist = 4.5f;
         Vector2 targetPos = startPos + new Vector2(dashDir * dashDist, 0f);
 
-        // Raycast to check for walls/obstacles, ignoring self-collision
         RaycastHit2D[] hits = Physics2D.RaycastAll(startPos, new Vector2(dashDir, 0f), dashDist, groundLayer);
         foreach (var h in hits)
         {
             if (h.collider != null && h.collider.gameObject != gameObject)
             {
-                // Teleport to slightly before the hit point
                 targetPos = h.point - new Vector2(dashDir * 0.4f, 0f);
                 break;
             }
@@ -404,8 +383,8 @@ public class IchigoController : FighterBase
             IDamageable damageable = hit.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                // Dynamic scaling damage based on combo step
-                float damage = 12f + (comboStep * 6f); // 18, 24, 30, 36
+                // Dynamic scaling damage based on combo step: 18, 24, 30, 36
+                float damage = 12f + (comboStep * 6f);
                 bool isHeavy = (comboStep == 4);
                 damageable.TakeDamage(damage, transform.position.x, isHeavy);
             }
@@ -424,41 +403,40 @@ public class IchigoController : FighterBase
     {
         if (ultimateSkill != null)
         {
-            ultimateSkill.SpawnUltimate(this, targetLayer);
+            ultimateSkill.SpawnUltimateCombo(this, targetLayer);
         }
     }
 
-    public Sprite LoadIchigoSprite(string spriteName)
+    public Sprite LoadBoaHancockSprite(string spriteName)
     {
-        // Utility to load sprite dynamically in case prefab isn't fully configured
-        string sheet = "bankai";
-        if (spriteName.StartsWith("image-removebg-preview"))
+        string filename = spriteName;
+        if (spriteName.Contains("_"))
         {
-            if (spriteName.Contains("("))
-            {
-                int start = spriteName.IndexOf("(") + 1;
-                int len = spriteName.IndexOf(")") - start;
-                sheet = "image-removebg-preview (" + spriteName.Substring(start, len) + ")";
-            }
-            else
-            {
-                sheet = "image-removebg-preview";
-            }
+            int index = spriteName.IndexOf("_");
+            filename = spriteName.Substring(0, index);
         }
 
-        string path = $"Assets/_Project/Characters/Ichigo/ichigo/{sheet}.png";
-#if UNITY_EDITOR
+        string path = $"Assets/_Project/Characters/BoaHancock/{filename}.png";
+        
+        #if UNITY_EDITOR
         Object[] assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(path);
+        Sprite firstSprite = null;
         foreach (var a in assets)
         {
-            if (a is Sprite s && s.name == spriteName)
+            if (a is Sprite s)
             {
-                return s;
+                if (firstSprite == null) firstSprite = s;
+                if (s.name == spriteName)
+                {
+                    return s;
+                }
             }
         }
-#endif
+        if (firstSprite != null)
+        {
+            return firstSprite;
+        }
+        #endif
         return null;
     }
-
-    // Compatibility helpers replaced by dynamic PlayerInput bindings
 }

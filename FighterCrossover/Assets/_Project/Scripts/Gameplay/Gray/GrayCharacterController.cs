@@ -8,6 +8,12 @@ public class GrayCharacterController : FighterBase
     public GrayRangedSkill rangedSkill;
     public GrayUltimateSkill ultimateSkill;
 
+    [Header("--- ULTIMATE FLASH CUTSCENE ---")]
+    [Tooltip("Kích thước ảnh theo tỉ lệ chiều cao màn hình (0.6 = 60% màn hình)")]
+    public float ultimateFlashSizeFactor = 0.6f;
+    [Tooltip("Vị trí ảnh so với tâm màn hình (pixel), ví dụ (0, 100) = lên trên 100px")]
+    public Vector2 ultimateFlashOffset = new Vector2(0f, 100f);
+
     [Header("--- DYNAMIC BINDINGS ---")]
     private AnimeFighter.UI.KeybindingsData keys;
     private bool initializedBindings = false;
@@ -262,6 +268,34 @@ public class GrayCharacterController : FighterBase
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
 
+        // Show cutscene flash before triggering animation
+        StartCoroutine(ExecuteUltimateWithFlash());
+    }
+
+    private IEnumerator ExecuteUltimateWithFlash()
+    {
+        Sprite flashSprite = LoadUltimateAvatar();
+        bool flashDone = false;
+
+        if (flashSprite != null)
+        {
+            // Show flash; onComplete fires AFTER the entire flash animation ends
+            UltimateFlashEffect.Show(this, flashSprite, ultimateFlashSizeFactor, ultimateFlashOffset, () =>
+            {
+                flashDone = true;
+            });
+
+            // Lock movement every frame until flash is fully done
+            while (!flashDone)
+            {
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+                ChangeState(FighterState.Attacking);
+                yield return null;
+            }
+        }
+
+        // Flash finished (or no sprite) - now trigger the animation
+        rb.linearVelocity = Vector2.zero;
         if (anim != null)
         {
             anim.SetTrigger("Ultimate");
@@ -272,6 +306,29 @@ public class GrayCharacterController : FighterBase
             AnimationEvent_SpawnUltimate();
             Invoke(nameof(AnimationEvent_EndAttack), 1.5f);
         }
+    }
+
+    private Sprite LoadUltimateAvatar()
+    {
+        string avatarPath = "Assets/_Project/Resources/Gray/avatar/Ultil_Gray.jpg";
+#if UNITY_EDITOR
+        var assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(avatarPath);
+        foreach (var a in assets)
+        {
+            if (a is Sprite s) return s;
+        }
+        // Fallback: try loading as Texture2D and convert
+        Texture2D tex = UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>(avatarPath);
+        if (tex != null)
+        {
+            return Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+        }
+#else
+        // Runtime: load from Resources folder
+        Sprite s = Resources.Load<Sprite>("Gray/avatar/Ultil_Gray");
+        return s;
+#endif
+        return null;
     }
 
     // --- OVERRIDE DASH ROUTINE (FLASH STEP) ---

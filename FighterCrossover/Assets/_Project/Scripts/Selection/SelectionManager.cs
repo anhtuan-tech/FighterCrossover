@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-// Thêm cấu trúc Phase chi tiết để phân chia lượt chọn
 public enum SelectionPhase { P1_MainCharacter, P2_MainCharacter, P1_SupportCharacter, P2_SupportCharacter, MapSelection }
 
 public class CharacterSelectionManager : MonoBehaviour
@@ -40,10 +39,6 @@ public class CharacterSelectionManager : MonoBehaviour
     [Header("--- DATA CHỌN MAP ---")]
     public List<MapInfoData> allMaps = new List<MapInfoData>();
 
-    [Header("--- HUD UI PREFAB ---")]
-    [Tooltip("Kéo thả file Prefab HUD_UI trực tiếp vào đây")]
-    public GameObject hudUiPrefab;
-
     [Header("--- GIAO DIỆN UI CHÍNH ---")]
     public Image p1Preview;
     public Image p2Preview;
@@ -53,7 +48,7 @@ public class CharacterSelectionManager : MonoBehaviour
     public GameObject charSlotPrefab;
     public GameObject mapSlotPrefab;
 
-    [Header("--- UI THÔNG BÁO PHASE (MỚI THÊM) ---")]
+    [Header("--- UI THÔNG BÁO PHASE ---")]
     public Image phaseTextImage;
     public Sprite selectFighterSprite;
     public Sprite supportSprite;
@@ -473,12 +468,7 @@ public class CharacterSelectionManager : MonoBehaviour
                     break;
 
                 case SelectionPhase.MapSelection:
-                    // Sinh HUD UI ra luôn và giữ lại qua màn chơi mới
-                    if (hudUiPrefab != null)
-                    {
-                        GameObject hudInstance = Instantiate(hudUiPrefab);
-                        DontDestroyOnLoad(hudInstance);
-                    }
+                    // Chỉ chuyển Scene, việc sinh UI hay Character do script trong Scene Map xử lý
                     SceneManager.LoadScene(allMaps[p1Index].mapName);
                     return;
             }
@@ -511,13 +501,7 @@ public class CharacterSelectionManager : MonoBehaviour
                     finalMapIndex = (Random.value > 0.5f) ? p1Index : p2Index;
                 }
 
-                // Sinh HUD UI ra luôn và giữ lại qua màn chơi mới
-                if (hudUiPrefab != null)
-                {
-                    GameObject hudInstance = Instantiate(hudUiPrefab);
-                    DontDestroyOnLoad(hudInstance);
-                }
-
+                // Chỉ chuyển Scene, việc sinh UI hay Character do script trong Scene Map xử lý
                 SceneManager.LoadScene(allMaps[finalMapIndex].mapName);
                 return;
             }

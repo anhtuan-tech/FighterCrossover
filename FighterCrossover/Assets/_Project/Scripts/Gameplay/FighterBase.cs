@@ -408,6 +408,7 @@ public class FighterBase : MonoBehaviour, IDamageable
         if (attackHitbox == null) return;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackHitbox.position, attackRadius, targetLayer);
+        bool didHit = false;
         foreach (var hit in hits)
         {
             IDamageable damageable = hit.GetComponent<IDamageable>();
@@ -416,7 +417,15 @@ public class FighterBase : MonoBehaviour, IDamageable
                 // Đòn thứ 4 sẽ là Heavy Attack (gây knockback)
                 bool isHeavy = (comboStep == 4);
                 damageable.TakeDamage(25f, transform.position.x, isHeavy);
+                didHit = true;
             }
+        }
+
+        // Hồi mana khi đánh trúng: +10% mana mỗi đòn
+        if (didHit)
+        {
+            GainMana(10f);
+            Debug.Log($"[MANA] Đánh trúng! +10% mana. Hiện: {stats.currentMana / stats.maxMana * 100f:F0}%");
         }
     }
 

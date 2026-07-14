@@ -396,6 +396,7 @@ public class BoaHancockController : FighterBase
         if (attackHitbox == null) return;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackHitbox.position, attackRadius, targetLayer);
+        bool didHit = false;
         foreach (var hit in hits)
         {
             if (hit.gameObject == gameObject) continue;
@@ -407,7 +408,15 @@ public class BoaHancockController : FighterBase
                 float damage = 12f + (comboStep * 6f);
                 bool isHeavy = (comboStep == 4);
                 damageable.TakeDamage(damage, transform.position.x, isHeavy);
+                didHit = true;
             }
+        }
+
+        // Hồi mana +10% khi đánh trúng địch
+        if (didHit)
+        {
+            GainMana(10f);
+            Debug.Log($"[MANA] BoaHancock đánh trúng! +10% mana. Hiện: {stats.currentMana / stats.maxMana * 100f:F0}%");
         }
     }
 

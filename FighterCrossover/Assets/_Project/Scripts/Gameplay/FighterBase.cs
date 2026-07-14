@@ -82,6 +82,7 @@ public class FighterBase : MonoBehaviour, IDamageable
 
     protected Vector2 moveInput;
     protected bool isGrounded;
+    protected bool isDroppingDown = false;
     protected int currentJumps;
     protected int comboStep = 0;
     protected int hitReceivedCount = 0;
@@ -145,6 +146,12 @@ public class FighterBase : MonoBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
+        if (!IsGameplayActive())
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            return;
+        }
+
         if (CurrentState == FighterState.Moving || CurrentState == FighterState.Idle || CurrentState == FighterState.Jumping)
         {
             ApplyMovementPhysics();
@@ -195,7 +202,9 @@ public class FighterBase : MonoBehaviour, IDamageable
                 if (blockAct != null) isBlockingInput = blockAct.IsPressed();
             }
 
-            if (isBlockingInput && isGrounded)
+            // Block chỉ kích hoạt khi đang trên mặt đất VÀ không đang rơi xuống
+            // (tránh trường hợp giữ Block trong lúc nhảy → nhân vật chạm đất bị lock ngay)
+            if (isBlockingInput && isGrounded && rb.linearVelocity.y >= -0.5f)
             {
                 ChangeState(FighterState.Blocking);
             }
@@ -505,6 +514,13 @@ public class FighterBase : MonoBehaviour, IDamageable
     #region UTILITIES
     protected virtual void CheckGrounded()
     {
+        if (isDroppingDown)
+        {
+            isGrounded = false;
+            groundCollider = null;
+            return;
+        }
+
         // Start raycast slightly above feet (0.1f) and check 0.25f down (0.15f below feet) to ignore self-collision
         Vector2 rayStart = (Vector2)transform.position + Vector2.up * 0.1f;
         RaycastHit2D[] hits = Physics2D.RaycastAll(rayStart, Vector2.down, 0.25f, groundLayer);
@@ -543,12 +559,14 @@ public class FighterBase : MonoBehaviour, IDamageable
 
     private IEnumerator DropDownRoutine(Collider2D platformCollider)
     {
+        isDroppingDown = true;
         Physics2D.IgnoreCollision(playerCollider, platformCollider, true);
         yield return new WaitForSeconds(0.3f);
         if (platformCollider != null && playerCollider != null)
         {
             Physics2D.IgnoreCollision(playerCollider, platformCollider, false);
         }
+        isDroppingDown = false;
     }
 
     protected virtual void UpdateAnimations()
@@ -603,14 +621,45 @@ public class FighterBase : MonoBehaviour, IDamageable
         // Instantiate the prefab
         GameObject supportGo = Instantiate(supportPrefab);
         supportGo.name = "SupportSummon_" + gameObject.name;
-        
+
+        float facingDir = transform.localScale.x;
+
+        // Hỗ trợ SupportLucy
         SupportLucy lucy = supportGo.GetComponent<SupportLucy>();
         if (lucy != null)
         {
-            float facingDir = transform.localScale.x;
             lucy.Setup(this, playerNumber, targetLayer, facingDir);
+            Debug.Log($"[Support] Summoned SupportLucy for Player {playerNumber}!");
+            return;
         }
-        
-        Debug.Log($"[Support] Summoned support Lucy prefab for Player {playerNumber}!");
+
+        // Hỗ trợ SupportNeji
+        SupportNeji neji = supportGo.GetComponent<SupportNeji>();
+        if (neji != null)
+        {
+            neji.Setup(this, playerNumber, targetLayer, facingDir);
+            Debug.Log($"[Support] Summoned SupportNeji for Player {playerNumber}!");
+            return;
+        }
+
+        // Hỗ trợ GiornoGiovanna
+        GiornoGiovannaController giorno = supportGo.GetComponent<GiornoGiovannaController>();
+        if (giorno != null)
+        {
+            giorno.Setup(this, playerNumber, targetLayer, facingDir);
+            Debug.Log($"[Support] Summoned GiornoGiovanna for Player {playerNumber}!");
+            return;
+        }
+
+        // Hỗ trợ Jinbei
+        JinbeiController jinbei = supportGo.GetComponent<JinbeiController>();
+        if (jinbei != null)
+        {
+            jinbei.Setup(this, playerNumber, targetLayer, facingDir);
+            Debug.Log($"[Support] Summoned Jinbei for Player {playerNumber}!");
+            return;
+        }
+
+        Debug.LogWarning($"[Support] Prefab '{supportPrefabUrl}' has no recognized Support component!");
     }
 }

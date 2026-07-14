@@ -1,0 +1,200 @@
+fileFormatVersion: 2
+guid: c11af254abf5fb9458e1cf8cebcb6f9e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7803252119118758710
+    second: OIP-Photoroom_0
+  - first:
+      213: 8110305820740401818
+    second: OIP-Photoroom_1
+  - first:
+      213: -717861749534612290
+    second: OIP-Photoroom_2
+  - first:
+      213: -763335317952655598
+    second: OIP-Photoroom_3
+  - first:
+      213: -431425513265354101
+    second: OIP-Photoroom_4
+  - first:
+      213: -4937345505224013889
+    second: OIP-Photoroom_5
+  - first:
+      213: -9199223089534045878
+    second: OIP-Photoroom_6
+  - first:
+      213: 3304786710420488889
+    second: OIP-Photoroom_7
+  - first:
+      213: 6803494867854159667
+    second: OIP-Photoroom_8
+  - first:
+      213: 534954842217417147
+    second: OIP-Photoroom_9
+  - first:
+      213: -3436104740373554186
+    second: OIP-Photoroom_10
+  - first:
+      213: -8194369518061757416
+    second: OIP-Photoroom_11
+  - first:
+      213: 148517352048963273
+    second: OIP-Photoroom_12
+  - first:
+      213: 8537691110549685056
+    second: OIP-Photoroom_13
+  - first:
+      213: -7749585448862406992
+    second: OIP-Photoroom_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: OIP-Photoroom_0
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 9
+        width: 383
+        height: 665
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63343ec7578ba4c60800000000000000
+      internalID: 7803252119118758710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: e094d9b7c17ae2147a667ff3a16dbc36
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      OIP-Photoroom_0: 7803252119118758710
+      OIP-Photoroom_1: 8110305820740401818
+      OIP-Photoroom_10: -3436104740373554186
+      OIP-Photoroom_11: -8194369518061757416
+      OIP-Photoroom_12: 148517352048963273
+      OIP-Photoroom_13: 8537691110549685056
+      OIP-Photoroom_14: -7749585448862406992
+      OIP-Photoroom_15: 276250873
+      OIP-Photoroom_2: -717861749534612290
+      OIP-Photoroom_3: -763335317952655598
+      OIP-Photoroom_4: -431425513265354101
+      OIP-Photoroom_5: -4937345505224013889
+      OIP-Photoroom_6: -9199223089534045878
+      OIP-Photoroom_7: 3304786710420488889
+      OIP-Photoroom_8: 6803494867854159667
+      OIP-Photoroom_9: 534954842217417147
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

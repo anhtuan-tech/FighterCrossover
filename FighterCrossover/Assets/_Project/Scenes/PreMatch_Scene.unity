@@ -933,11 +933,11 @@ PrefabInstance:
       objectReference: {fileID: 7646057345755110279, guid: 95909e6120d3de94bbdde50ae542ee44, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[0].mapName
@@ -1040,6 +1040,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2004181404358828230, guid: b211cf9a5cac1e442b0f738e04420cc4, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[1].avatarSprite
+      value: 
+      objectReference: {fileID: -5042914106468337636, guid: af10cd8ff11c6084bab47b61b086da82, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[2].avatarSprite
+      value: 
+      objectReference: {fileID: 5936356172364887011, guid: e87dc4ae766fa0248a33f6b45a28f6d3, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[3].avatarSprite
+      value: 
+      objectReference: {fileID: 5136973529325693610, guid: c0493c3af6b962345b1364814a36dc32, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterName
       value: Lucy
       objectReference: {fileID: 0}
@@ -1047,6 +1059,30 @@ PrefabInstance:
       propertyPath: allSupports.Array.data[0].standeeSprite
       value: 
       objectReference: {fileID: 1843801541628453706, guid: f56388452b669ae45a6da1a4137d32f5, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[1].characterName
+      value: Neji
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[1].standeeSprite
+      value: 
+      objectReference: {fileID: 6760856022779969810, guid: 10dba457a766352479184ef457173128, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[2].characterName
+      value: GiornoGiovanna
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[2].standeeSprite
+      value: 
+      objectReference: {fileID: 9154932736917132628, guid: 6c8989925283624438c3efda644d7a39, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[3].characterName
+      value: Jinbei
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[3].standeeSprite
+      value: 
+      objectReference: {fileID: -7250379924780520568, guid: 664a18486dd70a945b86519272ab50d9, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].avatarSprite
       value: 
@@ -1071,6 +1107,14 @@ PrefabInstance:
       propertyPath: allCharacters.Array.data[5].avatarSprite
       value: 
       objectReference: {fileID: 2508216385489343714, guid: 62f857183d87ae44fa373950f7b85a07, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[6].avatarSprite
+      value: 
+      objectReference: {fileID: 2003145952438520299, guid: dce9ed03e436eec4abf06e7304aa490e, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[7].avatarSprite
+      value: 
+      objectReference: {fileID: -7436449355640073556, guid: f99d884889e359b41b49a7615190646f, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterName
       value: Ichigo
@@ -1120,9 +1164,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5369950934850602345, guid: 15a79c74536dd204bb544ffd585685a9, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[6].characterName
+      value: Sasuke
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[6].standeeSprite
+      value: 
+      objectReference: {fileID: -916559365422949597, guid: 5777c7b44e4cdde449fb85c0c4ec430f, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[7].characterName
+      value: Konan
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[7].standeeSprite
+      value: 
+      objectReference: {fileID: 7803252119118758710, guid: c11af254abf5fb9458e1cf8cebcb6f9e, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterPrefab
       value: 
       objectReference: {fileID: 6913803890692420520, guid: 20190196d1157804caa982172329b372, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[1].characterPrefab
+      value: 
+      objectReference: {fileID: 1587152380877838536, guid: 44e385acfb720724490ac5f417a8d52c, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[2].characterPrefab
+      value: 
+      objectReference: {fileID: 7050201930769958427, guid: b538c748a6a60a24cab18fc52eaec84a, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[3].characterPrefab
+      value: 
+      objectReference: {fileID: 419711969202352683, guid: 47da98bd799f1bd49ba97544681959be, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterPrefab
       value: 
@@ -1147,6 +1219,14 @@ PrefabInstance:
       propertyPath: allCharacters.Array.data[5].characterPrefab
       value: 
       objectReference: {fileID: 7496560017347569153, guid: 7037764e8568b8143aef491cee177ec6, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[6].characterPrefab
+      value: 
+      objectReference: {fileID: 791866841552190526, guid: 4cbd959505db4784f8c0056f8f7f52c1, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[7].characterPrefab
+      value: 
+      objectReference: {fileID: 4996945127522638857, guid: be91023f0a4db704d9e047cf11c4bc8a, type: 3}
     - target: {fileID: 3011940216329422943, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 500

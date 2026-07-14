@@ -243,7 +243,7 @@ MonoBehaviour:
     stamina: 100
   staminaRegenRate: 20
   staminaRegenDelay: 1
-  moveSpeed: 6.5
+  moveSpeed: 5
   jumpForce: 10
   dashForce: 15
   dashDuration: 0.1

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: eba6995b0071c534e81db9c7465c83d9
+guid: 2ddeb8608be486f4fb1b2e87e0fe3141
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7454585242970673340
-    second: Fall 1_0
-  - first:
-      213: -54086892983063764
-    second: Fall 1_1
+      213: 4646315803332306921
+    second: cute-sasuke-gai1kahld8reil5j_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 60
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,62 +96,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fall 1_0
+      name: cute-sasuke-gai1kahld8reil5j_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 2
-        width: 32
-        height: 51
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 0
+        width: 1024
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb0d22b48c1047760800000000000000
-      internalID: 7454585242970673340
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fall 1_1
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 2
-        width: 32
-        height: 51
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c2b6db4e148df3ff0800000000000000
-      internalID: -54086892983063764
+      spriteID: 9e7e7eb1b970b7040800000000000000
+      internalID: 4646315803332306921
       vertices: []
       indices: 
       edges: []
@@ -163,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e725ecc6be1e2e64f939e93d65d6a4d7
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Fall 1_0: 7454585242970673340
-      Fall 1_1: -54086892983063764
+      cute-sasuke-gai1kahld8reil5j_0: 4646315803332306921
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -145,6 +145,12 @@ public class FighterBase : MonoBehaviour, IDamageable
 
     protected virtual void FixedUpdate()
     {
+        if (!IsGameplayActive())
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+            return;
+        }
+
         if (CurrentState == FighterState.Moving || CurrentState == FighterState.Idle || CurrentState == FighterState.Jumping)
         {
             ApplyMovementPhysics();

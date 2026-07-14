@@ -36,6 +36,12 @@ public class SasukeFireball : MonoBehaviour
         rb.freezeRotation         = true;
     }
 
+    public void SetStats(float customSpeed, float customDamage)
+    {
+        this.speed = customSpeed;
+        this.damage = customDamage;
+    }
+
     // ─── Public API ──────────────────────────────────────────────────────────────
     /// <summary>
     /// Khởi tạo fireball từ SasukeController. Gọi ngay sau Instantiate.

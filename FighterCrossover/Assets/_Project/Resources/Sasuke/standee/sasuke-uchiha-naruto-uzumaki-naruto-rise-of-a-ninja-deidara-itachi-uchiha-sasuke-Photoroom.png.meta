@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 0efbc772fdb14fc4082af17358d33eeb
+guid: 5777c7b44e4cdde449fb85c0c4ec430f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8731201881059741558
-    second: Hurt 1_0
-  - first:
-      213: -2224872977808581009
-    second: Hurt 1_1
+      213: -916559365422949597
+    second: sasuke-uchiha-naruto-uzumaki-naruto-rise-of-a-ninja-deidara-itachi-uchiha-sasuke-Photoroom_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 60
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,62 +96,27 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hurt 1_0
+      name: sasuke-uchiha-naruto-uzumaki-naruto-rise-of-a-ninja-deidara-itachi-uchiha-sasuke-Photoroom_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 2
-        width: 37
-        height: 45
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 28
+        y: 11
+        width: 244
+        height: 978
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a803639262a84d680800000000000000
-      internalID: -8731201881059741558
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Hurt 1_1
-      rect:
-        serializedVersion: 2
-        x: 54
-        y: 2
-        width: 34
-        height: 47
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f6e9a5780d9af11e0800000000000000
-      internalID: -2224872977808581009
+      spriteID: 32b58600d1ab743f0800000000000000
+      internalID: -916559365422949597
       vertices: []
       indices: 
       edges: []
@@ -163,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3974d0edf330e7e429e77767ea742752
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -173,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hurt 1_0: -8731201881059741558
-      Hurt 1_1: -2224872977808581009
+      sasuke-uchiha-naruto-uzumaki-naruto-rise-of-a-ninja-deidara-itachi-uchiha-sasuke-Photoroom_0: -916559365422949597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

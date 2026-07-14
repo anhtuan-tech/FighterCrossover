@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public enum SelectionPhase { P1_MainCharacter, P2_MainCharacter, P1_SupportCharacter, P2_SupportCharacter, MapSelection }
+public enum SelectionPhase { P1_MainCharacter, P2_MainCharacter, P1_SupportCharacter, P2_SupportCharacter, MapSelection, DeathBattle_BotSelection }
 
 public class CharacterSelectionManager : MonoBehaviour
 {
@@ -47,6 +47,11 @@ public class CharacterSelectionManager : MonoBehaviour
     public Transform gridContainer;
     public GameObject charSlotPrefab;
     public GameObject mapSlotPrefab;
+
+    [Header("--- UI RIÊNG CHO DEATH BATTLE ---")]
+    public GameObject deathBattlePanel;
+    public Image[] deathBattleBotPreviews;
+    private int currentBotSelectionIndex = 0;
 
     [Header("--- UI THÔNG BÁO PHASE ---")]
     public Image phaseTextImage;
@@ -99,6 +104,25 @@ public class CharacterSelectionManager : MonoBehaviour
     void Start()
     {
         currentPhase = SelectionPhase.P1_MainCharacter;
+
+        if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
+        {
+            SelectionData.DeathBattleData = new DeathBattleSaveData();
+            currentBotSelectionIndex = 0;
+            if (deathBattlePanel != null) deathBattlePanel.SetActive(true);
+            if (p2Preview != null) p2Preview.gameObject.SetActive(false);
+
+            foreach (var img in deathBattleBotPreviews)
+            {
+                img.sprite = null;
+                img.color = new Color(1, 1, 1, 0);
+            }
+        }
+        else
+        {
+            if (deathBattlePanel != null) deathBattlePanel.SetActive(false);
+        }
+
         SetupSelectionPhase();
     }
 
@@ -115,7 +139,8 @@ public class CharacterSelectionManager : MonoBehaviour
         p1Locked = false;
         p2Locked = false;
 
-        if (SelectionData.CurrentGameMode == GameMode.Training)
+        // Bỏ Training ra khỏi block này để nó dùng chung P1 & P2 giống PvP
+        if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
         {
             p1Index = 0;
             if (p2Cursor != null) p2Cursor.gameObject.SetActive(false);
@@ -139,7 +164,7 @@ public class CharacterSelectionManager : MonoBehaviour
             if (currentPhase == SelectionPhase.MapSelection)
             {
                 if (p1Preview != null) p1Preview.gameObject.SetActive(false);
-                if (p2Preview != null) p2Preview.gameObject.SetActive(false);
+                if (p2Preview != null && SelectionData.CurrentGameMode != GameMode.DeathBattle) p2Preview.gameObject.SetActive(false);
                 if (bigMapPreview != null) bigMapPreview.gameObject.SetActive(true);
                 if (mapNameText != null) mapNameText.gameObject.SetActive(true);
 
@@ -159,7 +184,7 @@ public class CharacterSelectionManager : MonoBehaviour
             else
             {
                 if (p1Preview != null) p1Preview.gameObject.SetActive(true);
-                if (p2Preview != null) p2Preview.gameObject.SetActive(true);
+                if (p2Preview != null && SelectionData.CurrentGameMode != GameMode.DeathBattle) p2Preview.gameObject.SetActive(true);
                 if (bigMapPreview != null) bigMapPreview.gameObject.SetActive(false);
                 if (mapNameText != null) mapNameText.gameObject.SetActive(false);
 
@@ -218,7 +243,7 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         if (phaseTextImage == null) return;
 
-        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter)
+        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter || currentPhase == SelectionPhase.DeathBattle_BotSelection)
         {
             if (selectFighterSprite != null) phaseTextImage.sprite = selectFighterSprite;
         }
@@ -276,7 +301,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
         int columns = (currentPhase == SelectionPhase.MapSelection) ? 6 : 4;
 
-        if (SelectionData.CurrentGameMode == GameMode.Training)
+        if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
         {
             if (!p1Locked)
             {
@@ -295,12 +320,22 @@ public class CharacterSelectionManager : MonoBehaviour
 
                 if (keyboard.jKey.wasPressedThisFrame)
                 {
+                    // Tránh chọn trùng nhân vật trong Bot Selection (Death Battle)
+                    if (currentPhase == SelectionPhase.DeathBattle_BotSelection)
+                    {
+                        string botPrefabPath = GetResourcesPath(allCharacters[p1Index].characterPrefab);
+                        if (SelectionData.DeathBattleData.enemyCharacterUrls.Contains(botPrefabPath))
+                        {
+                            return; // Bỏ qua nếu nhân vật đã được chọn trước đó
+                        }
+                    }
+
                     p1Locked = true;
                     LockAndProceed();
                 }
             }
         }
-        else
+        else // Áp dụng cho cả PvP và Training
         {
             if (!p1Locked)
             {
@@ -354,18 +389,16 @@ public class CharacterSelectionManager : MonoBehaviour
 
         if (currentPhase != SelectionPhase.MapSelection)
         {
-            if (SelectionData.CurrentGameMode == GameMode.Training)
+            if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
             {
-                if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P1_SupportCharacter)
+                // CHỈ CẬP NHẬT ẢNH TO KHI ĐANG CHỌN NHÂN VẬT CHÍNH
+                // Sau khi đã sang phase chọn Bot, ảnh to của P1 sẽ đứng im ở nhân vật đã lock
+                if (currentPhase == SelectionPhase.P1_MainCharacter)
                 {
                     if (p1Preview != null) p1Preview.sprite = GetPreviewSpriteAt(p1Index);
                 }
-                else
-                {
-                    if (p2Preview != null) p2Preview.sprite = GetPreviewSpriteAt(p1Index);
-                }
             }
-            else
+            else // Chung cho cả Training & PvP
             {
                 if (p1Preview != null) p1Preview.sprite = GetPreviewSpriteAt(p1Index);
                 if (p2Preview != null) p2Preview.sprite = GetPreviewSpriteAt(p2Index);
@@ -384,12 +417,25 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             if (spawnedSlots[i] == null) continue;
             spawnedSlots[i].color = Color.white;
+
+            // Làm tối màu (dim) những bot đã được chọn trong DeathBattle
+            if (SelectionData.CurrentGameMode == GameMode.DeathBattle && currentPhase == SelectionPhase.DeathBattle_BotSelection)
+            {
+                if (i < allCharacters.Count)
+                {
+                    string path = GetResourcesPath(allCharacters[i].characterPrefab);
+                    if (SelectionData.DeathBattleData.enemyCharacterUrls.Contains(path))
+                    {
+                        spawnedSlots[i].color = new Color(0.3f, 0.3f, 0.3f, 1f);
+                    }
+                }
+            }
         }
 
         if (p1Cursor != null && spawnedSlots.Count > p1Index)
             p1Cursor.position = spawnedSlots[p1Index].rectTransform.position + cursorOffset;
 
-        if (SelectionData.CurrentGameMode != GameMode.Training)
+        if (SelectionData.CurrentGameMode != GameMode.DeathBattle) // Training & PvP đều dùng chung P2 Cursor
         {
             if (p2Cursor != null && spawnedSlots.Count > p2Index)
                 p2Cursor.position = spawnedSlots[p2Index].rectTransform.position + cursorOffset;
@@ -398,20 +444,20 @@ public class CharacterSelectionManager : MonoBehaviour
 
     private int GetCurrentItemCount()
     {
-        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter) return allCharacters.Count;
+        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter || currentPhase == SelectionPhase.DeathBattle_BotSelection) return allCharacters.Count;
         if (currentPhase == SelectionPhase.P1_SupportCharacter || currentPhase == SelectionPhase.P2_SupportCharacter) return allSupports.Count;
         return allMaps.Count;
     }
 
     private Sprite GetAvatarSpriteAt(int index)
     {
-        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter) return allCharacters[index].avatarSprite;
+        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter || currentPhase == SelectionPhase.DeathBattle_BotSelection) return allCharacters[index].avatarSprite;
         return allSupports[index].avatarSprite;
     }
 
     private Sprite GetPreviewSpriteAt(int index)
     {
-        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter) return allCharacters[index].standeeSprite;
+        if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P2_MainCharacter || currentPhase == SelectionPhase.DeathBattle_BotSelection) return allCharacters[index].standeeSprite;
         if (currentPhase == SelectionPhase.P1_SupportCharacter || currentPhase == SelectionPhase.P2_SupportCharacter) return allSupports[index].standeeSprite;
         return null;
     }
@@ -439,41 +485,53 @@ public class CharacterSelectionManager : MonoBehaviour
     {
         isCounting = false;
 
-        if (SelectionData.CurrentGameMode == GameMode.Training)
+        if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
         {
-            switch (currentPhase)
+            if (currentPhase == SelectionPhase.P1_MainCharacter)
             {
-                case SelectionPhase.P1_MainCharacter:
-                    SelectionData.characterImageUrl1 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
-                    SelectionData.characterPrefabUrl1 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
-                    currentPhase = SelectionPhase.P2_MainCharacter;
-                    break;
+                SelectionData.characterImageUrl1 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
+                SelectionData.characterPrefabUrl1 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
+                SelectionData.DeathBattleData.playerCharacterUrl = SelectionData.characterPrefabUrl1;
 
-                case SelectionPhase.P2_MainCharacter:
-                    SelectionData.characterImageUrl2 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
-                    SelectionData.characterPrefabUrl2 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
-                    currentPhase = SelectionPhase.P1_SupportCharacter;
-                    break;
+                currentPhase = SelectionPhase.DeathBattle_BotSelection;
+            }
+            else if (currentPhase == SelectionPhase.DeathBattle_BotSelection)
+            {
+                string botPrefabPath = GetResourcesPath(allCharacters[p1Index].characterPrefab);
 
-                case SelectionPhase.P1_SupportCharacter:
-                    SelectionData.supportImageUrl1 = GetResourcesPath(allSupports[p1Index].avatarSprite);
-                    SelectionData.supportPrefabUrl1 = GetResourcesPath(allSupports[p1Index].characterPrefab);
-                    currentPhase = SelectionPhase.P2_SupportCharacter;
-                    break;
+                // Fallback chống lỗi: Lỡ timer = 0 ép lock ngay ô trùng lặp, game tự dò 1 ô chưa chọn
+                if (SelectionData.DeathBattleData.enemyCharacterUrls.Contains(botPrefabPath))
+                {
+                    for (int i = 0; i < allCharacters.Count; i++)
+                    {
+                        string fallbackPath = GetResourcesPath(allCharacters[i].characterPrefab);
+                        if (!SelectionData.DeathBattleData.enemyCharacterUrls.Contains(fallbackPath))
+                        {
+                            p1Index = i;
+                            botPrefabPath = fallbackPath;
+                            break;
+                        }
+                    }
+                }
 
-                case SelectionPhase.P2_SupportCharacter:
-                    SelectionData.supportImageUrl2 = GetResourcesPath(allSupports[p1Index].avatarSprite);
-                    SelectionData.supportPrefabUrl2 = GetResourcesPath(allSupports[p1Index].characterPrefab);
-                    currentPhase = SelectionPhase.MapSelection;
-                    break;
+                SelectionData.DeathBattleData.enemyCharacterUrls.Add(botPrefabPath);
 
-                case SelectionPhase.MapSelection:
-                    // Chỉ chuyển Scene, việc sinh UI hay Character do script trong Scene Map xử lý
-                    SceneManager.LoadScene(allMaps[p1Index].mapName);
+                if (currentBotSelectionIndex < deathBattleBotPreviews.Length)
+                {
+                    deathBattleBotPreviews[currentBotSelectionIndex].sprite = allCharacters[p1Index].avatarSprite;
+                    deathBattleBotPreviews[currentBotSelectionIndex].color = Color.white;
+                }
+
+                currentBotSelectionIndex++;
+
+                if (currentBotSelectionIndex >= 5)
+                {
+                    GenerateRandomMapsAndStartDeathBattle();
                     return;
+                }
             }
         }
-        else
+        else // Chạy logic chung cho PvP và Training
         {
             if (currentPhase == SelectionPhase.P1_MainCharacter)
             {
@@ -501,7 +559,6 @@ public class CharacterSelectionManager : MonoBehaviour
                     finalMapIndex = (Random.value > 0.5f) ? p1Index : p2Index;
                 }
 
-                // Chỉ chuyển Scene, việc sinh UI hay Character do script trong Scene Map xử lý
                 SceneManager.LoadScene(allMaps[finalMapIndex].mapName);
                 return;
             }
@@ -510,5 +567,23 @@ public class CharacterSelectionManager : MonoBehaviour
         timeRemaining = 30f;
         isCounting = true;
         SetupSelectionPhase();
+    }
+
+    void GenerateRandomMapsAndStartDeathBattle()
+    {
+        List<MapInfoData> tempMaps = new List<MapInfoData>(allMaps);
+        for (int i = 0; i < 5; i++)
+        {
+            if (tempMaps.Count == 0) break;
+            int ranIndex = Random.Range(0, tempMaps.Count);
+            SelectionData.DeathBattleData.mapNames.Add(tempMaps[ranIndex].mapName);
+            tempMaps.RemoveAt(ranIndex);
+        }
+
+        SelectionData.DeathBattleData.currentMatchIndex = 0;
+        DeathBattleSaveSystem.SaveProgress(SelectionData.DeathBattleData);
+        SelectionData.characterPrefabUrl2 = SelectionData.DeathBattleData.enemyCharacterUrls[0];
+
+        SceneManager.LoadScene(SelectionData.DeathBattleData.mapNames[0]);
     }
 }

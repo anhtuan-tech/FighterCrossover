@@ -625,7 +625,7 @@ PrefabInstance:
       objectReference: {fileID: 933662776}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: selectFighterSprite
@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[0].mapName
@@ -653,7 +653,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[3].mapName
-      value: Map_Orochimaru
+      value: Map_Terrraria
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[4].mapName
@@ -690,11 +690,11 @@ PrefabInstance:
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[3].mapSceneFile
       value: 
-      objectReference: {fileID: 102900000, guid: bd9423956ba48294e961ced6d9c16884, type: 3}
+      objectReference: {fileID: 102900000, guid: 6f74abb28e86771418ffa55a7ecdd1fe, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[3].mapThumbnail
       value: 
-      objectReference: {fileID: -761314762009460688, guid: a58c15cc7496bef4699ea0479cc183b2, type: 3}
+      objectReference: {fileID: -7914273191208986021, guid: e07c50f4b9a1851489c00cf565db33c7, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[4].mapSceneFile
       value: 
@@ -792,6 +792,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -7436449355640073556, guid: f99d884889e359b41b49a7615190646f, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[8].avatarSprite
+      value: 
+      objectReference: {fileID: 1930078898415787869, guid: 3aa1aad91a5764445972039cc8543fec, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterName
       value: Ichigo
       objectReference: {fileID: 0}
@@ -856,6 +860,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7803252119118758710, guid: c11af254abf5fb9458e1cf8cebcb6f9e, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[8].characterName
+      value: Peter Griffin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[8].standeeSprite
+      value: 
+      objectReference: {fileID: 1242908733262206585, guid: 30ded8fc87183bf45a6dfbb144b0f76d, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterPrefab
       value: 
       objectReference: {fileID: 6913803890692420520, guid: 20190196d1157804caa982172329b372, type: 3}
@@ -903,6 +915,10 @@ PrefabInstance:
       propertyPath: allCharacters.Array.data[7].characterPrefab
       value: 
       objectReference: {fileID: 4996945127522638857, guid: be91023f0a4db704d9e047cf11c4bc8a, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[8].characterPrefab
+      value: 
+      objectReference: {fileID: 4294074734229235403, guid: 2f423bd35c3fad94fb5abb8dd15faf96, type: 3}
     - target: {fileID: 3011940216329422943, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 500

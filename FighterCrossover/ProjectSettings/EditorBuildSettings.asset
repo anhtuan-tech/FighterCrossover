@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Map_NinjaAcademy.unity
     guid: 52c444419a8c309409813c8709b20622
+  - enabled: 1
+    path: Assets/_Project/Scenes/Map_Terrraria.unity
+    guid: 6f74abb28e86771418ffa55a7ecdd1fe
   - enabled: 0
     path: Assets/_Project/Scenes/Pre_Match_Scene.unity
     guid: 11eecb7581a32d9458c43d1f25d66be7

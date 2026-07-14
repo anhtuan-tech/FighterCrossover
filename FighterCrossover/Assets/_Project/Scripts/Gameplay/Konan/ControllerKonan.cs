@@ -215,7 +215,7 @@ public class ControllerKonan : FighterBase
     #endregion
 
     #region COMBAT - BASIC ATTACK
-    private void OnAttack()
+    public override void OnAttack()
     {
         if (!CanAct())
         {
@@ -460,12 +460,6 @@ public class ControllerKonan : FighterBase
         {
             effect.Setup(gameObject, targetLayer, blizzardDuration);
         }
-    }
-    protected override void CheckGrounded()
-    {
-        Vector2 origin = (Vector2)transform.position + new Vector2(0f, 0.1f);
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, 1.0f, groundLayer);
-        isGrounded = hit.collider != null;
     }
     #endregion
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f3191cc3fdb6dc840ac48d973fc667ff
+guid: 10dba457a766352479184ef457173128
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1863634314001754445
-    second: e4032b9a-335a-4e3a-b5b8-02031d06e251_0
+      213: 6760856022779969810
+    second: neji_standee_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 170
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,23 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: e4032b9a-335a-4e3a-b5b8-02031d06e251_0
+      name: neji_standee_0
       rect:
         serializedVersion: 2
-        x: 42
-        y: 16
-        width: 90
-        height: 124
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 60
+        y: 2
+        width: 643
+        height: 810
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d49ad4dd885fcd910800000000000000
-      internalID: 1863634314001754445
+      spriteID: 2114c5f6bb263dd50800000000000000
+      internalID: 6760856022779969810
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b2959f46818d15a4883b90bd5ef833d7
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      e4032b9a-335a-4e3a-b5b8-02031d06e251_0: 1863634314001754445
+      neji_standee_0: 6760856022779969810
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

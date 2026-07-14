@@ -336,15 +336,15 @@ MonoBehaviour:
     maxHp: 1000
     currentHp: 1000
     maxMana: 100
-    currentMana: 0
+    currentMana: 50
     maxStamina: 100
     stamina: 100
   staminaRegenRate: 20
   staminaRegenDelay: 1
-  moveSpeed: 6
-  jumpForce: 12.5
+  moveSpeed: 5
+  jumpForce: 10
   dashForce: 15
-  dashDuration: 0.2
+  dashDuration: 0.1
   maxJumps: 2
   groundLayer:
     serializedVersion: 2

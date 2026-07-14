@@ -1,0 +1,5 @@
+=== IDLE TRANSITIONS ===
+  -> Move (HasExitTime: False)
+=== MOVE TRANSITIONS ===
+  -> Idle (HasExitTime: False)
+     Condition: IsMoving IfNot 0

@@ -340,9 +340,9 @@ MonoBehaviour:
     stamina: 100
   staminaRegenRate: 20
   staminaRegenDelay: 1
-  moveSpeed: 6.5
+  moveSpeed: 5
   jumpForce: 10
-  dashForce: 25
+  dashForce: 15
   dashDuration: 0.1
   maxJumps: 2
   groundLayer:
@@ -362,6 +362,10 @@ MonoBehaviour:
   chidoriEffectPrefab: {fileID: 6920193976591894605, guid: 99b7dbe392c4cc94389b089fd1923290, type: 3}
   chidoriDuration: 1.5
   fireballSpawnPoint: {fileID: 0}
+  fireballSpeed: 7
+  fireballDamage: 30
+  attackSpeedMultiplier: 1
+  rangedSkillSpeedMultiplier: 2.5
   ultimateFlashSprite: {fileID: 4646315803332306921, guid: 2ddeb8608be486f4fb1b2e87e0fe3141, type: 3}
   ultimateFlashSizeFactor: 0.6
   ultimateFlashOffset: {x: 0, y: 100}

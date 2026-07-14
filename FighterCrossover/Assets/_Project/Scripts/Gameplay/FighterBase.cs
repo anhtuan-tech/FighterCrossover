@@ -276,8 +276,6 @@ public class FighterBase : MonoBehaviour, IDamageable
         GainMana(20f);
         Debug.Log($"[MANA] Ranged hit! +20% mana. Hiện: {stats.currentMana / stats.maxMana * 100f:F0}%");
     }
-
-    public virtual void OnUltimateMana() { }
     // ========================================================
     #endregion
 
@@ -588,6 +586,8 @@ public class FighterBase : MonoBehaviour, IDamageable
             Debug.LogError($"[Support] Could not find support prefab at Resources/{supportPrefabUrl}!");
             return;
         }
+
+        if (!SpendMana(100f)) return; // Tiêu 100% mana
 
         lastSupportTime = Time.time;
 

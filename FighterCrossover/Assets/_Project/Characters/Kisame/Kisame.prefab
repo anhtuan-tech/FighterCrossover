@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 5857297402213274117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49260807, y: 0.07174754, z: 0}
+  m_LocalPosition: {x: -3.6477838, y: -0.83427054, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -260,6 +260,7 @@ MonoBehaviour:
     m_Bits: 1
   waterSlashPrefab: {fileID: 3073610899593594826, guid: 781e3d04a1e4f374ab866139c802dcf2, type: 3}
   sharkUltimatePrefab: {fileID: 5475336132021150182, guid: ae6da4846851e504a9ae955e025c63ca, type: 3}
-  waterSlashSpawnPoint: {fileID: 317267988374697926, guid: 9b630cb9365cc7f419bcd3a4fd32b364, type: 3}
+  waterSlashSpawnPoint: {fileID: 0}
   rangedLockDuration: 1.2
   ultimateLockDuration: 3
+  singleHitDuration: 0.35

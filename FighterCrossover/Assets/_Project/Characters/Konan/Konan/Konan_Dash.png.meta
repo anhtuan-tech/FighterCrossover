@@ -1,28 +1,73 @@
 fileFormatVersion: 2
-guid: fa1b79a35cf13ee4d8a15918540bbca8
+guid: a08284d6a1735024c972d0d776ffb98a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4295039307428948894
-    second: Skill1_0
+      213: -5939324676707185267
+    second: Konan_Dash_0
   - first:
-      213: 2568111669257182342
-    second: Skill1_1
+      213: -486974254759684780
+    second: Konan_Dash_1
   - first:
-      213: 5208163471679184598
-    second: Skill1_2
+      213: -5321718711501796656
+    second: Konan_Dash_2
   - first:
-      213: -2494526410339912427
-    second: Skill1_3
+      213: -7154860950046560903
+    second: Konan_Dash_3
   - first:
-      213: 6815201271454372601
-    second: Skill1_4
+      213: 9138934513230458514
+    second: Konan_Dash_4
   - first:
-      213: 1383126235524219841
-    second: Skill1_5
+      213: 7882019762999329689
+    second: Konan_Dash_5
   - first:
-      213: -4418183862922187150
-    second: Skill1_6
+      213: -8774823002532454840
+    second: Konan_Dash_6
+  - first:
+      213: -8433086969416599673
+    second: Konan_Dash_7
+  - first:
+      213: 4447209728655931626
+    second: Konan_Dash_8
+  - first:
+      213: -3065719407529230367
+    second: Konan_Dash_9
+  - first:
+      213: -3698143536197517205
+    second: Konan_Dash_10
+  - first:
+      213: -5489440248185090728
+    second: Konan_Dash_11
+  - first:
+      213: -6483992618858336886
+    second: Konan_Dash_12
+  - first:
+      213: -1722716338679010366
+    second: Konan_Dash_13
+  - first:
+      213: 154560752914404634
+    second: Konan_Dash_14
+  - first:
+      213: 6403205700019369576
+    second: Konan_Dash_15
+  - first:
+      213: 6984894291589696664
+    second: Konan_Dash_16
+  - first:
+      213: -2526509430555651688
+    second: Konan_Dash_17
+  - first:
+      213: 124924619344176516
+    second: Konan_Dash_18
+  - first:
+      213: -1475029698972771898
+    second: Konan_Dash_19
+  - first:
+      213: 9008724997521885399
+    second: Konan_Dash_20
+  - first:
+      213: 4828498536679170901
+    second: Konan_Dash_21
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -69,7 +114,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 60
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -118,13 +163,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skill1_0
+      name: Konan_Dash_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 33
-        height: 61
+        width: 26
+        height: 81
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,140 +178,140 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2649b588184f464c0800000000000000
-      internalID: -4295039307428948894
+      spriteID: d8d0827aca7439da0800000000000000
+      internalID: -5939324676707185267
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_1
+      name: Konan_Dash_1
       rect:
         serializedVersion: 2
-        x: 38
+        x: 30
         y: 0
-        width: 58
-        height: 57
-      alignment: 9
-      pivot: {x: 0.7412503, y: -0.007220027}
+        width: 36
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68c1c9de4f3c3a320800000000000000
-      internalID: 2568111669257182342
+      spriteID: 455d942de7bed39f0800000000000000
+      internalID: -486974254759684780
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_2
+      name: Konan_Dash_2
       rect:
         serializedVersion: 2
-        x: 100
+        x: 70
         y: 0
-        width: 79
-        height: 56
-      alignment: 9
-      pivot: {x: 0.77089024, y: 0.000000050816197}
+        width: 54
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6de5a9d551d174840800000000000000
-      internalID: 5208163471679184598
+      spriteID: 0dac26e07057526b0800000000000000
+      internalID: -5321718711501796656
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_3
+      name: Konan_Dash_3
       rect:
         serializedVersion: 2
-        x: 183
+        x: 329
         y: 0
-        width: 79
-        height: 56
-      alignment: 9
-      pivot: {x: 0.7813089, y: 0.000000050816197}
+        width: 67
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 515fbd44279a16dd0800000000000000
-      internalID: -2494526410339912427
+      spriteID: 97d292fbfd3d4bc90800000000000000
+      internalID: -7154860950046560903
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_4
+      name: Konan_Dash_4
       rect:
         serializedVersion: 2
-        x: 274
+        x: 456
         y: 0
-        width: 176
-        height: 129
-      alignment: 9
-      pivot: {x: 0.42283562, y: -0.0031902445}
+        width: 29
+        height: 65
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f214d9a275749e50800000000000000
-      internalID: 6815201271454372601
+      spriteID: 29ea8a6058404de70800000000000000
+      internalID: 9138934513230458514
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_5
+      name: Konan_Dash_10
       rect:
         serializedVersion: 2
-        x: 464
+        x: 128
         y: 0
-        width: 116
-        height: 44
-      alignment: 9
-      pivot: {x: 0.1984374, y: 0.00000006467516}
+        width: 60
+        height: 69
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1c3c1fbabf9d13310800000000000000
-      internalID: 1383126235524219841
+      spriteID: b604a842c0e8dacc0800000000000000
+      internalID: -3698143536197517205
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_6
+      name: Konan_Dash_12
       rect:
         serializedVersion: 2
-        x: 588
+        x: 193
         y: 0
-        width: 115
-        height: 47
-      alignment: 9
-      pivot: {x: 0.19581564, y: 0.00000006054696}
+        width: 113
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 27ee82a6f257fa2c0800000000000000
-      internalID: -4418183862922187150
+      spriteID: a8da1ba111b3406a0800000000000000
+      internalID: -6483992618858336886
       vertices: []
       indices: 
       edges: []
@@ -275,7 +320,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5686d0656e62a5f45a6cdf10ba9b3931
+    spriteID: 142071cd40d8481428f85efb823c5698
     internalID: 0
     vertices: []
     indices: 
@@ -285,13 +330,28 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Skill1_0: -4295039307428948894
-      Skill1_1: 2568111669257182342
-      Skill1_2: 5208163471679184598
-      Skill1_3: -2494526410339912427
-      Skill1_4: 6815201271454372601
-      Skill1_5: 1383126235524219841
-      Skill1_6: -4418183862922187150
+      Konan_Dash_0: -5939324676707185267
+      Konan_Dash_1: -486974254759684780
+      Konan_Dash_10: -3698143536197517205
+      Konan_Dash_11: -5489440248185090728
+      Konan_Dash_12: -6483992618858336886
+      Konan_Dash_13: -1722716338679010366
+      Konan_Dash_14: 154560752914404634
+      Konan_Dash_15: 6403205700019369576
+      Konan_Dash_16: 6984894291589696664
+      Konan_Dash_17: -2526509430555651688
+      Konan_Dash_18: 124924619344176516
+      Konan_Dash_19: -1475029698972771898
+      Konan_Dash_2: -5321718711501796656
+      Konan_Dash_20: 9008724997521885399
+      Konan_Dash_21: 4828498536679170901
+      Konan_Dash_3: -7154860950046560903
+      Konan_Dash_4: 9138934513230458514
+      Konan_Dash_5: 7882019762999329689
+      Konan_Dash_6: -8774823002532454840
+      Konan_Dash_7: -8433086969416599673
+      Konan_Dash_8: 4447209728655931626
+      Konan_Dash_9: -3065719407529230367
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

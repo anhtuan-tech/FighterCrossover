@@ -1,28 +1,73 @@
 fileFormatVersion: 2
-guid: fa1b79a35cf13ee4d8a15918540bbca8
+guid: 4396946d887cf6c499570975fe78e9da
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4295039307428948894
-    second: Skill1_0
+      213: -4429015720016932695
+    second: Konan_Effect_Skill1_0
   - first:
-      213: 2568111669257182342
-    second: Skill1_1
+      213: 1451797829797647453
+    second: Konan_Effect_Skill1_1
   - first:
-      213: 5208163471679184598
-    second: Skill1_2
+      213: 648563868544784165
+    second: Konan_Effect_Skill1_2
   - first:
-      213: -2494526410339912427
-    second: Skill1_3
+      213: 35340745745678179
+    second: Konan_Effect_Skill1_3
   - first:
-      213: 6815201271454372601
-    second: Skill1_4
+      213: -8290917774435676351
+    second: Konan_Effect_Skill1_4
   - first:
-      213: 1383126235524219841
-    second: Skill1_5
+      213: -3589807957660827756
+    second: Konan_Effect_Skill1_5
   - first:
-      213: -4418183862922187150
-    second: Skill1_6
+      213: 613822349620238764
+    second: Konan_Effect_Skill1_6
+  - first:
+      213: 5898335572582964172
+    second: Konan_Effect_Skill1_7
+  - first:
+      213: -1418320834940340841
+    second: Konan_Effect_Skill1_8
+  - first:
+      213: 7929450168095914712
+    second: Konan_Effect_Skill1_9
+  - first:
+      213: -6287004837133605592
+    second: Konan_Effect_Skill1_10
+  - first:
+      213: -5936010701688731010
+    second: Konan_Effect_Skill1_11
+  - first:
+      213: -6229401642361777262
+    second: Konan_Effect_Skill1_12
+  - first:
+      213: -9022674306820533157
+    second: Konan_Effect_Skill1_13
+  - first:
+      213: 4314312506149817884
+    second: Konan_Effect_Skill1_14
+  - first:
+      213: 8991753609988688269
+    second: Konan_Effect_Skill1_15
+  - first:
+      213: 3403409384678162206
+    second: Konan_Effect_Skill1_16
+  - first:
+      213: 3946843519357460527
+    second: Konan_Effect_Skill1_17
+  - first:
+      213: -4983447369396487098
+    second: Konan_Effect_Skill1_18
+  - first:
+      213: -1115323149099047399
+    second: Konan_Effect_Skill1_19
+  - first:
+      213: 2439186678962083533
+    second: Konan_Effect_Skill1_20
+  - first:
+      213: -5956303336885107983
+    second: Konan_Effect_Skill1_21
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -69,7 +114,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 60
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -118,155 +163,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Skill1_0
+      name: Konan_Effect_Skill1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 33
-        height: 61
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        y: 38
+        width: 44
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2649b588184f464c0800000000000000
-      internalID: -4295039307428948894
+      spriteID: 9a015c72ba9f882c0800000000000000
+      internalID: -4429015720016932695
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_1
+      name: Konan_Effect_Skill1_1
       rect:
         serializedVersion: 2
-        x: 38
-        y: 0
-        width: 58
-        height: 57
-      alignment: 9
-      pivot: {x: 0.7412503, y: -0.007220027}
+        x: 48
+        y: 38
+        width: 39
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 68c1c9de4f3c3a320800000000000000
-      internalID: 2568111669257182342
+      spriteID: d5495ca2f62d52410800000000000000
+      internalID: 1451797829797647453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_2
+      name: Konan_Effect_Skill1_2
       rect:
         serializedVersion: 2
-        x: 100
+        x: 114
+        y: 2
+        width: 35
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 527d3c6f669200900800000000000000
+      internalID: 648563868544784165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Konan_Effect_Skill1_3
+      rect:
+        serializedVersion: 2
+        x: 156
         y: 0
-        width: 79
+        width: 49
         height: 56
-      alignment: 9
-      pivot: {x: 0.77089024, y: 0.000000050816197}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6de5a9d551d174840800000000000000
-      internalID: 5208163471679184598
+      spriteID: 36fb444983e8d7000800000000000000
+      internalID: 35340745745678179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_3
+      name: Konan_Effect_Skill1_14
       rect:
         serializedVersion: 2
-        x: 183
-        y: 0
-        width: 79
-        height: 56
-      alignment: 9
-      pivot: {x: 0.7813089, y: 0.000000050816197}
+        x: 208
+        y: 6
+        width: 24
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 515fbd44279a16dd0800000000000000
-      internalID: -2494526410339912427
+      spriteID: c1ec51bbd548fdb30800000000000000
+      internalID: 4314312506149817884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Skill1_4
+      name: Konan_Effect_Skill1_16
       rect:
         serializedVersion: 2
-        x: 274
-        y: 0
-        width: 176
-        height: 129
-      alignment: 9
-      pivot: {x: 0.42283562, y: -0.0031902445}
+        x: 236
+        y: 21
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f214d9a275749e50800000000000000
-      internalID: 6815201271454372601
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skill1_5
-      rect:
-        serializedVersion: 2
-        x: 464
-        y: 0
-        width: 116
-        height: 44
-      alignment: 9
-      pivot: {x: 0.1984374, y: 0.00000006467516}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1c3c1fbabf9d13310800000000000000
-      internalID: 1383126235524219841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Skill1_6
-      rect:
-        serializedVersion: 2
-        x: 588
-        y: 0
-        width: 115
-        height: 47
-      alignment: 9
-      pivot: {x: 0.19581564, y: 0.00000006054696}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 27ee82a6f257fa2c0800000000000000
-      internalID: -4418183862922187150
+      spriteID: e1ff8f6adc65b3f20800000000000000
+      internalID: 3403409384678162206
       vertices: []
       indices: 
       edges: []
@@ -275,7 +298,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5686d0656e62a5f45a6cdf10ba9b3931
+    spriteID: 75822ec23aba8f64fbd87e328e1ab88f
     internalID: 0
     vertices: []
     indices: 
@@ -285,13 +308,28 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Skill1_0: -4295039307428948894
-      Skill1_1: 2568111669257182342
-      Skill1_2: 5208163471679184598
-      Skill1_3: -2494526410339912427
-      Skill1_4: 6815201271454372601
-      Skill1_5: 1383126235524219841
-      Skill1_6: -4418183862922187150
+      Konan_Effect_Skill1_0: -4429015720016932695
+      Konan_Effect_Skill1_1: 1451797829797647453
+      Konan_Effect_Skill1_10: -6287004837133605592
+      Konan_Effect_Skill1_11: -5936010701688731010
+      Konan_Effect_Skill1_12: -6229401642361777262
+      Konan_Effect_Skill1_13: -9022674306820533157
+      Konan_Effect_Skill1_14: 4314312506149817884
+      Konan_Effect_Skill1_15: 8991753609988688269
+      Konan_Effect_Skill1_16: 3403409384678162206
+      Konan_Effect_Skill1_17: 3946843519357460527
+      Konan_Effect_Skill1_18: -4983447369396487098
+      Konan_Effect_Skill1_19: -1115323149099047399
+      Konan_Effect_Skill1_2: 648563868544784165
+      Konan_Effect_Skill1_20: 2439186678962083533
+      Konan_Effect_Skill1_21: -5956303336885107983
+      Konan_Effect_Skill1_3: 35340745745678179
+      Konan_Effect_Skill1_4: -8290917774435676351
+      Konan_Effect_Skill1_5: -3589807957660827756
+      Konan_Effect_Skill1_6: 613822349620238764
+      Konan_Effect_Skill1_7: 5898335572582964172
+      Konan_Effect_Skill1_8: -1418320834940340841
+      Konan_Effect_Skill1_9: 7929450168095914712
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

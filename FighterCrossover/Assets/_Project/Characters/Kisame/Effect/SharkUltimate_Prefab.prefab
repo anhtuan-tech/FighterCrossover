@@ -182,7 +182,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.5, y: 0.24}
+    oldSize: {x: 1, y: 0.48}
     newSize: {x: 0.5, y: 0.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -203,8 +203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SharkUltimate
   riseDelay: 0
-  chargeSpeed: 18
-  chargeTimeout: 3
+  chargeSpeed: 10
+  chargeTimeout: 2
   damage: 100
   hitCooldown: 0.4
   screenDestroyPadding: 2

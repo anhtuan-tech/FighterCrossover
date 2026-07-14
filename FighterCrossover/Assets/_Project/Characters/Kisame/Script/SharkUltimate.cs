@@ -3,21 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Thủy Độn – Đại Tạp Sáp Thao (Skill 2 / Ultimate của Kisame)
+/// Thủy Độn – Đại Tạp Sáp Thao (Skill 2 / Ultimate của Kisame – phím I)
 ///
-/// ┌─── Pha 1 (Hình thành) ──────────────────────────────────────────────────┐
-/// │  Cá mập đứng HOÀN TOÀN yên. Rigidbody2D.linearVelocity = Vector2.zero. │
-/// │  Animator phát hoạt ảnh "nước trồi lên" (Effect2 – các frame đầu).      │
-/// │  Thời gian chờ: riseDelay (giây).                                        │
-/// └─────────────────────────────────────────────────────────────────────────┘
-/// ┌─── Pha 2 (Lao đi) ──────────────────────────────────────────────────────┐
-/// │  Kích hoạt trigger "Charge" trên Animator (chuyển sang clip bơi/lao).   │
-/// │  Gán linearVelocity để lao về trục X theo hướng Kisame đang nhìn.        │
-/// │  Multi-hit: OnTriggerStay2D + cooldown per-target tránh spam damage.     │
-/// │  Tự hủy khi ra khỏi màn hình (Camera viewport) hoặc hết timeout.        │
-/// └─────────────────────────────────────────────────────────────────────────┘
+/// ┌─── Pha 1: Hình Thành ───────────────────────────────────────────────────────┐
+/// │  Cá mập ĐỨNG YÊN (linearVelocity = zero, Kinematic).                      │
+/// │  Animator phát clip "Rise" (nước trồi lên, các frame đầu của Effect2).     │
+/// │  Chờ riseDelay giây HOẶC đến khi Animation Event AnimEvent_StartCharge().  │
+/// └────────────────────────────────────────────────────────────────────────────┘
+/// ┌─── Pha 2: Lao Đi ───────────────────────────────────────────────────────────┐
+/// │  Gán linearVelocity = direction * chargeSpeed (chuẩn Unity 6).            │
+/// │  Set Trigger "Charge" → Animator chuyển sang clip bơi/lao.                │
+/// │  Multi-hit: OnTriggerStay2D + per-target cooldown tránh spam damage.       │
+/// │  Tự hủy khi ra ngoài màn hình (Camera viewport) HOẶC hết chargeTimeout.   │
+/// └────────────────────────────────────────────────────────────────────────────┘
 ///
-/// Yêu cầu Component: Rigidbody2D (Kinematic), BoxCollider2D (IsTrigger=true), Animator.
+/// Setup Prefab:
+///   • Rigidbody2D   → Body Type = Kinematic, Gravity Scale = 0, Collision = Continuous
+///   • BoxCollider2D → Is Trigger = true (bao phủ toàn thân cá mập)
+///   • Animator      → 2 clip: Effect2_Rise (loop=false) + Effect2_Charge (loop=true)
+///     └─ Animator Controller: State "Rise" --(Trigger "Charge")--> State "Charge"
+///     └─ Animation Event tuỳ chọn trên clip Rise (frame thành hình): AnimEvent_StartCharge()
+///
 /// Gọi Setup() ngay sau Instantiate từ KisameController.AnimationEvent_SpawnShark().
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(Animator))]
@@ -27,50 +33,51 @@ public class SharkUltimate : MonoBehaviour
     //  INSPECTOR FIELDS
     // ─────────────────────────────────────────────────────────────────────────────
     [Header("─── SHARK CONFIG ───")]
-    [Tooltip("Giây đứng yên ở Pha 1 (hoạt ảnh nước trồi lên). " +
-             "Điều chỉnh khớp với số frame clip 'trồi' chia FPS. " +
-             "Ví dụ: 10 frame / 12fps ≈ 0.83s → đặt 0.85f để dư 1 frame.")]
+    [Tooltip("Giây đứng yên ở Pha 1 (hoạt ảnh nước trồi lên).\n" +
+             "Ước tính: số frame clip 'Rise' ÷ FPS.\n" +
+             "Ví dụ: 10 frame ÷ 12fps ≈ 0.83s → đặt 0.85f.\n" +
+             "Đặt 0 nếu dùng AnimEvent_StartCharge() từ Animation Event.")]
     [SerializeField] private float riseDelay = 0.85f;
 
-    [Tooltip("Tốc độ lao đi ở Pha 2 (units/second).")]
+    [Tooltip("Tốc độ lao đi ở Pha 2 (units/second). Khuyến nghị 15–20.")]
     [SerializeField] private float chargeSpeed = 18f;
 
-    [Tooltip("Timeout tự hủy kể từ khi BẮT ĐẦU lao (giây). " +
-             "Đảm bảo cá mập không tồn tại mãi nếu không ra khỏi màn hình.")]
+    [Tooltip("Timeout tự hủy kể từ khi BẮT ĐẦU lao (giây).\n" +
+             "Đảm bảo cá mập không tồn tại mãi nếu không thoát màn hình.")]
     [SerializeField] private float chargeTimeout = 3.0f;
 
     [Header("─── DAMAGE ───")]
-    [Tooltip("Sát thương mỗi lần hit (Heavy Attack → gây knockback).")]
+    [Tooltip("Sát thương mỗi lần hit. isHeavyAttack = true → gây KnockedDown cho target.")]
     [SerializeField] private float damage = 45f;
 
-    [Tooltip("Cooldown giữa 2 lần hit cùng 1 target (giây). " +
-             "Tránh spam damage khi target nằm trong vùng Collider lớn.")]
+    [Tooltip("Cooldown giữa 2 lần hit cùng 1 target (giây).\n" +
+             "Tránh spam damage khi target nằm lâu trong vùng Collider lớn.")]
     [SerializeField] private float hitCooldown = 0.4f;
 
     [Header("─── OUT-OF-SCREEN ───")]
-    [Tooltip("Padding thêm ngoài biên màn hình (world units) trước khi tự hủy. " +
-             "Đặt đủ lớn để cá mập bay hẳn ra ngoài view.")]
+    [Tooltip("Padding thêm ngoài biên màn hình (world units) trước khi tự hủy.\n" +
+             "Đặt đủ lớn để cá mập bay hẳn ra ngoài view rồi mới destroy.")]
     [SerializeField] private float screenDestroyPadding = 2f;
 
     // ─────────────────────────────────────────────────────────────────────────────
     //  PRIVATE FIELDS  (cache – không GetComponent trong Update)
     // ─────────────────────────────────────────────────────────────────────────────
-    private Rigidbody2D  _rb;
-    private Animator     _anim;
-    private Camera       _cam;
+    private Rigidbody2D _rb;
+    private Animator    _anim;
+    private Camera      _cam;
 
-    private Vector2      _direction;
-    private GameObject   _owner;
-    private LayerMask    _targetLayer;
+    private Vector2     _direction;
+    private GameObject  _owner;
+    private LayerMask   _targetLayer;
 
-    private bool         _isCharging  = false; // True từ khi bắt đầu Pha 2
-    private bool         _isDestroyed = false; // Guard tránh double-Destroy
+    private bool        _isCharging  = false; // true từ khi bắt đầu Pha 2
+    private bool        _isDestroyed = false; // guard tránh double-Destroy
 
-    // Per-target hit cooldown (Dictionary tái sử dụng – tránh GC allocation)
+    /// <summary>Per-target hit cooldown. Dictionary tái sử dụng để tránh GC allocation.</summary>
     private readonly Dictionary<Collider2D, float> _lastHitTime
         = new Dictionary<Collider2D, float>();
 
-    // Animator parameter hash (tránh boxing string mỗi frame)
+    // Animator hash (tránh boxing string mỗi frame)
     private static readonly int HashCharge = Animator.StringToHash("Charge");
 
     // ─────────────────────────────────────────────────────────────────────────────
@@ -79,13 +86,18 @@ public class SharkUltimate : MonoBehaviour
 
     /// <summary>
     /// Khởi tạo cá mập ngay sau khi Instantiate.
+    /// GetComponent được gọi tại đây, KHÔNG gọi lại trong Update/Collision.
     /// </summary>
     /// <param name="direction">Hướng lao (đã normalize). Ví dụ: Vector2(1,0) hoặc Vector2(-1,0).</param>
     /// <param name="owner">GameObject của Kisame – bỏ qua va chạm với chính mình.</param>
     /// <param name="targetLayer">Layer của kẻ địch cần gây sát thương.</param>
-    public void Setup(Vector2 direction, GameObject owner, LayerMask targetLayer)
+    /// <param name="riseDelay">
+    /// Ghi đè thời gian chờ Pha 1 (giây). Mặc định -1 = dùng giá trị Inspector.
+    /// Truyền 0f để tắt timer và điều khiển hoàn toàn bằng AnimEvent_StartCharge.
+    /// </param>
+    public void Setup(Vector2 direction, GameObject owner, LayerMask targetLayer, float riseDelay = -1f)
     {
-        // Cache components (GetComponent 1 lần duy nhất trong Setup)
+        // Cache components (GetComponent 1 lần duy nhất)
         _rb          = GetComponent<Rigidbody2D>();
         _anim        = GetComponent<Animator>();
         _cam         = Camera.main;
@@ -94,12 +106,18 @@ public class SharkUltimate : MonoBehaviour
         _owner       = owner;
         _targetLayer = targetLayer;
 
-        // Lật sprite theo hướng lao (sprite mặc định hướng phải)
-        if (_direction.x < 0f)
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x),
-                                               transform.localScale.y, 1f);
+        // Ghi đè riseDelay nếu caller truyền giá trị hợp lệ (>= 0)
+        if (riseDelay >= 0f)
+            this.riseDelay = riseDelay;
 
-        // Pha 1: đứng yên hoàn toàn
+        // Lật sprite theo hướng lao (sprite mặc định hướng PHẢI)
+        if (_direction.x < 0f)
+        {
+            Vector3 s = transform.localScale;
+            transform.localScale = new Vector3(-Mathf.Abs(s.x), s.y, 1f);
+        }
+
+        // Pha 1: đứng hoàn toàn yên
         _rb.bodyType       = RigidbodyType2D.Kinematic;
         _rb.linearVelocity = Vector2.zero;
         _rb.gravityScale   = 0f;
@@ -118,20 +136,31 @@ public class SharkUltimate : MonoBehaviour
 
         yield return new WaitForSeconds(riseDelay);
 
-        // ── Pha 2: Lao đi ─────────────────────────────────────────────────────────
+        // ── Pha 2: Lao đi (chỉ kích hoạt nếu chưa lao – AnimEvent có thể kích sớm hơn) ──
+        if (!_isCharging)
+        {
+            StartCharge();
+        }
+    }
+
+    /// <summary>Logic bắt đầu Pha 2 – tách ra để cả Coroutine và AnimEvent đều dùng được.</summary>
+    private void StartCharge()
+    {
+        if (_isCharging) return;
         _isCharging = true;
 
-        // Báo Animator chuyển sang state "bơi/lao" (cần có trigger "Charge" trong Controller)
+        // Báo Animator chuyển sang state "Charge" (clip bơi/lao)
         _anim?.SetTrigger(HashCharge);
 
+        // ► linearVelocity: chuẩn Unity 6 (thay rb.velocity đã deprecated)
         _rb.linearVelocity = _direction * chargeSpeed;
 
-        // Timeout failsafe: tự hủy sau chargeTimeout giây kể từ lúc bắt đầu lao
+        // Timeout failsafe: tự hủy sau chargeTimeout giây kể từ khi bắt đầu lao
         Destroy(gameObject, chargeTimeout);
     }
 
     // ─────────────────────────────────────────────────────────────────────────────
-    //  UPDATE – KIỂM TRA OUT-OF-SCREEN  (chỉ khi đang lao)
+    //  UPDATE – KIỂM TRA OUT-OF-SCREEN  (chỉ khi đang lao Pha 2)
     // ─────────────────────────────────────────────────────────────────────────────
 
     private void Update()
@@ -141,8 +170,9 @@ public class SharkUltimate : MonoBehaviour
         // Chuyển vị trí sang Viewport coordinates (0-1 trong màn hình)
         Vector3 vp = _cam.WorldToViewportPoint(transform.position);
 
-        // Hủy khi hoàn toàn ra ngoài biên (tính cả padding world)
-        float padVP = screenDestroyPadding / Screen.width; // xấp xỉ padding viewport
+        // Tính padding viewport (world units → viewport units xấp xỉ)
+        float padVP = screenDestroyPadding / Screen.width;
+
         if (vp.x < -padVP || vp.x > 1f + padVP)
         {
             SafeDestroy();
@@ -160,7 +190,7 @@ public class SharkUltimate : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        // Tiếp tục gây sát thương theo cooldown khi target đứng trong vùng cá mập
+        // Tiếp tục gây sát thương khi target đứng lâu trong vùng cá mập
         ProcessHit(other);
     }
 
@@ -172,40 +202,40 @@ public class SharkUltimate : MonoBehaviour
 
     private void ProcessHit(Collider2D other)
     {
-        if (_isDestroyed) return;
-        if (_owner  != null && other.gameObject == _owner) return;
+        if (_isDestroyed)                                              return;
+        if (_owner != null && other.gameObject == _owner)             return;
         if (((1 << other.gameObject.layer) & _targetLayer.value) == 0) return;
 
         float now = Time.time;
         if (_lastHitTime.TryGetValue(other, out float last) && now - last < hitCooldown)
             return;
 
-        _lastHitTime[other] = now;
-
-        // Heavy Attack → isHeavyAttack = true → FighterBase.ApplyKnockback() được gọi
+        // Gây sát thương
+        // isHeavyAttack = true → FighterBase/KisameController.ApplyKnockback() → Trigger KnockedDown
         other.GetComponent<IDamageable>()?.TakeDamage(damage, transform.position.x, isHeavyAttack: true);
+
+        // Biến mất ngay sau khi trúng mục tiêu
+        SafeDestroy();
     }
 
     // ─────────────────────────────────────────────────────────────────────────────
-    //  ANIMATOR EVENT  (tùy chọn – gán trên clip Effect2 của Prefab cá mập)
+    //  ANIMATION EVENT  (tuỳ chọn – gán trên clip Rise của Prefab cá mập)
     // ─────────────────────────────────────────────────────────────────────────────
 
     /// <summary>
-    /// [Tùy chọn] Gán Animation Event tên "AnimEvent_StartCharge" trên clip Effect2
-    /// tại FRAME cá mập thành hình xong. Cách thay thế cho riseDelay timer.
-    /// Nếu dùng hàm này thì đặt riseDelay = 0 (hoặc rất nhỏ) trong Inspector.
+    /// [Tuỳ chọn] Thay thế cho riseDelay timer – cho phép Animator kiểm soát chính xác hơn.
+    ///
+    /// Cách dùng:
+    ///   1. Đặt riseDelay = 0 trong Inspector.
+    ///   2. Gán Animation Event tên "AnimEvent_StartCharge" trên clip Effect2_Rise
+    ///      tại frame cá mập thành hình xong (thường là frame cuối clip Rise).
+    ///
+    /// Nếu KHÔNG dùng Animation Event, để riseDelay > 0 và bỏ qua hàm này.
     /// </summary>
     public void AnimEvent_StartCharge()
     {
-        if (_isCharging) return; // Đã lao rồi, bỏ qua
-
-        StopAllCoroutines();     // Dừng timer coroutine cũ nếu có
-
-        _isCharging            = true;
-        _anim?.SetTrigger(HashCharge);
-        _rb.linearVelocity     = _direction * chargeSpeed;
-
-        Destroy(gameObject, chargeTimeout);
+        StopAllCoroutines(); // Dừng timer coroutine SharkSequence nếu đang chạy
+        StartCharge();
     }
 
     // ─────────────────────────────────────────────────────────────────────────────

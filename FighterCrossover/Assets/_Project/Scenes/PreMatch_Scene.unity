@@ -633,7 +633,7 @@ PrefabInstance:
       objectReference: {fileID: 7646057345755110279, guid: 95909e6120d3de94bbdde50ae542ee44, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.size
@@ -720,6 +720,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5042914106468337636, guid: af10cd8ff11c6084bab47b61b086da82, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[2].avatarSprite
+      value: 
+      objectReference: {fileID: 5936356172364887011, guid: e87dc4ae766fa0248a33f6b45a28f6d3, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterName
       value: Lucy
       objectReference: {fileID: 0}
@@ -735,6 +739,14 @@ PrefabInstance:
       propertyPath: allSupports.Array.data[1].standeeSprite
       value: 
       objectReference: {fileID: 6760856022779969810, guid: 10dba457a766352479184ef457173128, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[2].characterName
+      value: GiornoGiovanna
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[2].standeeSprite
+      value: 
+      objectReference: {fileID: 9154932736917132628, guid: 6c8989925283624438c3efda644d7a39, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].avatarSprite
       value: 
@@ -839,6 +851,10 @@ PrefabInstance:
       propertyPath: allSupports.Array.data[1].characterPrefab
       value: 
       objectReference: {fileID: 1587152380877838536, guid: 44e385acfb720724490ac5f417a8d52c, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[2].characterPrefab
+      value: 
+      objectReference: {fileID: 7050201930769958427, guid: b538c748a6a60a24cab18fc52eaec84a, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterPrefab
       value: 

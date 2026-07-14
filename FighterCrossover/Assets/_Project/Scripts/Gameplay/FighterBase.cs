@@ -642,6 +642,15 @@ public class FighterBase : MonoBehaviour, IDamageable
             return;
         }
 
+        // Hỗ trợ GiornoGiovanna
+        GiornoGiovannaController giorno = supportGo.GetComponent<GiornoGiovannaController>();
+        if (giorno != null)
+        {
+            giorno.Setup(this, playerNumber, targetLayer, facingDir);
+            Debug.Log($"[Support] Summoned GiornoGiovanna for Player {playerNumber}!");
+            return;
+        }
+
         Debug.LogWarning($"[Support] Prefab '{supportPrefabUrl}' has no recognized Support component!");
     }
 }

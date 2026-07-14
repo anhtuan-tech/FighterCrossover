@@ -139,7 +139,8 @@ public class CharacterSelectionManager : MonoBehaviour
         p1Locked = false;
         p2Locked = false;
 
-        if (SelectionData.CurrentGameMode == GameMode.Training || SelectionData.CurrentGameMode == GameMode.DeathBattle)
+        // Bỏ Training ra khỏi block này để nó dùng chung P1 & P2 giống PvP
+        if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
         {
             p1Index = 0;
             if (p2Cursor != null) p2Cursor.gameObject.SetActive(false);
@@ -300,7 +301,7 @@ public class CharacterSelectionManager : MonoBehaviour
 
         int columns = (currentPhase == SelectionPhase.MapSelection) ? 6 : 4;
 
-        if (SelectionData.CurrentGameMode == GameMode.Training || SelectionData.CurrentGameMode == GameMode.DeathBattle)
+        if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
         {
             if (!p1Locked)
             {
@@ -319,12 +320,22 @@ public class CharacterSelectionManager : MonoBehaviour
 
                 if (keyboard.jKey.wasPressedThisFrame)
                 {
+                    // Tránh chọn trùng nhân vật trong Bot Selection (Death Battle)
+                    if (currentPhase == SelectionPhase.DeathBattle_BotSelection)
+                    {
+                        string botPrefabPath = GetResourcesPath(allCharacters[p1Index].characterPrefab);
+                        if (SelectionData.DeathBattleData.enemyCharacterUrls.Contains(botPrefabPath))
+                        {
+                            return; // Bỏ qua nếu nhân vật đã được chọn trước đó
+                        }
+                    }
+
                     p1Locked = true;
                     LockAndProceed();
                 }
             }
         }
-        else
+        else // Áp dụng cho cả PvP và Training
         {
             if (!p1Locked)
             {
@@ -378,22 +389,16 @@ public class CharacterSelectionManager : MonoBehaviour
 
         if (currentPhase != SelectionPhase.MapSelection)
         {
-            if (SelectionData.CurrentGameMode == GameMode.Training)
+            if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
             {
-                if (currentPhase == SelectionPhase.P1_MainCharacter || currentPhase == SelectionPhase.P1_SupportCharacter)
+                // CHỈ CẬP NHẬT ẢNH TO KHI ĐANG CHỌN NHÂN VẬT CHÍNH
+                // Sau khi đã sang phase chọn Bot, ảnh to của P1 sẽ đứng im ở nhân vật đã lock
+                if (currentPhase == SelectionPhase.P1_MainCharacter)
                 {
                     if (p1Preview != null) p1Preview.sprite = GetPreviewSpriteAt(p1Index);
                 }
-                else
-                {
-                    if (p2Preview != null) p2Preview.sprite = GetPreviewSpriteAt(p1Index);
-                }
             }
-            else if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
-            {
-                if (p1Preview != null) p1Preview.sprite = GetPreviewSpriteAt(p1Index);
-            }
-            else
+            else // Chung cho cả Training & PvP
             {
                 if (p1Preview != null) p1Preview.sprite = GetPreviewSpriteAt(p1Index);
                 if (p2Preview != null) p2Preview.sprite = GetPreviewSpriteAt(p2Index);
@@ -412,12 +417,25 @@ public class CharacterSelectionManager : MonoBehaviour
         {
             if (spawnedSlots[i] == null) continue;
             spawnedSlots[i].color = Color.white;
+
+            // Làm tối màu (dim) những bot đã được chọn trong DeathBattle
+            if (SelectionData.CurrentGameMode == GameMode.DeathBattle && currentPhase == SelectionPhase.DeathBattle_BotSelection)
+            {
+                if (i < allCharacters.Count)
+                {
+                    string path = GetResourcesPath(allCharacters[i].characterPrefab);
+                    if (SelectionData.DeathBattleData.enemyCharacterUrls.Contains(path))
+                    {
+                        spawnedSlots[i].color = new Color(0.3f, 0.3f, 0.3f, 1f);
+                    }
+                }
+            }
         }
 
         if (p1Cursor != null && spawnedSlots.Count > p1Index)
             p1Cursor.position = spawnedSlots[p1Index].rectTransform.position + cursorOffset;
 
-        if (SelectionData.CurrentGameMode != GameMode.Training && SelectionData.CurrentGameMode != GameMode.DeathBattle)
+        if (SelectionData.CurrentGameMode != GameMode.DeathBattle) // Training & PvP đều dùng chung P2 Cursor
         {
             if (p2Cursor != null && spawnedSlots.Count > p2Index)
                 p2Cursor.position = spawnedSlots[p2Index].rectTransform.position + cursorOffset;
@@ -480,6 +498,22 @@ public class CharacterSelectionManager : MonoBehaviour
             else if (currentPhase == SelectionPhase.DeathBattle_BotSelection)
             {
                 string botPrefabPath = GetResourcesPath(allCharacters[p1Index].characterPrefab);
+
+                // Fallback chống lỗi: Lỡ timer = 0 ép lock ngay ô trùng lặp, game tự dò 1 ô chưa chọn
+                if (SelectionData.DeathBattleData.enemyCharacterUrls.Contains(botPrefabPath))
+                {
+                    for (int i = 0; i < allCharacters.Count; i++)
+                    {
+                        string fallbackPath = GetResourcesPath(allCharacters[i].characterPrefab);
+                        if (!SelectionData.DeathBattleData.enemyCharacterUrls.Contains(fallbackPath))
+                        {
+                            p1Index = i;
+                            botPrefabPath = fallbackPath;
+                            break;
+                        }
+                    }
+                }
+
                 SelectionData.DeathBattleData.enemyCharacterUrls.Add(botPrefabPath);
 
                 if (currentBotSelectionIndex < deathBattleBotPreviews.Length)
@@ -497,40 +531,7 @@ public class CharacterSelectionManager : MonoBehaviour
                 }
             }
         }
-        else if (SelectionData.CurrentGameMode == GameMode.Training)
-        {
-            switch (currentPhase)
-            {
-                case SelectionPhase.P1_MainCharacter:
-                    SelectionData.characterImageUrl1 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
-                    SelectionData.characterPrefabUrl1 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
-                    currentPhase = SelectionPhase.P2_MainCharacter;
-                    break;
-
-                case SelectionPhase.P2_MainCharacter:
-                    SelectionData.characterImageUrl2 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
-                    SelectionData.characterPrefabUrl2 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
-                    currentPhase = SelectionPhase.P1_SupportCharacter;
-                    break;
-
-                case SelectionPhase.P1_SupportCharacter:
-                    SelectionData.supportImageUrl1 = GetResourcesPath(allSupports[p1Index].avatarSprite);
-                    SelectionData.supportPrefabUrl1 = GetResourcesPath(allSupports[p1Index].characterPrefab);
-                    currentPhase = SelectionPhase.P2_SupportCharacter;
-                    break;
-
-                case SelectionPhase.P2_SupportCharacter:
-                    SelectionData.supportImageUrl2 = GetResourcesPath(allSupports[p1Index].avatarSprite);
-                    SelectionData.supportPrefabUrl2 = GetResourcesPath(allSupports[p1Index].characterPrefab);
-                    currentPhase = SelectionPhase.MapSelection;
-                    break;
-
-                case SelectionPhase.MapSelection:
-                    SceneManager.LoadScene(allMaps[p1Index].mapName);
-                    return;
-            }
-        }
-        else
+        else // Chạy logic chung cho PvP và Training
         {
             if (currentPhase == SelectionPhase.P1_MainCharacter)
             {

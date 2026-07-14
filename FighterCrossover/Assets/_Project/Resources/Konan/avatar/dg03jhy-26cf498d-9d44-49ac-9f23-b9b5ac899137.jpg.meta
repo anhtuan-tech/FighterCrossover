@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 6451536a300ba9e48b10d10e258402c7
+guid: 63e5acab2c56b4c4ba80fe424a2f16d8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -170943669090901719
-    second: Konan_Effect_CB3_0
-  - first:
-      213: -3286849035970812267
-    second: Konan_Effect_CB3_1
+      213: 6398518779561358066
+    second: dg03jhy-26cf498d-9d44-49ac-9f23-b9b5ac899137_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -103,45 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Konan_Effect_CB3_0
+      name: dg03jhy-26cf498d-9d44-49ac-9f23-b9b5ac899137_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 135
-        height: 46
+        width: 1020
+        height: 765
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9212c3f73afa0adf0800000000000000
-      internalID: -170943669090901719
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Konan_Effect_CB3_1
-      rect:
-        serializedVersion: 2
-        x: 139
-        y: 0
-        width: 103
-        height: 49
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 596ef9c5734c262d0800000000000000
-      internalID: -3286849035970812267
+      spriteID: 2f2bb60edea1cc850800000000000000
+      internalID: 6398518779561358066
       vertices: []
       indices: 
       edges: []
@@ -150,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: df8b5a315239cd54fa59473fa918ab70
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Konan_Effect_CB3_0: -170943669090901719
-      Konan_Effect_CB3_1: -3286849035970812267
+      dg03jhy-26cf498d-9d44-49ac-9f23-b9b5ac899137_0: 6398518779561358066
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

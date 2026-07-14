@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: 42dd105de83dfdc42917c1666f5edfcf
+guid: cc2ce6528eec22a4aaa40656f482c6e3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7547060924036456780
-    second: sprite-1-1 (2)_0
+      213: 4195482768644628097
+    second: jinbei_0
   - first:
-      213: 7952132190412520130
-    second: sprite-1-1 (2)_1
+      213: -6519212527537232246
+    second: jinbei_1
   - first:
-      213: 4758864291580500433
-    second: sprite-1-1 (2)_2
+      213: 1948998824882641830
+    second: jinbei_2
   - first:
-      213: -289458860000487635
-    second: sprite-1-1 (2)_3
+      213: 7475768665557892677
+    second: jinbei_3
   - first:
-      213: -7666627585662594874
-    second: sprite-1-1 (2)_4
+      213: -58190898360909611
+    second: jinbei_4
   - first:
-      213: 1645404438093838981
-    second: sprite-1-1 (2)_5
+      213: -8241234989091795779
+    second: jinbei_5
   - first:
-      213: 5032800362775460246
-    second: sprite-1-1 (2)_6
+      213: -8449341393590906868
+    second: jinbei_6
   - first:
-      213: 6425734165567617339
-    second: sprite-1-1 (2)_7
+      213: -3892976883036248758
+    second: jinbei_7
   - first:
-      213: 2299753330637200494
-    second: sprite-1-1 (2)_8
+      213: 6278758293659587164
+    second: jinbei_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -75,7 +75,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 65
+  spritePixelsToUnits: 80
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -124,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sprite-1-1 (2)_0
+      name: jinbei_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 41
-        height: 55
+        width: 55
+        height: 76
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -139,20 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c41ac63aceb8cb860800000000000000
-      internalID: 7547060924036456780
+      spriteID: 18ed5567959593a30800000000000000
+      internalID: 4195482768644628097
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-1-1 (2)_1
+      name: jinbei_1
       rect:
         serializedVersion: 2
-        x: 47
+        x: 68
         y: 0
-        width: 37
-        height: 55
+        width: 78
+        height: 82
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2cabc705816ab5e60800000000000000
-      internalID: 7952132190412520130
+      spriteID: a86edd81fba1785a0800000000000000
+      internalID: -6519212527537232246
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-1-1 (2)_2
+      name: jinbei_2
       rect:
         serializedVersion: 2
-        x: 95
+        x: 163
         y: 0
-        width: 37
-        height: 55
+        width: 82
+        height: 82
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,20 +183,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d952f11cd1ea0240800000000000000
-      internalID: 4758864291580500433
+      spriteID: 6ab98c0ea1c3c0b10800000000000000
+      internalID: 1948998824882641830
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-1-1 (2)_3
+      name: jinbei_3
       rect:
         serializedVersion: 2
-        x: 143
+        x: 259
         y: 0
-        width: 37
-        height: 55
+        width: 93
+        height: 86
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d27d49053b2abfbf0800000000000000
-      internalID: -289458860000487635
+      spriteID: 54ef2953ef34fb760800000000000000
+      internalID: 7475768665557892677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-1-1 (2)_4
+      name: jinbei_4
       rect:
         serializedVersion: 2
-        x: 191
+        x: 364
         y: 0
-        width: 37
-        height: 55
+        width: 93
+        height: 66
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +227,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c0de5394daaa9590800000000000000
-      internalID: -7666627585662594874
+      spriteID: 5d0890eafa3413ff0800000000000000
+      internalID: -58190898360909611
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-1-1 (2)_5
+      name: jinbei_5
       rect:
         serializedVersion: 2
-        x: 239
+        x: 466
         y: 0
-        width: 37
-        height: 55
+        width: 93
+        height: 64
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -249,20 +249,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 58a3f646e96a5d610800000000000000
-      internalID: 1645404438093838981
+      spriteID: dbcc9acf07041ad80800000000000000
+      internalID: -8241234989091795779
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-1-1 (2)_6
+      name: jinbei_6
       rect:
         serializedVersion: 2
-        x: 288
+        x: 566
         y: 0
-        width: 37
-        height: 55
+        width: 93
+        height: 58
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 69930b8d34918d540800000000000000
-      internalID: 5032800362775460246
+      spriteID: c009201e4c8edba80800000000000000
+      internalID: -8449341393590906868
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-1-1 (2)_7
+      name: jinbei_7
       rect:
         serializedVersion: 2
-        x: 335
+        x: 670
         y: 0
-        width: 37
-        height: 55
+        width: 93
+        height: 54
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -293,20 +293,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b39bfb7bd2bcc2950800000000000000
-      internalID: 6425734165567617339
+      spriteID: a4521d7962e59f9c0800000000000000
+      internalID: -3892976883036248758
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: sprite-1-1 (2)_8
+      name: jinbei_8
       rect:
         serializedVersion: 2
-        x: 383
+        x: 779
         y: 0
-        width: 31
-        height: 53
+        width: 55
+        height: 72
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -315,8 +315,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e6cd6a7387d5aef10800000000000000
-      internalID: 2299753330637200494
+      spriteID: c521e1cd661a22750800000000000000
+      internalID: 6278758293659587164
       vertices: []
       indices: 
       edges: []
@@ -325,7 +325,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 217cb358e9859df4793a39f6db384966
+    spriteID: f51f8a5646c1c2f4f8c0402f54f64473
     internalID: 0
     vertices: []
     indices: 
@@ -335,15 +335,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sprite-1-1 (2)_0: 7547060924036456780
-      sprite-1-1 (2)_1: 7952132190412520130
-      sprite-1-1 (2)_2: 4758864291580500433
-      sprite-1-1 (2)_3: -289458860000487635
-      sprite-1-1 (2)_4: -7666627585662594874
-      sprite-1-1 (2)_5: 1645404438093838981
-      sprite-1-1 (2)_6: 5032800362775460246
-      sprite-1-1 (2)_7: 6425734165567617339
-      sprite-1-1 (2)_8: 2299753330637200494
+      jinbei_0: 4195482768644628097
+      jinbei_1: -6519212527537232246
+      jinbei_2: 1948998824882641830
+      jinbei_3: 7475768665557892677
+      jinbei_4: -58190898360909611
+      jinbei_5: -8241234989091795779
+      jinbei_6: -8449341393590906868
+      jinbei_7: -3892976883036248758
+      jinbei_8: 6278758293659587164
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

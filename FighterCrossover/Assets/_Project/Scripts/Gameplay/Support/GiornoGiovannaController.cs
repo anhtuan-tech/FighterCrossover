@@ -13,7 +13,7 @@ public class GiornoGiovannaController : MonoBehaviour
 
     [Header("--- Cài Đặt Giorno ---")]
     [SerializeField] private float healPercentage   = 0.15f;  // hồi 15% máu tối đa
-    [SerializeField] private float activeDuration   = 0.75f;  // thời gian diễn hoạt ảnh (9 frames ở 12 FPS)
+    [SerializeField] private float activeDuration   = 1.0f;  // thời gian diễn hoạt ảnh (9 frames ở 12 FPS + bù trễ Animator)
     [SerializeField] private float fadeDuration     = 0.3f;   // thời gian fade out
     [SerializeField] private float spawnOffsetX     = 1.0f;   // khoảng cách xuất hiện trước mặt chủ thể
 

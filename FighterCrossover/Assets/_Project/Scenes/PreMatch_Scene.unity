@@ -633,7 +633,7 @@ PrefabInstance:
       objectReference: {fileID: 7646057345755110279, guid: 95909e6120d3de94bbdde50ae542ee44, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.size
@@ -724,6 +724,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5936356172364887011, guid: e87dc4ae766fa0248a33f6b45a28f6d3, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[3].avatarSprite
+      value: 
+      objectReference: {fileID: 5136973529325693610, guid: c0493c3af6b962345b1364814a36dc32, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterName
       value: Lucy
       objectReference: {fileID: 0}
@@ -747,6 +751,14 @@ PrefabInstance:
       propertyPath: allSupports.Array.data[2].standeeSprite
       value: 
       objectReference: {fileID: 9154932736917132628, guid: 6c8989925283624438c3efda644d7a39, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[3].characterName
+      value: Jinbei
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[3].standeeSprite
+      value: 
+      objectReference: {fileID: -7250379924780520568, guid: 664a18486dd70a945b86519272ab50d9, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].avatarSprite
       value: 
@@ -855,6 +867,10 @@ PrefabInstance:
       propertyPath: allSupports.Array.data[2].characterPrefab
       value: 
       objectReference: {fileID: 7050201930769958427, guid: b538c748a6a60a24cab18fc52eaec84a, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allSupports.Array.data[3].characterPrefab
+      value: 
+      objectReference: {fileID: 419711969202352683, guid: 47da98bd799f1bd49ba97544681959be, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterPrefab
       value: 

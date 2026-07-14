@@ -651,6 +651,15 @@ public class FighterBase : MonoBehaviour, IDamageable
             return;
         }
 
+        // Hỗ trợ Jinbei
+        JinbeiController jinbei = supportGo.GetComponent<JinbeiController>();
+        if (jinbei != null)
+        {
+            jinbei.Setup(this, playerNumber, targetLayer, facingDir);
+            Debug.Log($"[Support] Summoned Jinbei for Player {playerNumber}!");
+            return;
+        }
+
         Debug.LogWarning($"[Support] Prefab '{supportPrefabUrl}' has no recognized Support component!");
     }
 }

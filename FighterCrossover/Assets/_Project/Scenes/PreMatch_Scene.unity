@@ -937,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[0].mapName
@@ -1119,6 +1119,9 @@ PrefabInstance:
       propertyPath: allCharacters.Array.data[8].avatarSprite
       value: 
       objectReference: {fileID: 1930078898415787869, guid: 3aa1aad91a5764445972039cc8543fec, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[9].avatarSprite
+      value: 
       objectReference: {fileID: 9147959691429643531, guid: 73452f56b9de69e4f91978e203842230, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterName
@@ -1187,12 +1190,18 @@ PrefabInstance:
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[8].characterName
       value: Peter Griffin
-      value: Kisame
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[8].standeeSprite
       value: 
       objectReference: {fileID: 1242908733262206585, guid: 30ded8fc87183bf45a6dfbb144b0f76d, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[9].characterName
+      value: Kisame
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[9].standeeSprite
+      value: 
       objectReference: {fileID: -2126108058625235920, guid: 6805618bc1e571b4e99ed6a129cb4de2, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterPrefab
@@ -1246,6 +1255,9 @@ PrefabInstance:
       propertyPath: allCharacters.Array.data[8].characterPrefab
       value: 
       objectReference: {fileID: 4294074734229235403, guid: 2f423bd35c3fad94fb5abb8dd15faf96, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[9].characterPrefab
+      value: 
       objectReference: {fileID: 1500280979166049099, guid: 1570cbc2f92c5c345bc5d7e03ec1a487, type: 3}
     - target: {fileID: 3011940216329422943, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: m_SizeDelta.x

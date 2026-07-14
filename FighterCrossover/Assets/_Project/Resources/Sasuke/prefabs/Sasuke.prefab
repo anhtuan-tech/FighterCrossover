@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 791866841552190526}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000017414575, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.881, y: -0.962, z: -0}
+  m_LocalPosition: {x: -3.574524, y: 1.9310224, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -179,7 +179,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.26}
+  m_Offset: {x: 0.0006297827, y: 0.43857348}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -189,7 +189,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.37, y: 0.52}
+  m_Size: {x: 0.58412766, y: 0.8063438}
   m_EdgeRadius: 0
 --- !u!114 &7345772798020076746
 MonoBehaviour:
@@ -308,6 +308,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 879fb1b6-b4ef-4c36-9307-f16f6ca9b5ef
+    m_ActionName: 'Player/Support[/Keyboard/o]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -329,13 +333,14 @@ MonoBehaviour:
   stats:
     maxHp: 500
     currentHp: 500
-    mana: 250
+    maxMana: 100
+    currentMana: 50
     maxStamina: 100
     stamina: 100
   staminaRegenRate: 20
   staminaRegenDelay: 1
   moveSpeed: 6.5
-  jumpForce: 11
+  jumpForce: 10
   dashForce: 25
   dashDuration: 0.1
   maxJumps: 2
@@ -350,11 +355,13 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 1
+  supportKey: 0
+  supportPrefabUrl: 
   fireballPrefab: {fileID: 7110573353993386170, guid: e55b30399966c9d46b7c42c85ad9a8e6, type: 3}
   chidoriEffectPrefab: {fileID: 6920193976591894605, guid: 99b7dbe392c4cc94389b089fd1923290, type: 3}
   chidoriDuration: 1.5
   fireballSpawnPoint: {fileID: 0}
-  chidoriDashSpeed: 10
+  chidoriDashSpeed: 15
   chidoriDashDuration: 0.3
-  chidoriDragSpeed: 5
+  chidoriDragSpeed: 7
   chidoriDragDuration: 1.4

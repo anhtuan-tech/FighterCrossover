@@ -36,14 +36,39 @@ public class MatchManager : MonoBehaviour
 
     void Start()
     {
+        DisableAllMatchHUD();
+        //IsMatchStarted = false;
+        //IsMatchEnded = false;
+
+        //if (letterK != null) letterK.SetActive(false);
+        //if (letterDot != null) letterDot.SetActive(false);
+        //if (letterO != null) letterO.SetActive(false);
+
+        //StartCoroutine(StartMatchRoutine());
+    }
+
+    /// <summary>
+    /// Hàm này được RoundManager gọi để khởi động đếm ngược cho một Round mới
+    /// </summary>
+    public void StartNewRoundMatch()
+    {
+        this.enabled = true; // Bật lại Update để theo dõi máu
         IsMatchStarted = false;
         IsMatchEnded = false;
 
+        DisableAllMatchHUD();
+        StartCoroutine(StartMatchRoutine());
+    }
+
+    private void DisableAllMatchHUD()
+    {
+        if (letter3 != null) letter3.SetActive(false);
+        if (letter2 != null) letter2.SetActive(false);
+        if (letter1 != null) letter1.SetActive(false);
+        if (letterGo != null) letterGo.SetActive(false);
         if (letterK != null) letterK.SetActive(false);
         if (letterDot != null) letterDot.SetActive(false);
         if (letterO != null) letterO.SetActive(false);
-
-        StartCoroutine(StartMatchRoutine());
     }
 
     /// <summary>
@@ -57,25 +82,25 @@ public class MatchManager : MonoBehaviour
 
     private void Update()
     {
-        // Nếu trận đấu chưa bắt đầu hoặc đã kết thúc rồi thì không check nữa
         if (!IsMatchStarted || IsMatchEnded) return;
 
-        // XỬ LÝ: Nếu player1 hoặc 2 hết máu thì kết thúc trận đấu
+        // 1. Kiểm tra hết máu
         if (player1 != null && player1.stats.currentHp <= 0)
         {
-            Debug.Log("[MATCH] Player 1 hết máu -> Kết thúc trận!");
-            EndMatch();
+            Debug.Log("[MATCH] Player 1 hết máu!");
+            EndMatch(false);
         }
         else if (player2 != null && player2.stats.currentHp <= 0)
         {
-            Debug.Log("[MATCH] Player 2 hết máu -> Kết thúc trận!");
-            EndMatch();
+            Debug.Log("[MATCH] Player 2 hết máu!");
+            EndMatch(false);
         }
 
-        // Nếu hết giờ
+        // 2. Kiểm tra hết thời gian
         if (timerScript != null && timerScript.IsEnd())
         {
-            EndMatch();
+            Debug.Log("[MATCH] Hết giờ!");
+            EndMatch(true); // Gửi tham số true báo hiệu hết giờ
         }
     }
 
@@ -99,29 +124,41 @@ public class MatchManager : MonoBehaviour
 
     public void EndMatch()
     {
-        if (IsMatchEnded) return; // Tránh việc gọi trùng lặp nhiều lần
-        IsMatchEnded = true;
-
-        StartCoroutine(EndMatchRoutine());
-        this.enabled = false; // Tắt Update đi
+        EndMatch(false);
     }
 
-    IEnumerator EndMatchRoutine()
+    public void EndMatch(bool isTimeOut)
+    {
+        if (IsMatchEnded) return;
+        IsMatchEnded = true;
+
+        StartCoroutine(EndMatchRoutine(isTimeOut));
+        this.enabled = false; // Tắt Update
+    }
+
+    IEnumerator EndMatchRoutine(bool isTimeOut)
     {
         yield return new WaitForSeconds(0.1f);
         Time.timeScale = 0.3f;
 
+        // Hiển thị hiệu ứng K.O.
         if (letterK != null) letterK.SetActive(true); yield return new WaitForSecondsRealtime(0.5f);
         if (letterDot != null) letterDot.SetActive(true); yield return new WaitForSecondsRealtime(0.5f);
         if (letterO != null) letterO.SetActive(true);
 
-        yield return new WaitForSecondsRealtime(2.5f);
+        yield return new WaitForSecondsRealtime(2.0f);
         Time.timeScale = 1f;
 
         letterK.SetActive(false);
         letterDot.SetActive(false);
         letterO.SetActive(false);
 
-        Debug.Log("Kết thúc hiệu ứng K.O. -> Chuyển sang xử lý Winner!");
+        Debug.Log("Kết thúc hiệu ứng K.O. -> Báo cáo kết quả lên RoundManager!");
+
+        // Báo kết quả round này về cho RoundManager xử lý điểm số
+        if (RoundManager.Instance != null)
+        {
+            RoundManager.Instance.OnRoundEnd(player1, player2, isTimeOut);
+        }
     }
 }

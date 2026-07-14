@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class LoadCharacter : MonoBehaviour
 {
+    // THÊM: Tạo Instance để RoundManager có thể gọi trực tiếp không sợ bị null
+    public static LoadCharacter Instance { get; private set; }
+
     [Header("--- Spawn Points (P1 / P2 Objects) ---")]
     public GameObject p1;
     public GameObject p2;
@@ -13,7 +16,22 @@ public class LoadCharacter : MonoBehaviour
     [Header("--- Match Manager ---")]
     public MatchManager matchManager;
 
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
     void Start()
+    {
+        // Khi game bắt đầu, thực hiện đợt spawn đầu tiên
+        SpawnStageCharacters();
+    }
+
+    /// <summary>
+    /// Hàm Public được gọi khi bắt đầu Game và khi chuyển Round mới để sinh lại nhân vật
+    /// </summary>
+    public void SpawnStageCharacters()
     {
         FighterBase p1Fighter = null;
         FighterBase p2Fighter = null;
@@ -22,7 +40,7 @@ public class LoadCharacter : MonoBehaviour
         FighterBase spawnedFighter1 = null;
         FighterBase spawnedFighter2 = null;
 
-        // Sinh nhân vật thứ nhất (từ Slot 1 trong SelectionData) tại vị trí p1
+        // Sinh nhân vật thứ nhất tại vị trí p1
         if (p1 != null && !string.IsNullOrEmpty(SelectionData.characterPrefabUrl1))
         {
             spawnedFighter1 = SpawnPlayer(SelectionData.characterPrefabUrl1, p1);
@@ -32,7 +50,7 @@ public class LoadCharacter : MonoBehaviour
             }
         }
 
-        // Sinh nhân vật thứ hai (từ Slot 2 trong SelectionData) tại vị trí p2
+        // Sinh nhân vật thứ hai tại vị trí p2
         if (p2 != null && !string.IsNullOrEmpty(SelectionData.characterPrefabUrl2))
         {
             spawnedFighter2 = SpawnPlayer(SelectionData.characterPrefabUrl2, p2);
@@ -43,10 +61,7 @@ public class LoadCharacter : MonoBehaviour
         }
 
         // --- BƯỚC 2: PHÂN LOẠI THEO PLAYER NUMBER ĐỂ KHỚP UI & MATCH MANAGER ---
-        // Kiểm tra nhân vật thứ 1
         ConfigurePlayerByNumber(spawnedFighter1, ref p1Fighter, ref p2Fighter);
-
-        // Kiểm tra nhân vật thứ 2
         ConfigurePlayerByNumber(spawnedFighter2, ref p1Fighter, ref p2Fighter);
 
         // --- BƯỚC 3: KẾT NỐI SANG MATCH MANAGER ---
@@ -54,17 +69,16 @@ public class LoadCharacter : MonoBehaviour
         {
             matchManager.SetPlayers(p1Fighter, p2Fighter);
         }
+        else if (MatchManager.Instance != null)
+        {
+            MatchManager.Instance.SetPlayers(p1Fighter, p2Fighter);
+        }
     }
 
-    /// <summary>
-    /// Hàm kiểm tra Player Number của nhân vật để gán đúng UI Monitor và lưu vào đúng biến p1/p2 Fighter
-    /// </summary>
     private void ConfigurePlayerByNumber(FighterBase fighter, ref FighterBase p1Fighter, ref FighterBase p2Fighter)
     {
         if (fighter == null) return;
 
-        // Giả sử biến "Player Number" trong ảnh của bạn tên là 'playerNumber' nằm trong FighterBase
-        // Nếu nó nằm ở script khác, hãy thay đổi cách gọi cho đúng (ví dụ: fighter.GetComponent<IchigoSettings>().playerNumber)
         if (fighter.playerNumber == 1)
         {
             p1Fighter = fighter;
@@ -73,7 +87,7 @@ public class LoadCharacter : MonoBehaviour
             if (p1UiMonitor != null)
             {
                 p1UiMonitor.Initialize(p1Fighter);
-                Debug.Log("Player 1 (Cấu hình từ Player Number 1) loaded thành công!");
+                Debug.Log("Player 1 loaded và gắn vào UI thành công!");
             }
         }
         else if (fighter.playerNumber == 2)
@@ -84,7 +98,7 @@ public class LoadCharacter : MonoBehaviour
             if (p2UiMonitor != null)
             {
                 p2UiMonitor.Initialize(p2Fighter);
-                Debug.Log("Player 2 (Cấu hình từ Player Number 2) loaded thành công!");
+                Debug.Log("Player 2 loaded và gắn vào UI thành công!");
             }
         }
         else
@@ -93,9 +107,6 @@ public class LoadCharacter : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Hàm sinh nhân vật cơ bản từ Resources
-    /// </summary>
     private FighterBase SpawnPlayer(string prefabUrl, GameObject spawnPoint)
     {
         GameObject prefab = Resources.Load<GameObject>(prefabUrl);
@@ -116,7 +127,7 @@ public class LoadCharacter : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Không tìm thấy Prefab ở đường dẫn: Resources/{prefabUrl}. Hãy kiểm tra lại cấu trúc thư mục!");
+            Debug.LogError($"Không tìm thấy Prefab ở đường dẫn: Resources/{prefabUrl}");
             return null;
         }
     }

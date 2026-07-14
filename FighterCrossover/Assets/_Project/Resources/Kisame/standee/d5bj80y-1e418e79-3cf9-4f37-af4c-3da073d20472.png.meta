@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 2c6f61d7054137546955c06605a78abe
+guid: 6805618bc1e571b4e99ed6a129cb4de2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 170995007111499237
-    second: Avatar_Kisame_0
+      213: -2126108058625235920
+    second: d5bj80y-1e418e79-3cf9-4f37-af4c-3da073d20472_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Avatar_Kisame_0
+      name: d5bj80y-1e418e79-3cf9-4f37-af4c-3da073d20472_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 154
-        height: 96
+        x: 5
+        y: 4
+        width: 429
+        height: 818
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5ed0f319d0f7f5200800000000000000
-      internalID: 170995007111499237
+      spriteID: 0342c8b3cfb8e72e0800000000000000
+      internalID: -2126108058625235920
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Avatar_Kisame_0: 170995007111499237
+      d5bj80y-1e418e79-3cf9-4f37-af4c-3da073d20472_0: -2126108058625235920
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

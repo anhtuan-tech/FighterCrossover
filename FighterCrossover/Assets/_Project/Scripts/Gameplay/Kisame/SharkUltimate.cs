@@ -80,6 +80,15 @@ public class SharkUltimate : MonoBehaviour
     // Animator hash (tránh boxing string mỗi frame)
     private static readonly int HashCharge = Animator.StringToHash("Charge");
 
+    private void Awake()
+    {
+        var col = GetComponent<BoxCollider2D>();
+        if (col != null)
+        {
+            col.isTrigger = true;
+        }
+    }
+
     // ─────────────────────────────────────────────────────────────────────────────
     //  PUBLIC API
     // ─────────────────────────────────────────────────────────────────────────────

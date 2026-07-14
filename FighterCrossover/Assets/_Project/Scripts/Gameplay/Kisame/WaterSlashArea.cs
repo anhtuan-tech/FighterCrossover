@@ -52,6 +52,20 @@ public class WaterSlashArea : MonoBehaviour
     /// </summary>
     private bool _alreadyHit = false;
 
+    private void Awake()
+    {
+        var col = GetComponent<BoxCollider2D>();
+        if (col != null)
+        {
+            col.isTrigger = true;
+            Debug.Log($"[WaterSlash] Awake: BoxCollider2D.isTrigger set to true. Size={col.size}, Offset={col.offset}");
+        }
+        else
+        {
+            Debug.LogWarning("[WaterSlash] Awake: BoxCollider2D component not found!");
+        }
+    }
+
     // ─────────────────────────────────────────────────────────────────────────────
     //  PUBLIC API
     // ─────────────────────────────────────────────────────────────────────────────
@@ -67,6 +81,8 @@ public class WaterSlashArea : MonoBehaviour
     {
         _owner       = owner;
         _targetLayer = targetLayer;
+        
+        Debug.Log($"[WaterSlash] Setup: Owner={(_owner != null ? _owner.name : "Null")}, TargetLayer={_targetLayer.value}");
 
         // Lật sprite theo hướng Kisame đang nhìn
         if (facingDir < 0f)
@@ -81,6 +97,24 @@ public class WaterSlashArea : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale   = 0f;
 
+        // Chạy kiểm tra va chạm ngay lập tức đề phòng đối thủ đã đứng sẵn ở vị trí đó
+        BoxCollider2D col = GetComponent<BoxCollider2D>();
+        if (col != null)
+        {
+            Vector2 checkCenter = (Vector2)transform.position + col.offset;
+            Vector2 checkSize = new Vector2(col.size.x * Mathf.Abs(transform.localScale.x), col.size.y * transform.localScale.y);
+            Collider2D[] hits = Physics2D.OverlapBoxAll(checkCenter, checkSize, 0f, _targetLayer);
+            Debug.Log($"[WaterSlash] OverlapBox check at {checkCenter} with size {checkSize}. Hits found: {hits.Length}");
+            foreach (var hit in hits)
+            {
+                if (hit != null && hit.gameObject != _owner)
+                {
+                    Debug.Log($"[WaterSlash] OverlapBox hit: {hit.gameObject.name}");
+                    TryApplyDamage(hit);
+                }
+            }
+        }
+
         // Fallback tự hủy (đề phòng Animation Event không được gán clip)
         Destroy(gameObject, fallbackLifetime);
     }
@@ -91,18 +125,43 @@ public class WaterSlashArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"[WaterSlash] OnTriggerEnter2D with {other.gameObject.name}");
+        TryApplyDamage(other);
+    }
+
+    private void TryApplyDamage(Collider2D other)
+    {
+        if (other == null) return;
+        
+        bool isOwner = (_owner != null && other.gameObject == _owner);
+        bool isLayerMatch = (((1 << other.gameObject.layer) & _targetLayer.value) != 0);
+        
+        Debug.Log($"[WaterSlash] TryApplyDamage with {other.gameObject.name}: alreadyHit={_alreadyHit}, isOwner={isOwner}, layerMatch={isLayerMatch} (layer={other.gameObject.layer}, mask={_targetLayer.value})");
+
         // Kiểm tra: chưa hit ai, không phải owner, thuộc đúng layer địch
         if (_alreadyHit) return;
-        if (_owner != null && other.gameObject == _owner) return;
-        if (((1 << other.gameObject.layer) & _targetLayer.value) == 0) return;
-
-        _alreadyHit = true; // Khoá – chỉ hit 1 target (thay bằng HashSet nếu muốn multi-hit)
+        if (isOwner) return;
+        if (!isLayerMatch) return;
 
         IDamageable damageable = other.GetComponent<IDamageable>();
-        damageable?.TakeDamage(damage, transform.position.x, isHeavyAttack: false);
-
-        // Không Destroy ngay để hiệu ứng visual tiếp tục phát.
-        // OnEffectEnd() sẽ Destroy sau khi animation kết thúc.
+        Debug.Log($"[WaterSlash] IDamageable found: {damageable != null}");
+        
+        if (damageable != null)
+        {
+            _alreadyHit = true; // Khóa sát thương CHỈ KHI thực sự gây sát thương lên mục tiêu hợp lệ!
+            
+            damageable.TakeDamage(damage, transform.position.x, isHeavyAttack: false);
+            Debug.Log($"[WaterSlash] Applied {damage} damage to {other.gameObject.name}!");
+            
+            if (_owner != null)
+            {
+                FighterBase fb = _owner.GetComponent<FighterBase>();
+                if (fb != null)
+                {
+                    fb.GainManaOnRangedHit();
+                }
+            }
+        }
     }
 
     // ─────────────────────────────────────────────────────────────────────────────

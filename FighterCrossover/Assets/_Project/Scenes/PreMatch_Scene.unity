@@ -722,7 +722,7 @@ PrefabInstance:
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].standeeSprite
       value: 
-      objectReference: {fileID: 6682878493859446307, guid: 9eb8607a208c7894fb483f588168d7a2, type: 3}
+      objectReference: {fileID: 1843801541628453706, guid: f56388452b669ae45a6da1a4137d32f5, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].avatarSprite
       value: 

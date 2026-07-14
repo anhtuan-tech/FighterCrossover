@@ -51,6 +51,11 @@ public class GrayProjectile : MonoBehaviour
             if (damageable != null)
             {
                 damageable.TakeDamage(damage, transform.position.x, false);
+
+                // Hồi 20% mana cho người bắn khi tầm xa trúng
+                FighterBase ownerFighter = owner != null ? owner.GetComponent<FighterBase>() : null;
+                if (ownerFighter != null) ownerFighter.GainManaOnRangedHit();
+
                 SpawnExplosion();
                 Destroy(gameObject);
             }

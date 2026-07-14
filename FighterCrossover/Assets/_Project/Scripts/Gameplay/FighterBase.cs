@@ -19,7 +19,8 @@ public struct FighterStats
 {
     public float maxHp;
     public float currentHp;
-    public int mana;
+    public float maxMana;
+    public float currentMana;
     public float maxStamina;
     public float stamina;
 
@@ -37,11 +38,10 @@ public class FighterBase : MonoBehaviour, IDamageable
     {
         maxHp = 500f,
         currentHp = 500f,
-        mana = 250,
+        maxMana = 100f,
+        currentMana = 50f,
         maxStamina = 100f,
         stamina = 100f
-
-
     };
     [Header("--- STAMINA REGEN ---")]
     public float staminaRegenRate = 20f; // Lượng stamina hồi mỗi giây
@@ -64,6 +64,11 @@ public class FighterBase : MonoBehaviour, IDamageable
     public Transform attackHitbox;
     public float attackRadius = 0.3f;
     public LayerMask targetLayer;
+
+    [HideInInspector] public KeyCode supportKey = KeyCode.None;
+    [HideInInspector] public string supportPrefabUrl = "";
+    protected float lastSupportTime;
+    private const float SUPPORT_COOLDOWN = 0f;
 
     // --- FSM STATE ---
     public FighterState CurrentState { get; protected set; } = FighterState.Idle;
@@ -116,6 +121,18 @@ public class FighterBase : MonoBehaviour, IDamageable
     #endregion
 
     #region GAME LOOPS
+    protected virtual void Start()
+    {
+        // Load selected support prefab URL
+        supportPrefabUrl = (playerNumber == 1) ? SelectionData.supportPrefabUrl1 : SelectionData.supportPrefabUrl2;
+        
+        // Auto-assign default keys if not overridden by child controllers
+        if (supportKey == KeyCode.None)
+        {
+            supportKey = (playerNumber == 1) ? KeyCode.O : KeyCode.Keypad6;
+        }
+    }
+
     protected virtual void Update()
     {
         if (CurrentState == FighterState.Dead) return;
@@ -225,6 +242,41 @@ public class FighterBase : MonoBehaviour, IDamageable
             }
         }
     }
+
+    // ===================== MANA SYSTEM =====================
+
+    /// <summary>Hồi mana theo % thanh mana tối đa.</summary>
+    protected void GainMana(float percent)
+    {
+        stats.currentMana = Mathf.Min(stats.currentMana + stats.maxMana * percent / 100f, stats.maxMana);
+    }
+
+    /// <summary>Tiêu mana theo % thanh mana tối đa. Trả false nếu không đủ mana.</summary>
+    protected bool SpendMana(float percent)
+    {
+        float cost = stats.maxMana * percent / 100f;
+        if (stats.currentMana < cost - 0.01f)
+        {
+            Debug.Log($"[MANA] Không đủ mana! Cần {percent}%, hiện có {stats.currentMana / stats.maxMana * 100f:F0}%");
+            return false;
+        }
+        stats.currentMana = Mathf.Max(0f, stats.currentMana - cost);
+        return true;
+    }
+
+    /// <summary>Kiểm tra có đủ mana không (không tiêu).</summary>
+    public bool HasMana(float percent)
+    {
+        return stats.currentMana >= stats.maxMana * percent / 100f - 0.01f;
+    }
+
+    /// <summary>Gọi từ subclass khi skill tầm xa trúng: hồi 20% mana.</summary>
+    public void GainManaOnRangedHit()
+    {
+        GainMana(20f);
+        Debug.Log($"[MANA] Ranged hit! +20% mana. Hiện: {stats.currentMana / stats.maxMana * 100f:F0}%");
+    }
+    // ========================================================
     #endregion
 
     #region MOVEMENT & ACTIONS
@@ -356,6 +408,7 @@ public class FighterBase : MonoBehaviour, IDamageable
         if (attackHitbox == null) return;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackHitbox.position, attackRadius, targetLayer);
+        bool didHit = false;
         foreach (var hit in hits)
         {
             IDamageable damageable = hit.GetComponent<IDamageable>();
@@ -364,7 +417,15 @@ public class FighterBase : MonoBehaviour, IDamageable
                 // Đòn thứ 4 sẽ là Heavy Attack (gây knockback)
                 bool isHeavy = (comboStep == 4);
                 damageable.TakeDamage(25f, transform.position.x, isHeavy);
+                didHit = true;
             }
+        }
+
+        // Hồi mana khi đánh trúng: +10% mana mỗi đòn
+        if (didHit)
+        {
+            GainMana(10f);
+            Debug.Log($"[MANA] Đánh trúng! +10% mana. Hiện: {stats.currentMana / stats.maxMana * 100f:F0}%");
         }
     }
 
@@ -509,4 +570,47 @@ public class FighterBase : MonoBehaviour, IDamageable
         }
     }
     #endregion
+
+    // --- SUPPORT SUMMON LOGIC ---
+    public virtual void OnSupport()
+    {
+        TrySummonSupport();
+    }
+
+    private void TrySummonSupport()
+    {
+        if (!CanAct()) return;
+        if (Time.time - lastSupportTime < SUPPORT_COOLDOWN) return;
+
+        // Try to load the prefab from Resources
+        if (string.IsNullOrEmpty(supportPrefabUrl))
+        {
+            // Default fallback to Lucy if not assigned
+            supportPrefabUrl = "Support_Lucy/prefabs/Support_Lucy";
+        }
+
+        GameObject supportPrefab = Resources.Load<GameObject>(supportPrefabUrl);
+        if (supportPrefab == null)
+        {
+            Debug.LogError($"[Support] Could not find support prefab at Resources/{supportPrefabUrl}!");
+            return;
+        }
+
+        if (!SpendMana(100f)) return; // Tiêu 100% mana
+
+        lastSupportTime = Time.time;
+
+        // Instantiate the prefab
+        GameObject supportGo = Instantiate(supportPrefab);
+        supportGo.name = "SupportSummon_" + gameObject.name;
+        
+        SupportLucy lucy = supportGo.GetComponent<SupportLucy>();
+        if (lucy != null)
+        {
+            float facingDir = transform.localScale.x;
+            lucy.Setup(this, playerNumber, targetLayer, facingDir);
+        }
+        
+        Debug.Log($"[Support] Summoned support Lucy prefab for Player {playerNumber}!");
+    }
 }

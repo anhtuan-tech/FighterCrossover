@@ -637,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.size
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[0].mapName
@@ -736,6 +736,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1737465909194255422, guid: 73f42b09600b64e4bb73636b5252fffe, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[3].avatarSprite
+      value: 
+      objectReference: {fileID: -657143771025568216, guid: 2aa610c2a4bfe78458e5343265c9893f, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[4].avatarSprite
+      value: 
+      objectReference: {fileID: 4733519420919138184, guid: a67e2730406675d4fa2ecb4b2fd7523a, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[5].avatarSprite
+      value: 
+      objectReference: {fileID: 2508216385489343714, guid: 62f857183d87ae44fa373950f7b85a07, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterName
       value: Ichigo
       objectReference: {fileID: 0}
@@ -760,6 +772,30 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -5295706209006928118, guid: 88a79e6274a10244eb2dca0925c8fdb0, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[3].characterName
+      value: Pain
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[3].standeeSprite
+      value: 
+      objectReference: {fileID: -1440187295990855512, guid: 54e64a6ba1fc4cf4083ac5156bcb27ad, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[4].characterName
+      value: Sonic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[4].standeeSprite
+      value: 
+      objectReference: {fileID: 1556312303897551070, guid: 5ea7567795865c24586b510ec8053d73, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[5].characterName
+      value: SuperNhon
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[5].standeeSprite
+      value: 
+      objectReference: {fileID: -5369950934850602345, guid: 15a79c74536dd204bb544ffd585685a9, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allSupports.Array.data[0].characterPrefab
       value: 
       objectReference: {fileID: 6913803890692420520, guid: 20190196d1157804caa982172329b372, type: 3}
@@ -775,6 +811,18 @@ PrefabInstance:
       propertyPath: allCharacters.Array.data[2].characterPrefab
       value: 
       objectReference: {fileID: 7496560017347569153, guid: 2d91083c190ef9a4e815842dfde09c13, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[3].characterPrefab
+      value: 
+      objectReference: {fileID: 7496560017347569153, guid: 7de3e806039a6c849a2e5832d5035b58, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[4].characterPrefab
+      value: 
+      objectReference: {fileID: 7496560017347569153, guid: 19f2519f692727047891c5bea1b3ff08, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[5].characterPrefab
+      value: 
+      objectReference: {fileID: 7496560017347569153, guid: 7037764e8568b8143aef491cee177ec6, type: 3}
     - target: {fileID: 3011940216329422943, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 500

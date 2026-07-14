@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class MatchManager : MonoBehaviour
@@ -138,7 +138,16 @@ public class MatchManager : MonoBehaviour
 
     IEnumerator EndMatchRoutine(bool isTimeOut)
     {
-        yield return new WaitForSeconds(0.1f);
+        if (isTimeOut)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        else
+        {
+            // Chờ 1.5 giây ở tốc độ bình thường để nhân vật kịp chạy hoàn chỉnh hoạt ảnh ngã xuống (Die)
+            yield return new WaitForSeconds(1.5f);
+        }
+        
         Time.timeScale = 0.3f;
 
         // Hiển thị hiệu ứng K.O.

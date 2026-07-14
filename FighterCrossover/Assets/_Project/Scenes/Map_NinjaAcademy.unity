@@ -619,7 +619,7 @@ PrefabInstance:
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: manaSlider
       value: 
-      objectReference: {fileID: 784187395}
+      objectReference: {fileID: 784187394}
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: healthSlider
       value: 
@@ -627,7 +627,7 @@ PrefabInstance:
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: staminaSlider
       value: 
-      objectReference: {fileID: 784187394}
+      objectReference: {fileID: 784187395}
     - target: {fileID: 2554158799505995502, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: m_Name
       value: P1
@@ -748,7 +748,7 @@ PrefabInstance:
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: manaSlider
       value: 
-      objectReference: {fileID: 784187392}
+      objectReference: {fileID: 784187391}
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: healthSlider
       value: 
@@ -756,7 +756,7 @@ PrefabInstance:
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: staminaSlider
       value: 
-      objectReference: {fileID: 784187391}
+      objectReference: {fileID: 784187392}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

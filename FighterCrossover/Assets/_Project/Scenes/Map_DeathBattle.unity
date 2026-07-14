@@ -470,7 +470,7 @@ PrefabInstance:
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: manaSlider
       value: 
-      objectReference: {fileID: 1860800418}
+      objectReference: {fileID: 28229710}
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: healthSlider
       value: 
@@ -478,7 +478,7 @@ PrefabInstance:
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: staminaSlider
       value: 
-      objectReference: {fileID: 28229710}
+      objectReference: {fileID: 1860800418}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -641,7 +641,7 @@ PrefabInstance:
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: manaSlider
       value: 
-      objectReference: {fileID: 2029778341}
+      objectReference: {fileID: 1165465052}
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: healthSlider
       value: 
@@ -649,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: staminaSlider
       value: 
-      objectReference: {fileID: 1165465052}
+      objectReference: {fileID: 2029778341}
     - target: {fileID: 2554158799505995502, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: m_Name
       value: P1
@@ -869,11 +869,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 951091451914040656, guid: 09a14c4b7f546d4428537b4465391584, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.9688133
+      value: 1.610306
       objectReference: {fileID: 0}
     - target: {fileID: 951091451914040656, guid: 09a14c4b7f546d4428537b4465391584, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.9688133
+      value: 1.610306
       objectReference: {fileID: 0}
     - target: {fileID: 951091451914040656, guid: 09a14c4b7f546d4428537b4465391584, type: 3}
       propertyPath: m_LocalPosition.x

@@ -205,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 886866854764750026, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.29
+      value: -0.93
       objectReference: {fileID: 0}
     - target: {fileID: 886866854764750026, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -222,7 +222,7 @@ PrefabInstance:
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: manaSlider
       value: 
-      objectReference: {fileID: 1463950643}
+      objectReference: {fileID: 1463950642}
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: healthSlider
       value: 
@@ -230,7 +230,7 @@ PrefabInstance:
     - target: {fileID: 2096602479830229325, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: staminaSlider
       value: 
-      objectReference: {fileID: 1463950642}
+      objectReference: {fileID: 1463950643}
     - target: {fileID: 2554158799505995502, guid: b7103ffc976404340a277004d04358ed, type: 3}
       propertyPath: m_Name
       value: P1
@@ -662,7 +662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2303152802864856407, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.19
+      value: -0.94
       objectReference: {fileID: 0}
     - target: {fileID: 2303152802864856407, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -679,7 +679,7 @@ PrefabInstance:
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: manaSlider
       value: 
-      objectReference: {fileID: 1463950640}
+      objectReference: {fileID: 1463950639}
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: healthSlider
       value: 
@@ -687,7 +687,7 @@ PrefabInstance:
     - target: {fileID: 8697182064994538201, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: staminaSlider
       value: 
-      objectReference: {fileID: 1463950639}
+      objectReference: {fileID: 1463950640}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

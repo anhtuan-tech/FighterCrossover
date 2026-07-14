@@ -13,6 +13,14 @@ public class IchigoController : FighterBase
     [HideInInspector, System.Obsolete] public GameObject ultimateEffectPrefab;
     [HideInInspector, System.Obsolete] public float ultimateDuration = 1.0f;
 
+    [Header("--- ULTIMATE FLASH CUTSCENE ---")]
+    [Tooltip("Ảnh hiển thị khi dùng Ultimate (Nếu để trống sẽ tự động load mặc định)")]
+    public Sprite ultimateFlashSprite;
+    [Tooltip("Kích thước ảnh theo tỉ lệ chiều cao màn hình (0.6 = 60% màn hình)")]
+    public float ultimateFlashSizeFactor = 0.6f;
+    [Tooltip("Vị trí ảnh so với tâm màn hình (pixel), ví dụ (0, 100) = lên trên 100px")]
+    public Vector2 ultimateFlashOffset = new Vector2(0f, 100f);
+
     [Header("--- DYNAMIC BINDINGS ---")]
     private AnimeFighter.UI.KeybindingsData keys;
     private bool initializedBindings = false;
@@ -92,9 +100,10 @@ public class IchigoController : FighterBase
         }
 
         keys = (playerNumber == 1) ? settingsData.player1Keys : settingsData.player2Keys;
+        supportKey = keys.support;
         initializedBindings = true;
         
-        Debug.Log($"[IchigoController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}");
+        Debug.Log($"[IchigoController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}, Support: {supportKey}");
     }
 
     private void SetupPlayerInputBindings()
@@ -179,6 +188,15 @@ public class IchigoController : FighterBase
                 specialAction.ApplyBindingOverride(GetBindingPath(keys.specialMove));
                 specialAction.performed += ctx => OnSpecial();
             }
+
+            // 8. Setup Support Action
+            var supportAction = playerMap.FindAction("Support");
+            if (supportAction != null)
+            {
+                supportAction.RemoveAllBindingOverrides();
+                supportAction.ApplyBindingOverride(GetBindingPath(keys.support));
+                supportAction.performed += ctx => OnSupport();
+            }
         }
 
         // Re-enable all actions
@@ -229,6 +247,11 @@ public class IchigoController : FighterBase
     public void OnSpecial()
     {
         if (!CanAct() || !isGrounded) return;
+        if (!HasMana(50f))
+        {
+            Debug.Log("[MANA] Không đủ mana dùng Ultimate!");
+            return;
+        }
         ExecuteUltimate();
     }
 
@@ -278,10 +301,39 @@ public class IchigoController : FighterBase
 
     private void ExecuteUltimate()
     {
+        SpendMana(50f); // Tiêu 50% mana
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
 
+        // Show cutscene flash before triggering animation
+        StartCoroutine(ExecuteUltimateWithFlash());
+    }
+
+    private IEnumerator ExecuteUltimateWithFlash()
+    {
+        Sprite flashSprite = LoadUltimateAvatar();
+        bool flashDone = false;
+
+        if (flashSprite != null)
+        {
+            // Show flash; onComplete fires AFTER the entire flash animation ends
+            UltimateFlashEffect.Show(this, flashSprite, ultimateFlashSizeFactor, ultimateFlashOffset, new Color(1f, 0.3f, 0f), () =>
+            {
+                flashDone = true;
+            });
+
+            // Lock movement every frame until flash is fully done
+            while (!flashDone)
+            {
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+                ChangeState(FighterState.Attacking);
+                yield return null;
+            }
+        }
+
+        // Flash finished (or no sprite) - now trigger the animation
+        rb.linearVelocity = Vector2.zero;
         if (anim != null)
         {
             anim.SetTrigger("Ultimate");
@@ -292,6 +344,31 @@ public class IchigoController : FighterBase
             AnimationEvent_SpawnUltimate();
             Invoke(nameof(AnimationEvent_EndAttack), 1.0f);
         }
+    }
+
+    private Sprite LoadUltimateAvatar()
+    {
+        if (ultimateFlashSprite != null) return ultimateFlashSprite;
+
+        string avatarPath = "Assets/_Project/Resources/Ichigo/avatar/until_ichigo.jpg";
+#if UNITY_EDITOR
+        var assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(avatarPath);
+        foreach (var a in assets)
+        {
+            if (a is Sprite s) return s;
+        }
+        // Fallback: try loading as Texture2D and convert
+        Texture2D tex = UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>(avatarPath);
+        if (tex != null)
+        {
+            return Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+        }
+#else
+        // Runtime: load from Resources folder
+        Sprite s = Resources.Load<Sprite>("Ichigo/avatar/until_ichigo");
+        return s;
+#endif
+        return null;
     }
 
     // --- OVERRIDE DASH ROUTINE (FLASH STEP) ---

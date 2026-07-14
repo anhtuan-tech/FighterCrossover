@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class FighterStatMonitor : MonoBehaviour
@@ -23,7 +23,7 @@ public class FighterStatMonitor : MonoBehaviour
 
         // Thiết lập giá trị tối đa (Max Value) cho các Slider dựa trên chỉ số gốc của nhân vật
         if (healthSlider != null) healthSlider.maxValue = targetFighter.stats.maxHp;
-        if (manaSlider != null) manaSlider.maxValue = targetFighter.stats.mana;
+        if (manaSlider != null) manaSlider.maxValue = targetFighter.stats.maxMana;
         if (staminaSlider != null) staminaSlider.maxValue = targetFighter.stats.maxStamina;
 
         isInitialized = true;
@@ -36,7 +36,7 @@ public class FighterStatMonitor : MonoBehaviour
 
         // Tự động cập nhật thanh UI theo chỉ số thời gian thực của nhân vật
         if (healthSlider != null) healthSlider.value = targetFighter.stats.currentHp;
-        if (manaSlider != null) manaSlider.value = targetFighter.stats.mana;
+        if (manaSlider != null) manaSlider.value = targetFighter.stats.currentMana;
         if (staminaSlider != null) staminaSlider.value = targetFighter.stats.stamina;
     }
 }

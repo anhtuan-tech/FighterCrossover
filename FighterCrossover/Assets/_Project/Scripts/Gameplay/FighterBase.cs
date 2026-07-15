@@ -300,7 +300,13 @@ public class FighterBase : MonoBehaviour, IDamageable
     /// <summary>Hồi mana theo % thanh mana tối đa.</summary>
     protected void GainMana(float percent)
     {
-        stats.currentMana = Mathf.Min(stats.currentMana + stats.maxMana * percent / 100f, stats.maxMana);
+        float actualPercent = percent;
+        FighterBotAI botAI = GetComponent<FighterBotAI>();
+        if (botAI != null && botAI.Difficulty == 2)
+        {
+            actualPercent *= 2f;
+        }
+        stats.currentMana = Mathf.Min(stats.currentMana + stats.maxMana * actualPercent / 100f, stats.maxMana);
     }
 
     /// <summary>Tiêu mana theo % thanh mana tối đa. Trả false nếu không đủ mana.</summary>

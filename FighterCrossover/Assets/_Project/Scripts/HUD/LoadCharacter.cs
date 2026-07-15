@@ -57,6 +57,11 @@ public class LoadCharacter : MonoBehaviour
             if (spawnedFighter2 != null)
             {
                 spawnedFighter2.InitializePlayer(2);
+                if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
+                {
+                    FighterBotAI botAI = spawnedFighter2.gameObject.AddComponent<FighterBotAI>();
+                    botAI.Initialize(spawnedFighter2);
+                }
             }
         }
 

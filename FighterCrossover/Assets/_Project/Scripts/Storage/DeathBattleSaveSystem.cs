@@ -6,37 +6,70 @@ using System.IO;
 public class DeathBattleSaveData
 {
     public string playerCharacterUrl;
+    public string playerCharacterImageUrl; // Thêm
     public List<string> enemyCharacterUrls = new List<string>();
+    public List<string> enemyCharacterImageUrls = new List<string>(); // Thêm
     public List<string> mapNames = new List<string>();
-    public int currentMatchIndex = 0; // Đang đánh tới trận thứ mấy (0 -> 4)
+    public int currentMatchIndex = 0; // Trận hiện tại (0-4 tương ứng vòng 1-5)
+    public bool isComplete = false;   // Đã hoàn thành cả 5 vòng chưa
 }
 
 public static class DeathBattleSaveSystem
 {
-    private static string saveFilePath = Application.persistentDataPath + "/DeathBattleSave.json";
+    private static string SaveFilePath => Path.Combine(Application.persistentDataPath, "DeathBattleSave.json");
 
+    // Lưu reference hiện tại để emergency-save khi quit
+    public static DeathBattleSaveData Current { get; set; }
+
+    /// <summary>Ghi dữ liệu ra file JSON (an toàn với try/catch)</summary>
     public static void SaveProgress(DeathBattleSaveData data)
     {
-        string json = JsonUtility.ToJson(data, true);
-        File.WriteAllText(saveFilePath, json);
-        Debug.Log("Đã lưu tiến trình Death Battle tại: " + saveFilePath);
+        if (data == null) return;
+        Current = data;
+        try
+        {
+            string json = JsonUtility.ToJson(data, true);
+            File.WriteAllText(SaveFilePath, json);
+            Debug.Log("[DeathBattle] Đã lưu tiến trình: " + SaveFilePath);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("[DeathBattle] Lỗi khi lưu: " + e.Message);
+        }
     }
 
+    /// <summary>Đọc file save. Trả về null nếu chưa có hoặc file bị lỗi.</summary>
     public static DeathBattleSaveData LoadProgress()
     {
-        if (File.Exists(saveFilePath))
+        try
         {
-            string json = File.ReadAllText(saveFilePath);
-            return JsonUtility.FromJson<DeathBattleSaveData>(json);
+            if (File.Exists(SaveFilePath))
+            {
+                string json = File.ReadAllText(SaveFilePath);
+                var data = JsonUtility.FromJson<DeathBattleSaveData>(json);
+                Current = data;
+                return data;
+            }
         }
-        return null; // Trả về null nếu chưa có file save
+        catch (System.Exception e)
+        {
+            Debug.LogError("[DeathBattle] Lỗi khi đọc save: " + e.Message);
+        }
+        return null;
     }
 
+    /// <summary>Xoá file save (dùng sau khi hoàn thành hoặc thua)</summary>
     public static void DeleteProgress()
     {
-        if (File.Exists(saveFilePath))
+        try
         {
-            File.Delete(saveFilePath);
+            if (File.Exists(SaveFilePath))
+                File.Delete(SaveFilePath);
         }
+        catch (System.Exception e)
+        {
+            Debug.LogError("[DeathBattle] Lỗi khi xoá save: " + e.Message);
+        }
+        Current = null;
     }
 }

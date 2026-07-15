@@ -20,6 +20,42 @@ public class LoadCharacter : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        // Re-hydrate từ file save nếu SelectionData bị mất khi chuyển scene (DeathBattle mode)
+        TryRehydrateFromSave();
+    }
+
+    /// <summary>
+    /// Khi chuyển map trong Death Battle, static SelectionData có thể bị reset.
+    /// Hàm này khôi phục lại từ file JSON nếu cần.
+    /// </summary>
+    private void TryRehydrateFromSave()
+    {
+        if (SelectionData.CurrentGameMode != GameMode.DeathBattle) return;
+        if (!string.IsNullOrEmpty(SelectionData.characterPrefabUrl1)) return; // đã có dữ liệu
+
+        var saveData = DeathBattleSaveSystem.LoadProgress();
+        if (saveData == null)
+        {
+            Debug.LogWarning("[LoadCharacter] DeathBattle mode nhưng không có file save để khôi phục!");
+            return;
+        }
+
+        SelectionData.DeathBattleData = saveData;
+        SelectionData.characterPrefabUrl1 = saveData.playerCharacterUrl;
+        SelectionData.characterImageUrl1 = saveData.playerCharacterImageUrl; // Re-hydrate P1 Avatar
+
+        int idx = saveData.currentMatchIndex;
+        if (idx < saveData.enemyCharacterUrls.Count)
+        {
+            SelectionData.characterPrefabUrl2 = saveData.enemyCharacterUrls[idx];
+        }
+        if (saveData.enemyCharacterImageUrls != null && idx < saveData.enemyCharacterImageUrls.Count)
+        {
+            SelectionData.characterImageUrl2 = saveData.enemyCharacterImageUrls[idx]; // Re-hydrate Bot Avatar
+        }
+
+        Debug.Log($"[LoadCharacter] Re-hydrated DeathBattle save: Match {idx + 1}/5");
     }
 
     void Start()
@@ -27,6 +63,7 @@ public class LoadCharacter : MonoBehaviour
         // Khi game bắt đầu, thực hiện đợt spawn đầu tiên
         SpawnStageCharacters();
     }
+
 
     /// <summary>
     /// Hàm Public được gọi khi bắt đầu Game và khi chuyển Round mới để sinh lại nhân vật
@@ -114,7 +151,24 @@ public class LoadCharacter : MonoBehaviour
 
     private FighterBase SpawnPlayer(string prefabUrl, GameObject spawnPoint)
     {
+        // Thử load theo đường dẫn đầy đủ trước
         GameObject prefab = Resources.Load<GameObject>(prefabUrl);
+
+        // Fallback: nếu path không tìm thấy, tìm bằng tên file (hỗ trợ cả build & editor)
+        if (prefab == null)
+        {
+            string nameOnly = System.IO.Path.GetFileName(prefabUrl);
+            GameObject[] allPrefabs = Resources.LoadAll<GameObject>("");
+            foreach (var p in allPrefabs)
+            {
+                if (p.name == nameOnly && p.GetComponent<FighterBase>() != null)
+                {
+                    prefab = p;
+                    Debug.LogWarning($"[LoadCharacter] Dùng fallback tìm prefab '{nameOnly}' (path gốc '{prefabUrl}' thất bại).");
+                    break;
+                }
+            }
+        }
 
         if (prefab != null)
         {
@@ -122,18 +176,16 @@ public class LoadCharacter : MonoBehaviour
             newCharacter.transform.SetParent(spawnPoint.transform);
 
             FighterBase fighterScript = newCharacter.GetComponent<FighterBase>();
-
             if (fighterScript == null)
-            {
                 Debug.LogError($"Prefab tại '{prefabUrl}' thiếu script FighterBase!");
-            }
 
             return fighterScript;
         }
         else
         {
-            Debug.LogError($"Không tìm thấy Prefab ở đường dẫn: Resources/{prefabUrl}");
+            Debug.LogError($"[LoadCharacter] Không tìm thấy Prefab nào tại Resources/{prefabUrl} và không có fallback phù hợp.");
             return null;
         }
     }
+
 }

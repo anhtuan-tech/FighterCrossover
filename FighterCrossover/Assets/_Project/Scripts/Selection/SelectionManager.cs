@@ -465,21 +465,33 @@ public class CharacterSelectionManager : MonoBehaviour
     string GetResourcesPath(Object obj)
     {
         if (obj == null) return string.Empty;
-#if UNITY_EDITOR
-        string fullPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
-        if (string.IsNullOrEmpty(fullPath)) return obj.name;
 
-        int resourcesIndex = fullPath.IndexOf("Resources/");
-        if (resourcesIndex != -1)
+#if UNITY_EDITOR
+        // In Editor: derive exact path from AssetDatabase
+        string fullPath = UnityEditor.AssetDatabase.GetAssetPath(obj);
+        if (!string.IsNullOrEmpty(fullPath))
         {
-            string cutPath = fullPath.Substring(resourcesIndex + 10);
-            int dotIndex = cutPath.LastIndexOf('.');
-            if (dotIndex != -1) { cutPath = cutPath.Substring(0, dotIndex); }
-            return cutPath;
+            int resourcesIndex = fullPath.IndexOf("Resources/");
+            if (resourcesIndex != -1)
+            {
+                string cutPath = fullPath.Substring(resourcesIndex + 10); // skip "Resources/"
+                int dotIndex = cutPath.LastIndexOf('.');
+                if (dotIndex != -1) cutPath = cutPath.Substring(0, dotIndex);
+                return cutPath;
+            }
         }
 #endif
+        // Runtime fallback: Unity Resources.Load requires the path relative to Resources/.
+        // Since all character prefabs live at  Resources/<CharacterFolder>/<PrefabName>
+        // and all character sprites at          Resources/<CharacterFolder>/<SpriteName>
+        // we cannot infer the folder at runtime without extra data.
+        // SOLUTION: use obj.name only — callers (LoadCharacter) must use
+        //   Resources.Load<T>(path) where path may be just the filename
+        //   IF all prefabs are directly under Resources/ (flat).
+        // For nested paths the Editor path is authoritative and saved to JSON on first run.
         return obj.name;
     }
+
 
     void LockAndProceed()
     {
@@ -492,12 +504,14 @@ public class CharacterSelectionManager : MonoBehaviour
                 SelectionData.characterImageUrl1 = GetResourcesPath(allCharacters[p1Index].avatarSprite);
                 SelectionData.characterPrefabUrl1 = GetResourcesPath(allCharacters[p1Index].characterPrefab);
                 SelectionData.DeathBattleData.playerCharacterUrl = SelectionData.characterPrefabUrl1;
+                SelectionData.DeathBattleData.playerCharacterImageUrl = SelectionData.characterImageUrl1; // Lưu avatar P1
 
                 currentPhase = SelectionPhase.DeathBattle_BotSelection;
             }
             else if (currentPhase == SelectionPhase.DeathBattle_BotSelection)
             {
                 string botPrefabPath = GetResourcesPath(allCharacters[p1Index].characterPrefab);
+                string botImageUrl = GetResourcesPath(allCharacters[p1Index].avatarSprite); // Lấy avatar bot
 
                 // Fallback chống lỗi: Lỡ timer = 0 ép lock ngay ô trùng lặp, game tự dò 1 ô chưa chọn
                 if (SelectionData.DeathBattleData.enemyCharacterUrls.Contains(botPrefabPath))
@@ -509,12 +523,14 @@ public class CharacterSelectionManager : MonoBehaviour
                         {
                             p1Index = i;
                             botPrefabPath = fallbackPath;
+                            botImageUrl = GetResourcesPath(allCharacters[i].avatarSprite);
                             break;
                         }
                     }
                 }
 
                 SelectionData.DeathBattleData.enemyCharacterUrls.Add(botPrefabPath);
+                SelectionData.DeathBattleData.enemyCharacterImageUrls.Add(botImageUrl); // Lưu avatar bot
 
                 if (currentBotSelectionIndex < deathBattleBotPreviews.Length)
                 {
@@ -583,7 +599,8 @@ public class CharacterSelectionManager : MonoBehaviour
         SelectionData.DeathBattleData.currentMatchIndex = 0;
         DeathBattleSaveSystem.SaveProgress(SelectionData.DeathBattleData);
         SelectionData.characterPrefabUrl2 = SelectionData.DeathBattleData.enemyCharacterUrls[0];
-
+        SelectionData.characterImageUrl2 = SelectionData.DeathBattleData.enemyCharacterImageUrls[0];
+ 
         SceneManager.LoadScene(SelectionData.DeathBattleData.mapNames[0]);
     }
 }

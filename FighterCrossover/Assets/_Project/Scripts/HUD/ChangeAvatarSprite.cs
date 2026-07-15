@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI; // Bắt buộc phải có để làm việc với UI Canvas
 
 public class ChangeAvatarSprite : MonoBehaviour
@@ -18,14 +18,12 @@ public class ChangeAvatarSprite : MonoBehaviour
     /// <param name="spritePath">Đường dẫn ảnh (Ví dụ: "Avatars/Goku_Icon")</param>
     public void ExecuteSpriteChange()
     {
-        // 1. Kiểm tra xem bạn đã kéo GameObject mục tiêu vào chưa
         if (player1 == null || player2 == null)
         {
             Debug.LogWarning("Vui lòng kéo đầy đủ Target GameObject vào bảng Inspector!");
             return;
         }
 
-        // 3. Lấy thành phần Image (UI) từ GameObject đó ra để xử lý ảnh
         Image uiImage1 = player1.GetComponent<Image>();
         Image uiImage2 = player2.GetComponent<Image>();
 
@@ -35,20 +33,50 @@ public class ChangeAvatarSprite : MonoBehaviour
             return;
         }
 
-        // 4. Load Sprite từ thư mục Resources dựa trên đường dẫn string
-        Sprite loadedSprite1 = Resources.Load<Sprite>(SelectionData.characterImageUrl1);
-        Sprite loadedSprite2 = Resources.Load<Sprite>(SelectionData.characterImageUrl2);
+        Sprite loadedSprite1 = LoadSpriteWithFallback(SelectionData.characterImageUrl1);
+        Sprite loadedSprite2 = LoadSpriteWithFallback(SelectionData.characterImageUrl2);
 
-        // 5. Nếu tìm thấy ảnh thì tiến hành gán vào UI Image
-        if (loadedSprite1 != null && loadedSprite2 != null)
+        if (loadedSprite1 != null)
         {
             uiImage1.sprite = loadedSprite1;
-            uiImage2.sprite = loadedSprite2;
-            Debug.Log($"Đã đổi ảnh UI của GameObject thành công!");
+            uiImage1.enabled = true;
         }
-        else
+        else if (!string.IsNullOrEmpty(SelectionData.characterImageUrl1))
         {
-            Debug.LogError($"Không tìm thấy file Sprite nào tại đường dẫn Resources");
+            Debug.LogWarning($"[ChangeAvatarSprite] Không tìm thấy file Sprite P1 tại: {SelectionData.characterImageUrl1}");
+        }
+
+        if (loadedSprite2 != null)
+        {
+            uiImage2.sprite = loadedSprite2;
+            uiImage2.enabled = true;
+        }
+        else if (!string.IsNullOrEmpty(SelectionData.characterImageUrl2))
+        {
+            Debug.LogWarning($"[ChangeAvatarSprite] Không tìm thấy file Sprite P2 tại: {SelectionData.characterImageUrl2}");
         }
     }
+
+    private Sprite LoadSpriteWithFallback(string path)
+    {
+        if (string.IsNullOrEmpty(path)) return null;
+
+        // 1. Thử load trực tiếp
+        Sprite sprite = Resources.Load<Sprite>(path);
+        if (sprite != null) return sprite;
+
+        // 2. Thử load bằng tên file (bỏ folder)
+        string nameOnly = System.IO.Path.GetFileName(path);
+        Sprite[] allSprites = Resources.LoadAll<Sprite>("");
+        foreach (var s in allSprites)
+        {
+            if (s.name == nameOnly)
+            {
+                Debug.Log($"[ChangeAvatarSprite] Dùng fallback tìm sprite '{nameOnly}' thành công.");
+                return s;
+            }
+        }
+        return null;
+    }
+
 }

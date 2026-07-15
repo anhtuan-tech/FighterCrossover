@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebaed8962637c34bac60dba2261b9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SasukeChidoriEffect
-  damage: 100
+  damage: 50
   damageCooldown: 0.25
 --- !u!95 &548823891777538131
 Animator:

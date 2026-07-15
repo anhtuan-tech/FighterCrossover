@@ -12,6 +12,9 @@ public class ControllerKonan : FighterBase
     [Tooltip("Vị trí spawn shuriken. Nếu để trống sẽ dùng offset mặc định.")]
     public Transform shurikenSpawnPoint;
 
+    [Tooltip("Vị trí spawn Ultimate (Paper Blizzard). Nếu để trống sẽ dùng vị trí nhân vật.")]
+    public Transform ultimateSpawnPoint;
+
     [Header("--- INSPECTOR ADJUSTMENTS ---")]
     [Tooltip("Tốc độ bay của shuriken giấy.")]
     public float shurikenSpeed = 8f;
@@ -433,11 +436,14 @@ public class ControllerKonan : FighterBase
     public void AnimationEvent_SpawnProjectile()
     {
         if (paperShurikenPrefab == null) return;
+        if (shurikenSpawnPoint == null) 
+        {
+            Debug.LogWarning("[Konan] shurikenSpawnPoint chưa được gán trên Inspector!");
+            return;
+        }
 
         float dir = transform.localScale.x;
-        Vector2 spawnPos = (shurikenSpawnPoint != null)
-            ? (Vector2)shurikenSpawnPoint.position
-            : (Vector2)transform.position + new Vector2(dir * 1.0f, 0.5f);
+        Vector2 spawnPos = shurikenSpawnPoint.position;
 
         GameObject projObj = Instantiate(paperShurikenPrefab, spawnPos, Quaternion.identity);
         KonanPaperShuriken proj = projObj.GetComponent<KonanPaperShuriken>();
@@ -451,8 +457,14 @@ public class ControllerKonan : FighterBase
     public void AnimationEvent_SpawnUltimate()
     {
         if (paperBlizzardPrefab == null) return;
+        if (ultimateSpawnPoint == null)
+        {
+            Debug.LogWarning("[Konan] ultimateSpawnPoint chưa được gán trên Inspector!");
+            return;
+        }
 
-        Vector2 spawnPos = transform.position;
+        Vector2 spawnPos = ultimateSpawnPoint.position;
+            
         GameObject ultObj = Instantiate(paperBlizzardPrefab, spawnPos, Quaternion.identity);
 
         KonanPaperBlizzard effect = ultObj.GetComponent<KonanPaperBlizzard>();

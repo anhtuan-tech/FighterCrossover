@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &713940343029371441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3945932046691885029}
+  m_Layer: 0
+  m_Name: AttackHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3945932046691885029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713940343029371441}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.045, y: 0.4333377, z: 0.0000150927835}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6887564340182165937}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &791866841552190526
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,11 +62,12 @@ Transform:
   m_GameObject: {fileID: 791866841552190526}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000017414575, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.574524, y: 1.9310224, z: -0}
+  m_LocalPosition: {x: -3.1475842, y: 1.4525043, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3945932046691885029}
+  - {fileID: 8340074515346491359}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.002, y: 0, z: 0}
 --- !u!212 &7502054504589846242
@@ -361,7 +393,7 @@ MonoBehaviour:
   fireballPrefab: {fileID: 7110573353993386170, guid: e55b30399966c9d46b7c42c85ad9a8e6, type: 3}
   chidoriEffectPrefab: {fileID: 6920193976591894605, guid: 99b7dbe392c4cc94389b089fd1923290, type: 3}
   chidoriDuration: 1.5
-  fireballSpawnPoint: {fileID: 0}
+  fireballSpawnPoint: {fileID: 8340074515346491359}
   fireballSpeed: 7
   fireballDamage: 30
   attackSpeedMultiplier: 1
@@ -373,65 +405,34 @@ MonoBehaviour:
   chidoriDashDuration: 0.3
   chidoriDragSpeed: 7
   chidoriDragDuration: 1.4
---- !u!1001 &4868654239437917302
-PrefabInstance:
+--- !u!1 &2789078086011750043
+GameObject:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 6887564340182165937}
-    m_Modifications:
-    - target: {fileID: 5366183858862792263, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_Name
-      value: AttackHitbox
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.045
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.4333377
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.0000150927835
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
---- !u!4 &3945932046691885029 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8453867238297162643, guid: 02479254390485f4f9114a52c0b5720c, type: 3}
-  m_PrefabInstance: {fileID: 4868654239437917302}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8340074515346491359}
+  m_Layer: 0
+  m_Name: FireballPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8340074515346491359
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2789078086011750043}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.00003482915, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.6243186, y: 0.554, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6887564340182165937}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

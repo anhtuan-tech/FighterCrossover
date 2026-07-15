@@ -616,10 +616,17 @@ public class PeterGriffinController : FighterBase
             }
         }
 
-        stats.currentHp -= damage;
-        if (stats.currentHp <= 0)
+        if (SelectionData.CurrentGameMode == GameMode.Training)
         {
-            Die();
+            stats.currentHp = stats.maxHp;
+        }
+        else
+        {
+            stats.currentHp -= damage;
+            if (stats.currentHp <= 0)
+            {
+                Die();
+            }
         }
     }
 

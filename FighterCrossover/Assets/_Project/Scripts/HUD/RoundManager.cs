@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement; // THÊM: Thư viện quản lý chuyển Scene
@@ -53,17 +53,20 @@ public class RoundManager : MonoBehaviour
     {
         DisableAllRoundObjects();
 
-        // 1. Tìm Object tương ứng với Round hiện tại để bật lên
-        GameObject activeRoundUI = null;
-        if (CurrentRound == 1) activeRoundUI = round1Object;
-        else if (CurrentRound == 2) activeRoundUI = round2Object;
-        else if (CurrentRound == 3) activeRoundUI = round3Object;
-
-        if (activeRoundUI != null)
+        if (SelectionData.CurrentGameMode != GameMode.Training)
         {
-            activeRoundUI.SetActive(true);
-            yield return new WaitForSeconds(1.5f); // Hiển thị chữ Round trong 1.5 giây
-            activeRoundUI.SetActive(false);
+            // 1. Tìm Object tương ứng với Round hiện tại để bật lên
+            GameObject activeRoundUI = null;
+            if (CurrentRound == 1) activeRoundUI = round1Object;
+            else if (CurrentRound == 2) activeRoundUI = round2Object;
+            else if (CurrentRound == 3) activeRoundUI = round3Object;
+
+            if (activeRoundUI != null)
+            {
+                activeRoundUI.SetActive(true);
+                yield return new WaitForSeconds(1.5f); // Hiển thị chữ Round trong 1.5 giây
+                activeRoundUI.SetActive(false);
+            }
         }
 
         // 2. Gọi MatchManager bắt đầu đếm 3, 2, 1, GO và bắt đầu tính thời gian

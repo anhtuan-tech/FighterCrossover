@@ -138,10 +138,53 @@ public class FighterBase : MonoBehaviour, IDamageable
     {
         if (CurrentState == FighterState.Dead) return;
 
+        if (SelectionData.CurrentGameMode == GameMode.Training)
+        {
+            stats.currentHp = stats.maxHp;
+            stats.stamina = stats.maxStamina;
+            stats.currentMana = stats.maxMana;
+        }
+
         CheckGrounded();
         HandleStateLogic();
         HandleStaminaRegen();
         UpdateAnimations();
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (playerInput != null && playerInput.actions != null)
+        {
+            foreach (var action in playerInput.actions)
+            {
+                ClearActionCallbacks(action);
+            }
+        }
+    }
+
+    private void ClearActionCallbacks(UnityEngine.InputSystem.InputAction action)
+    {
+        try
+        {
+            var type = typeof(UnityEngine.InputSystem.InputAction);
+            var bindingFlags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance;
+            
+            string[] callbackFields = { "m_OnStarted", "m_OnPerformed", "m_OnCanceled" };
+            foreach (var fieldName in callbackFields)
+            {
+                var field = type.GetField(fieldName, bindingFlags);
+                if (field != null)
+                {
+                    var fieldType = field.FieldType;
+                    var emptyValue = System.Activator.CreateInstance(fieldType);
+                    field.SetValue(action, emptyValue);
+                }
+            }
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning($"[FighterBase] Failed to clear callbacks for action {action.name}: {e.Message}");
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -263,6 +306,10 @@ public class FighterBase : MonoBehaviour, IDamageable
     /// <summary>Tiêu mana theo % thanh mana tối đa. Trả false nếu không đủ mana.</summary>
     protected bool SpendMana(float percent)
     {
+        if (SelectionData.CurrentGameMode == GameMode.Training)
+        {
+            return true;
+        }
         float cost = stats.maxMana * percent / 100f;
         if (stats.currentMana < cost - 0.01f)
         {
@@ -276,6 +323,10 @@ public class FighterBase : MonoBehaviour, IDamageable
     /// <summary>Kiểm tra có đủ mana không (không tiêu).</summary>
     public bool HasMana(float percent)
     {
+        if (SelectionData.CurrentGameMode == GameMode.Training)
+        {
+            return true;
+        }
         return stats.currentMana >= stats.maxMana * percent / 100f - 0.01f;
     }
 
@@ -367,7 +418,8 @@ public class FighterBase : MonoBehaviour, IDamageable
 
     protected virtual void TriggerDash()
     {
-        if (!CanAct() || !isGrounded || stats.stamina < 20) return;
+        if (!CanAct() || !isGrounded) return;
+        if (SelectionData.CurrentGameMode != GameMode.Training && stats.stamina < 20) return;
         StartCoroutine(DashRoutine());
     }
 
@@ -375,8 +427,11 @@ public class FighterBase : MonoBehaviour, IDamageable
     protected virtual IEnumerator DashRoutine()
     {
         ChangeState(FighterState.Dashing);
-        stats.stamina -= 20;
-        lastStaminaUseTime = Time.time; // Ghi nhận thời gian vừa xài stamina
+        if (SelectionData.CurrentGameMode != GameMode.Training)
+        {
+            stats.stamina -= 20;
+            lastStaminaUseTime = Time.time; // Ghi nhận thời gian vừa xài stamina
+        }
 
         float dashDir = transform.localScale.x;
         rb.gravityScale = 0f;
@@ -477,10 +532,17 @@ public class FighterBase : MonoBehaviour, IDamageable
             }
         }
 
-        stats.currentHp -= damage;
-        if (stats.currentHp <= 0)
+        if (SelectionData.CurrentGameMode == GameMode.Training)
         {
-            Die();
+            stats.currentHp = stats.maxHp;
+        }
+        else
+        {
+            stats.currentHp -= damage;
+            if (stats.currentHp <= 0)
+            {
+                Die();
+            }
         }
     }
 

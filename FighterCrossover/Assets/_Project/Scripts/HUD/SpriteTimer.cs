@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using AnimeFighter.UI;
@@ -24,9 +24,16 @@ public class SpriteTimer : MonoBehaviour
     public float timeRemaining = 99f;
     private bool isTimerRunning = false;
     private bool gameEnd = false;
+    private float matchTime;
 
     void Awake()
     {
+        if (SelectionData.CurrentGameMode == GameMode.Training)
+        {
+            isInfinite = true;
+            return;
+        }
+
         // ==========================================================
         // TỰ ĐỌC FILE JSON VÀ SET UP THỜI GIAN TRẬN ĐẤU TẠI ĐÂY
         // ==========================================================
@@ -51,6 +58,7 @@ public class SpriteTimer : MonoBehaviour
                     {
                         isInfinite = false;
                         timeRemaining = data.matchTime; // Gán 60 hoặc 90 giây vào biến chạy của đồng hồ
+                        matchTime = data.matchTime;
                     }
                 }
             }
@@ -115,5 +123,23 @@ public class SpriteTimer : MonoBehaviour
     public bool IsEnd()
     {
         return gameEnd;
+    }
+    public void StartTimerWithTime()
+    {
+        
+        if (isInfinite)
+        {
+            if (infinityImage != null) infinityImage.gameObject.SetActive(true);
+            sec1Image.gameObject.SetActive(false);
+            sec2Image.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (infinityImage != null) infinityImage.gameObject.SetActive(false);
+            timeRemaining = matchTime;
+            UpdateSecondsUI(timeRemaining);
+        }
+
+        RunTimer();
     }
 }

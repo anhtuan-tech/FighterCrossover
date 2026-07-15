@@ -707,13 +707,18 @@ public class CharacterSelectionManager : MonoBehaviour
 
     void GenerateRandomMapsAndStartDeathBattle()
     {
-        List<MapInfoData> tempMaps = new List<MapInfoData>(allMaps);
+        List<MapInfoData> pool = new List<MapInfoData>();
         for (int i = 0; i < 5; i++)
         {
-            if (tempMaps.Count == 0) break;
-            int ranIndex = Random.Range(0, tempMaps.Count);
-            SelectionData.DeathBattleData.mapNames.Add(tempMaps[ranIndex].mapName);
-            tempMaps.RemoveAt(ranIndex);
+            if (pool.Count == 0)
+            {
+                pool.AddRange(allMaps);
+            }
+            if (pool.Count == 0) break;
+
+            int ranIndex = Random.Range(0, pool.Count);
+            SelectionData.DeathBattleData.mapNames.Add(pool[ranIndex].mapName);
+            pool.RemoveAt(ranIndex);
         }
 
         SelectionData.DeathBattleData.currentMatchIndex = 0;

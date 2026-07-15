@@ -62,7 +62,7 @@ Transform:
   m_GameObject: {fileID: 1500280979166049099}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.681916, y: 1.81235, z: 0}
+  m_LocalPosition: {x: 1.7147249, y: -0.3198857, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -212,7 +212,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.44166666}
+  m_Offset: {x: 0.012064278, y: 0.44166666}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -222,7 +222,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.65, y: 0.8833333}
+  m_Size: {x: 0.3785516, y: 0.8833333}
   m_EdgeRadius: 0
 --- !u!114 &3820253383188692587
 MonoBehaviour:
@@ -390,8 +390,8 @@ MonoBehaviour:
     m_Bits: 1
   supportKey: 0
   supportPrefabUrl: 
-  waterSlashPrefab: {fileID: 3073610899593594826, guid: 781e3d04a1e4f374ab866139c802dcf2, type: 3}
-  sharkUltimatePrefab: {fileID: 5475336132021150182, guid: ae6da4846851e504a9ae955e025c63ca, type: 3}
+  waterSlashPrefab: {fileID: 3073610899593594826, guid: c0dbfa49c6b49f542ae4b5e7e6d1bfb6, type: 3}
+  sharkUltimatePrefab: {fileID: 5475336132021150182, guid: 1165010c7033e264dada4edeb2a51a68, type: 3}
   waterSlashSpawnPoint: {fileID: 4547021543056170943}
   rangedLockDuration: 1.2
   ultimateLockDuration: 3
@@ -424,7 +424,7 @@ Transform:
   m_GameObject: {fileID: 5290581652561195904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.4, z: 0}
+  m_LocalPosition: {x: 0.008, y: 0.374, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -263,6 +263,7 @@ namespace AnimeFighter.UI
             else if (settingsData.botDifficulty >= difficulties.Length) settingsData.botDifficulty = 0;
 
             UpdateDifficultyText();
+            SaveSettings();
         }
 
         private void UpdateDifficultyText()
@@ -292,6 +293,7 @@ namespace AnimeFighter.UI
 
             settingsData.matchTime = matchTimes[currentIdx];
             UpdateMatchTimeText();
+            SaveSettings();
         }
 
         private void UpdateMatchTimeText()
@@ -363,11 +365,13 @@ namespace AnimeFighter.UI
                 catch
                 {
                     settingsData = new GameSettingsData();
+                    SaveSettings();
                 }
             }
             else
             {
                 settingsData = new GameSettingsData();
+                SaveSettings();
             }
 
             // Sync from PlayerPrefs if available (per requirement: map audio to PlayerPrefs)

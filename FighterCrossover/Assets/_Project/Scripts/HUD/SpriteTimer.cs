@@ -21,13 +21,18 @@ public class SpriteTimer : MonoBehaviour
 
 
     [Header("--- Cấu hình thời gian (Nếu không bật Vô Hạn) ---")]
-    public float timeRemaining = 99f;
+    public float timeRemaining = 90f;
     private bool isTimerRunning = false;
     private bool gameEnd = false;
-    private float matchTime;
+    private float matchTime = 90f;
 
     void Awake()
     {
+        // Default fallbacks
+        isInfinite = false;
+        matchTime = 90f;
+        timeRemaining = 90f;
+
         if (SelectionData.CurrentGameMode == GameMode.Training)
         {
             isInfinite = true;
@@ -124,22 +129,31 @@ public class SpriteTimer : MonoBehaviour
     {
         return gameEnd;
     }
-    public void StartTimerWithTime()
+
+    public void ResetTimer()
     {
-        
+        gameEnd = false;
+        isTimerRunning = false;
+
         if (isInfinite)
         {
             if (infinityImage != null) infinityImage.gameObject.SetActive(true);
-            sec1Image.gameObject.SetActive(false);
-            sec2Image.gameObject.SetActive(false);
+            if (sec1Image != null) sec1Image.gameObject.SetActive(false);
+            if (sec2Image != null) sec2Image.gameObject.SetActive(false);
         }
         else
         {
             if (infinityImage != null) infinityImage.gameObject.SetActive(false);
+            if (sec1Image != null) sec1Image.gameObject.SetActive(true);
+            if (sec2Image != null) sec2Image.gameObject.SetActive(true);
             timeRemaining = matchTime;
             UpdateSecondsUI(timeRemaining);
         }
+    }
 
+    public void StartTimerWithTime()
+    {
+        ResetTimer();
         RunTimer();
     }
 }

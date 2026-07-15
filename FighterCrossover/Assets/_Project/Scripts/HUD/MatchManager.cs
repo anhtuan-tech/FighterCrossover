@@ -115,6 +115,11 @@ public class MatchManager : MonoBehaviour
 
     IEnumerator StartMatchRoutine()
     {
+        if (timerScript != null)
+        {
+            timerScript.ResetTimer();
+        }
+
         yield return new WaitForSeconds(0.5f);
         letter3.SetActive(true); yield return new WaitForSeconds(1f); letter3.SetActive(false);
         letter2.SetActive(true); yield return new WaitForSeconds(1f); letter2.SetActive(false);

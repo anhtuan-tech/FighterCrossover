@@ -79,6 +79,12 @@ public class SasukeFireball : MonoBehaviour
         if (damageable != null)
         {
             damageable.TakeDamage(damage, transform.position.x, isHeavyAttack: false);
+
+            FighterBase ownerFighter = ownerObject != null ? ownerObject.GetComponent<FighterBase>() : null;
+            if (ownerFighter != null)
+            {
+                ownerFighter.GainManaOnRangedHit();
+            }
         }
 
         Destroy(gameObject);

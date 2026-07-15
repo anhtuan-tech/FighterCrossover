@@ -394,8 +394,8 @@ MonoBehaviour:
   chidoriEffectPrefab: {fileID: 6920193976591894605, guid: 99b7dbe392c4cc94389b089fd1923290, type: 3}
   chidoriDuration: 1.5
   fireballSpawnPoint: {fileID: 8340074515346491359}
-  fireballSpeed: 7
-  fireballDamage: 30
+  fireballSpeed: 10
+  fireballDamage: 35
   attackSpeedMultiplier: 1
   rangedSkillSpeedMultiplier: 2.5
   ultimateFlashSprite: {fileID: 4646315803332306921, guid: 2ddeb8608be486f4fb1b2e87e0fe3141, type: 3}

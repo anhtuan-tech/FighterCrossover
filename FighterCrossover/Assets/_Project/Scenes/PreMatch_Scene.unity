@@ -937,7 +937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allMaps.Array.data[0].mapName
@@ -1132,6 +1132,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: -6205060834854952739, guid: 5d796e8726e4f5d4c8da786a57152488, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[10].avatarSprite
+      value: 
+      objectReference: {fileID: 6380907381744861984, guid: 037a027c267282d4799c519fae8ec00a, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[1].characterName
       value: Gray
       objectReference: {fileID: 0}
@@ -1220,6 +1224,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 419711969202352683, guid: 47da98bd799f1bd49ba97544681959be, type: 3}
     - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[10].characterName
+      value: Walter White
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[10].standeeSprite
+      value: 
+      objectReference: {fileID: -7074074694150286249, guid: 1b5ccabbfed92e14baa9bbbe7b55e348, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: allCharacters.Array.data[0].characterPrefab
       value: 
       objectReference: {fileID: 7496560017347569153, guid: 719a0686b215e2045bc23af875c499f6, type: 3}
@@ -1259,6 +1271,10 @@ PrefabInstance:
       propertyPath: allCharacters.Array.data[9].characterPrefab
       value: 
       objectReference: {fileID: 1500280979166049099, guid: 1570cbc2f92c5c345bc5d7e03ec1a487, type: 3}
+    - target: {fileID: 2678040898196704553, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
+      propertyPath: allCharacters.Array.data[10].characterPrefab
+      value: 
+      objectReference: {fileID: 7693289480299953511, guid: f8724ad24a2e9f341a2404fbfe2211be, type: 3}
     - target: {fileID: 3011940216329422943, guid: d1aa6146045a8dd48ae15786aa3dc0eb, type: 3}
       propertyPath: m_SizeDelta.x
       value: 500

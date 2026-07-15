@@ -23,6 +23,10 @@ public class MatchManager : MonoBehaviour
     [Header("--- Timer Script ---")]
     public SpriteTimer timerScript;
 
+    [Header("--- SOUND ---")]
+    [SerializeField] private AudioClip clickSound;
+    private AudioSource audioSource;
+
     public static bool IsMatchStarted { get; private set; } = false;
     public static bool IsMatchEnded { get; private set; } = false;
 
@@ -40,6 +44,18 @@ public class MatchManager : MonoBehaviour
 
     void Start()
     {
+        // Setup audio source for click sound
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+
+        if (clickSound == null)
+        {
+#if UNITY_EDITOR
+            clickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Project/Audio/SFX/click_menu.wav");
+#endif
+        }
+
         DisableAllMatchHUD();
         //IsMatchStarted = false;
         //IsMatchEnded = false;
@@ -145,6 +161,11 @@ public class MatchManager : MonoBehaviour
     {
         if (IsMatchEnded) return;
         IsMatchEnded = true;
+
+        if (timerScript != null)
+        {
+            timerScript.StopTimer();
+        }
 
         StartCoroutine(EndMatchRoutine(isTimeOut));
         this.enabled = false; // Tắt Update
@@ -343,6 +364,11 @@ public class MatchManager : MonoBehaviour
 
     private void OnYesClicked()
     {
+        if (audioSource != null && clickSound != null)
+        {
+            // Use PlayClipAtPoint to ensure sound plays even if this GameObject/Scene is destroyed during load
+            AudioSource.PlayClipAtPoint(clickSound, Camera.main != null ? Camera.main.transform.position : transform.position);
+        }
         Time.timeScale = 1f; // Restore timescale
         string menuName = "MainMenu_Scene";
         if (RoundManager.Instance != null && !string.IsNullOrEmpty(RoundManager.Instance.menuSceneName))
@@ -354,6 +380,10 @@ public class MatchManager : MonoBehaviour
 
     private void OnNoClicked()
     {
+        if (audioSource != null && clickSound != null)
+        {
+            audioSource.PlayOneShot(clickSound);
+        }
         if (escPopupInstance != null)
         {
             escPopupInstance.SetActive(false);

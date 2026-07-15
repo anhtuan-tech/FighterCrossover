@@ -16,8 +16,24 @@ namespace AnimeFighter.UI
         private const string DeathBattleSceneName = "Prematch_Scene";
         private const string PvpLocalSceneName = "Prematch_Scene";
 
+        [Header("Sound")]
+        [SerializeField] private AudioClip clickSound;
+        private AudioSource audioSource;
+
         private void Start()
         {
+            // Setup audio source
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+            audioSource.loop = false;
+
+            if (clickSound == null)
+            {
+#if UNITY_EDITOR
+                clickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Project/Audio/SFX/click_menu.wav");
+#endif
+            }
+
             // Gắn listener ngay khi popup được khởi tạo để có thể cắm vào Main Menu cũ.
             if (trainingModeBtn != null)
             {
@@ -70,26 +86,38 @@ namespace AnimeFighter.UI
             gameObject.SetActive(true);
         }
 
+        private void PlayClick()
+        {
+            if (audioSource != null && clickSound != null)
+            {
+                audioSource.PlayOneShot(clickSound);
+            }
+        }
+
         // Đóng popup khi người chơi bấm nút X hoặc khi cần hủy lựa chọn.
         public void ClosePopup()
         {
+            PlayClick();
             gameObject.SetActive(false);
         }
 
         private void OnTrainingModeClicked()
         {
+            PlayClick();
             SelectionData.CurrentGameMode = GameMode.Training; // <--- LƯU LẠI MODE
             LoadGameMode(TrainingSceneName);
         }
 
         private void OnDeathBattleModeClicked()
         {
+            PlayClick();
             SelectionData.CurrentGameMode = GameMode.DeathBattle; // <--- LƯU LẠI MODE
             LoadGameMode(DeathBattleSceneName);
         }
 
         private void OnPvp1v1Clicked()
         {
+            PlayClick();
             SelectionData.CurrentGameMode = GameMode.PvP; // <--- LƯU LẠI MODE
             LoadGameMode(PvpLocalSceneName);
         }

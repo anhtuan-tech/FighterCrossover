@@ -300,6 +300,8 @@ MonoBehaviour:
   ultimateFlashSprite: {fileID: 8050372184844627645, guid: 3c129866b33dc074e9a1ebd3118d6fed, type: 3}
   ultimateFlashSizeFactor: 0.6
   ultimateFlashOffset: {x: 0, y: 100}
+  ultimateVoiceClip: {fileID: 8300000, guid: 13a915a9d1ae43b47a0424f3cad2a4ce, type: 3}
+  ultimateVoiceVolume: 1
 --- !u!114 &1420903388094790582
 MonoBehaviour:
   m_ObjectHideFlags: 0

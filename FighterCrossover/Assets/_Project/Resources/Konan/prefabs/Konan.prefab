@@ -435,6 +435,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4701250720578639642, guid: 87100dfbe80ed8c4bb4f94ae1f165e26, type: 3}
   m_PrefabInstance: {fileID: 2430758839356909973}
   m_PrefabAsset: {fileID: 0}
+  ultimateVoiceClip: {fileID: 8300000, guid: 696b10eaf41332049a8df745aec03090, type: 3}
+  ultimateVoiceVolume: 1
 --- !u!1001 &4261736445858423977
 PrefabInstance:
   m_ObjectHideFlags: 0

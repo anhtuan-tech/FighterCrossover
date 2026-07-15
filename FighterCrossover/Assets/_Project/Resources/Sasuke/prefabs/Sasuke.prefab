@@ -401,6 +401,8 @@ MonoBehaviour:
   ultimateFlashSprite: {fileID: 4646315803332306921, guid: 2ddeb8608be486f4fb1b2e87e0fe3141, type: 3}
   ultimateFlashSizeFactor: 0.6
   ultimateFlashOffset: {x: 0, y: 100}
+  ultimateVoiceClip: {fileID: 8300000, guid: 59d50cbbe3422dc4b8874337b8a404a8, type: 3}
+  ultimateVoiceVolume: 1
   chidoriDashSpeed: 15
   chidoriDashDuration: 0.3
   chidoriDragSpeed: 7

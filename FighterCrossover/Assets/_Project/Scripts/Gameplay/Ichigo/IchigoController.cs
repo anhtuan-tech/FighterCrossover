@@ -21,6 +21,13 @@ public class IchigoController : FighterBase
     [Tooltip("Vị trí ảnh so với tâm màn hình (pixel), ví dụ (0, 100) = lên trên 100px")]
     public Vector2 ultimateFlashOffset = new Vector2(0f, 100f);
 
+    [Header("--- SOUND ---")]
+    [Tooltip("Âm thanh phát khi dùng Ultimate.")]
+    public AudioClip ultimateVoiceClip;
+    [Range(0f, 1f)]
+    public float ultimateVoiceVolume = 0.6f;
+    private AudioSource audioSource;
+
     [Header("--- DYNAMIC BINDINGS ---")]
     private AnimeFighter.UI.KeybindingsData keys;
     private bool initializedBindings = false;
@@ -28,6 +35,10 @@ public class IchigoController : FighterBase
     protected override void Awake()
     {
         base.Awake();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
 
         // Auto-acquire or add skill components if not assigned
         if (rangedSkill == null)
@@ -257,6 +268,7 @@ public class IchigoController : FighterBase
 
     protected override void ExecuteAttack()
     {
+        PlayAttackSound();
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero; // Stop moving when attacking
         lastAttackTime = Time.time;
@@ -278,6 +290,7 @@ public class IchigoController : FighterBase
 
     private void ExecuteRanged()
     {
+        PlayRangedSound();
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
@@ -305,6 +318,9 @@ public class IchigoController : FighterBase
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
+
+        if (ultimateVoiceClip != null && audioSource != null)
+            audioSource.PlayOneShot(ultimateVoiceClip, ultimateVoiceVolume);
 
         // Show cutscene flash before triggering animation
         StartCoroutine(ExecuteUltimateWithFlash());
@@ -374,6 +390,7 @@ public class IchigoController : FighterBase
     // --- OVERRIDE DASH ROUTINE (FLASH STEP) ---
     protected override IEnumerator DashRoutine()
     {
+        PlayDashSound();
         ChangeState(FighterState.Dashing);
         stats.stamina -= 20;
 

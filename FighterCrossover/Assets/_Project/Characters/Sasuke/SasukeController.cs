@@ -31,6 +31,13 @@ public class SasukeController : FighterBase
     public float ultimateFlashSizeFactor = 0.6f;
     public Vector2 ultimateFlashOffset = new Vector2(0f, 100f);
 
+    [Header("--- SOUND ---")]
+    [Tooltip("Âm thanh phát khi dùng Ultimate.")]
+    public AudioClip ultimateVoiceClip;
+    [Range(0f, 1f)]
+    public float ultimateVoiceVolume = 0.6f;
+    private AudioSource audioSource;
+
     [Header("--- CHIDORI DASH ---")]
     [Tooltip("Toc do lao khi dam nhanh ban dau.")]
     public float chidoriDashSpeed = 18f;
@@ -55,6 +62,10 @@ public class SasukeController : FighterBase
     protected override void Awake()
     {
         base.Awake();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
         LoadKeybindings();
         SetupPlayerInputBindings();
     }
@@ -259,6 +270,7 @@ public class SasukeController : FighterBase
 
     protected override void ExecuteAttack()
     {
+        PlayAttackSound();
         comboQueued = false;
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
@@ -301,6 +313,7 @@ public class SasukeController : FighterBase
     #region COMBAT - SKILLS
     private void ExecuteRanged()
     {
+        PlayRangedSound();
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
@@ -326,6 +339,9 @@ public class SasukeController : FighterBase
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
+
+        if (ultimateVoiceClip != null && audioSource != null)
+            audioSource.PlayOneShot(ultimateVoiceClip, ultimateVoiceVolume);
 
         if (anim != null) anim.speed = 1f;
 
@@ -398,6 +414,7 @@ public class SasukeController : FighterBase
     #region DASH OVERRIDE
     protected override IEnumerator DashRoutine()
     {
+        PlayDashSound();
         ChangeState(FighterState.Dashing);
         stats.stamina -= 20;
         lastStaminaUseTime = Time.time; // Ghi nhan thoi gian dung stamina
@@ -507,6 +524,7 @@ public class SasukeController : FighterBase
 
     private IEnumerator ChidoriDashRoutine()
     {
+        PlayDashSound();
         float dashDir = transform.localScale.x;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;

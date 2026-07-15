@@ -217,7 +217,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.19076923, y: 0.6323077}
+    oldSize: {x: 0.248, y: 0.822}
     newSize: {x: 0.17714286, y: 0.5871429}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -300,6 +300,8 @@ MonoBehaviour:
   ultimateFlashSprite: {fileID: -7766327610030312114, guid: 04c0f07a0e0fe774f9a9b48026d0635c, type: 3}
   ultimateFlashSizeFactor: 0.6
   ultimateFlashOffset: {x: 0, y: 100}
+  ultimateVoiceClip: {fileID: 8300000, guid: d6e540a21bc43114facfed46dd3d028f, type: 3}
+  ultimateVoiceVolume: 1
 --- !u!114 &7288893176410431926
 MonoBehaviour:
   m_ObjectHideFlags: 0

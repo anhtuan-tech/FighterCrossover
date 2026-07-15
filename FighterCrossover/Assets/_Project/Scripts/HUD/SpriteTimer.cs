@@ -125,6 +125,11 @@ public class SpriteTimer : MonoBehaviour
         isTimerRunning = true;
     }
 
+    public void StopTimer()
+    {
+        isTimerRunning = false;
+    }
+
     public bool IsEnd()
     {
         return gameEnd;

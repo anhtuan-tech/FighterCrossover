@@ -4,7 +4,7 @@ using UnityEngine;
 public class SuperNhonUltimateSkill : MonoBehaviour
 {
     [Header("--- ULTIMATE CONFIG ---")]
-    public float detectionRadius = 3.5f;
+    public float detectionRadius = 6f;   // Tăng để đảm bảo tìm được địch
     public float searchOffset = 1.0f;
     public float tickInterval = 0.25f;
 
@@ -14,12 +14,11 @@ public class SuperNhonUltimateSkill : MonoBehaviour
 
     public void SpawnUltimateCombo(SuperNhonController owner, LayerMask targetLayer)
     {
-        float dir = owner.transform.localScale.x;
-        Vector3 detectPos = owner.transform.position + new Vector3(dir * searchOffset, 0.5f, 0f);
-
-        Collider2D[] hits = Physics2D.OverlapCircleAll(detectPos, detectionRadius, targetLayer);
+        // Tìm địch gần nhất trong vòng tròn xung quanh owner (không phân biệt hướng nhìn)
+        Collider2D[] hits = Physics2D.OverlapCircleAll(owner.transform.position, detectionRadius, targetLayer);
         IDamageable hitTarget = null;
-        
+        float closestDist = float.MaxValue;
+
         foreach (var hit in hits)
         {
             if (hit.gameObject == owner.gameObject) continue;
@@ -27,19 +26,23 @@ public class SuperNhonUltimateSkill : MonoBehaviour
             IDamageable damageable = hit.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                hitTarget = damageable;
-                break;
+                float dist = Vector2.Distance(owner.transform.position, hit.transform.position);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    hitTarget = damageable;
+                }
             }
         }
 
         if (hitTarget != null)
         {
             Debug.Log($"[Ultimate] SuperNhon TimeStop hit target {((MonoBehaviour)hitTarget).gameObject.name}!");
-            owner.StartCoroutine(UltimateComboRoutine(owner, hitTarget, dir));
+            owner.StartCoroutine(UltimateComboRoutine(owner, hitTarget, owner.transform.localScale.x));
         }
         else
         {
-            Debug.Log("[Ultimate] SuperNhon Ultimate missed.");
+            Debug.Log("[Ultimate] SuperNhon Ultimate missed - no enemy in range.");
             owner.Invoke("AnimationEvent_EndAttack", 0.3f);
         }
     }

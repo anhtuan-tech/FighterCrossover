@@ -65,6 +65,11 @@ public class FighterBase : MonoBehaviour, IDamageable
     public float attackRadius = 0.3f;
     public LayerMask targetLayer;
 
+    [Header("--- COMMON COMBAT SFX ---")]
+    public AudioClip attackSound;
+    public AudioClip rangedSound;
+    public AudioClip dashSound;
+
     [HideInInspector] public KeyCode supportKey = KeyCode.None;
     [HideInInspector] public string supportPrefabUrl = "";
     protected float lastSupportTime;
@@ -99,6 +104,15 @@ public class FighterBase : MonoBehaviour, IDamageable
         rb.gravityScale = 3.5f;
         rb.freezeRotation = true;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; // Chống lọt hố khi dash nhanh
+
+#if UNITY_EDITOR
+        if (attackSound == null)
+            attackSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Project/Audio/SFX/Sound_Attack.wav");
+        if (rangedSound == null)
+            rangedSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Project/Audio/SFX/Sound_NemXa.wav");
+        if (dashSound == null)
+            dashSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Project/Audio/SFX/dash.wav");
+#endif
 
         // Cảnh báo nếu layer chưa được gán (thường xảy ra sau khi bấm Reset trong Inspector)
         if (groundLayer.value == 0)
@@ -456,6 +470,27 @@ public class FighterBase : MonoBehaviour, IDamageable
     {
         if (!CanAct() || !isGrounded) return;
         ExecuteAttack();
+    }
+
+    public void PlayAttackSound()
+    {
+        AudioSource myAudio = GetComponent<AudioSource>();
+        if (myAudio != null && attackSound != null)
+            myAudio.PlayOneShot(attackSound, 1.0f);
+    }
+
+    public void PlayRangedSound()
+    {
+        AudioSource myAudio = GetComponent<AudioSource>();
+        if (myAudio != null && rangedSound != null)
+            myAudio.PlayOneShot(rangedSound, 1.0f);
+    }
+
+    public void PlayDashSound()
+    {
+        AudioSource myAudio = GetComponent<AudioSource>();
+        if (myAudio != null && dashSound != null)
+            myAudio.PlayOneShot(dashSound, 1.0f);
     }
 
     protected virtual void ExecuteAttack()

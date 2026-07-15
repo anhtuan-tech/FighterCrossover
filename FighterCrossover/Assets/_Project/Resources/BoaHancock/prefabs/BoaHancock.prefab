@@ -271,7 +271,8 @@ MonoBehaviour:
   stats:
     maxHp: 500
     currentHp: 500
-    mana: 250
+    maxMana: 100
+    currentMana: 50
     maxStamina: 100
     stamina: 100
   staminaRegenRate: 20
@@ -292,11 +293,15 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 1
+  supportKey: 0
+  supportPrefabUrl: 
   rangedSkill: {fileID: 2553668415592583215}
   ultimateSkill: {fileID: 3312166166759251108}
   ultimateFlashSprite: {fileID: -3874904671510300912, guid: ad8e45c49c1d2a949823ccec5963a14e, type: 3}
   ultimateFlashSizeFactor: 0.6
   ultimateFlashOffset: {x: 0, y: 100}
+  ultimateVoiceClip: {fileID: 8300000, guid: 81166254736d9e144b4a247930496377, type: 3}
+  ultimateVoiceVolume: 1
 --- !u!114 &2553668415592583215
 MonoBehaviour:
   m_ObjectHideFlags: 0

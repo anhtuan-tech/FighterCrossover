@@ -24,6 +24,13 @@ namespace AnimeFighter.UI
         [SerializeField] private Sprite unmuteSprite; // on_volume
         [SerializeField] private Sprite muteSprite;   // mute_volume
 
+        [Header("Click Sound")]
+        [Tooltip("Âm thanh khi bấm nút. Để trống → tự load Assets/_Project/Audio/SFX/click_menu.wav")]
+        [SerializeField] private AudioClip clickSound;
+        [Range(0f, 1f)]
+        [SerializeField] private float clickVolume = 1.0f;
+        private AudioSource sfxSource;
+
         [Header("Gameplay Controls")]
         [SerializeField] private TextMeshProUGUI difficultyText;
         [SerializeField] private TextMeshProUGUI matchTimeText;
@@ -67,6 +74,21 @@ namespace AnimeFighter.UI
         {
             saveFilePath = Path.Combine(Application.persistentDataPath, "settings.json");
             LoadSettings();
+
+            // Setup SFX AudioSource for click sounds
+            sfxSource = gameObject.AddComponent<AudioSource>();
+            sfxSource.playOnAwake = false;
+            sfxSource.loop = false;
+
+            // Auto-load click_menu.wav if not assigned
+            if (clickSound == null)
+                clickSound = Resources.Load<AudioClip>("Audio/SFX/click_menu");
+            if (clickSound == null)
+            {
+#if UNITY_EDITOR
+                clickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Project/Audio/SFX/click_menu.wav");
+#endif
+            }
         }
 
         private void Start()
@@ -142,14 +164,23 @@ namespace AnimeFighter.UI
             }
         }
 
+        // --- Click Sound Helper ---
+        private void PlayClick()
+        {
+            if (sfxSource != null && clickSound != null)
+                sfxSource.PlayOneShot(clickSound, clickVolume);
+        }
+
         // --- Main Menu Navigation ---
         public void StartGame()
         {
+            PlayClick();
             gameModePopup.OpenPopup();
         }
 
         public void OpenSettings()
         {
+            PlayClick();
             if (settingsPopup != null)
             {
                 settingsPopup.SetActive(true);
@@ -161,18 +192,21 @@ namespace AnimeFighter.UI
 
         public void ShowGeneralSetup()
         {
+            PlayClick();
             if (generalPanel != null) generalPanel.SetActive(true);
             if (keyboardPanel != null) keyboardPanel.SetActive(false);
         }
 
         public void ShowKeyboardSetup()
         {
+            PlayClick();
             if (generalPanel != null) generalPanel.SetActive(false);
             if (keyboardPanel != null) keyboardPanel.SetActive(true);
         }
 
         public void SaveAndCloseSettings()
         {
+            PlayClick();
             SaveSettings();
             if (settingsPopup != null)
             {
@@ -185,6 +219,7 @@ namespace AnimeFighter.UI
 
         public void ExitGame()
         {
+            PlayClick();
 #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -209,6 +244,7 @@ namespace AnimeFighter.UI
         // --- Audio Logic ---
         public void ToggleMute()
         {
+            PlayClick();
             if (settingsData != null)
             {
                 settingsData.isMuted = !settingsData.isMuted;
@@ -257,6 +293,7 @@ namespace AnimeFighter.UI
         // --- Gameplay Selection Cycles ---
         public void CycleDifficulty(int direction)
         {
+            PlayClick();
             if (settingsData == null) return;
             settingsData.botDifficulty += direction;
             if (settingsData.botDifficulty < 0) settingsData.botDifficulty = difficulties.Length - 1;
@@ -276,6 +313,7 @@ namespace AnimeFighter.UI
 
         public void CycleMatchTime(int direction)
         {
+            PlayClick();
             if (settingsData == null) return;
             int currentIdx = 1; // default to 90
             for (int i = 0; i < matchTimes.Length; i++)
@@ -316,7 +354,11 @@ namespace AnimeFighter.UI
                 if (tmp != null)
                 {
                     btn.onClick.RemoveAllListeners();
-                    btn.onClick.AddListener(() => StartRebind(playerNum, actionName, tmp));
+                    btn.onClick.AddListener(() =>
+                    {
+                        PlayClick();
+                        StartRebind(playerNum, actionName, tmp);
+                    });
                 }
             }
         }

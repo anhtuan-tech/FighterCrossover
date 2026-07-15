@@ -10,6 +10,11 @@ public class CharacterSelectionManager : MonoBehaviour
 {
     private SelectionPhase currentPhase = SelectionPhase.P1_MainCharacter;
 
+    [Header("--- SOUND ---")]
+    [SerializeField] private AudioClip clickSound;
+    [SerializeField] private AudioClip selectCharSound;
+    private AudioSource audioSource;
+
     [System.Serializable]
     public class CharacterInfoData
     {
@@ -103,6 +108,24 @@ public class CharacterSelectionManager : MonoBehaviour
 
     void Start()
     {
+        // Setup audio source for click sound
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
+
+        if (clickSound == null)
+        {
+#if UNITY_EDITOR
+            clickSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Project/Audio/SFX/click_menu.wav");
+#endif
+        }
+        if (selectCharSound == null)
+        {
+#if UNITY_EDITOR
+            selectCharSound = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/_Project/Audio/SFX/Sound_Select_Char.wav");
+#endif
+        }
+
         currentPhase = SelectionPhase.P1_MainCharacter;
 
         if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
@@ -225,7 +248,28 @@ public class CharacterSelectionManager : MonoBehaviour
             if (btn != null)
             {
                 btn.onClick.AddListener(() => {
-                    if (!p1Locked) { p1Index = index; UpdateVisuals(); }
+                    if (!p1Locked)
+                    {
+                        if (p1Index != index)
+                        {
+                            p1Index = index;
+                            PlaySelectSound();
+                            UpdateVisuals();
+                        }
+                        else
+                        {
+                            p1Locked = true;
+                            PlayClick();
+                            if (SelectionData.CurrentGameMode == GameMode.DeathBattle)
+                            {
+                                LockAndProceed();
+                            }
+                            else if (p1Locked && p2Locked)
+                            {
+                                LockAndProceed();
+                            }
+                        }
+                    }
                 });
             }
         }
@@ -292,6 +336,9 @@ public class CharacterSelectionManager : MonoBehaviour
 
     void HandleNewInputSystem()
     {
+        int oldP1Index = p1Index;
+        int oldP2Index = p2Index;
+
         int totalItems = GetCurrentItemCount();
         if (totalItems == 0) return;
 
@@ -352,7 +399,11 @@ public class CharacterSelectionManager : MonoBehaviour
                 if (keyboard.wKey.wasPressedThisFrame && p1Index >= columns) p1Index -= columns;
                 if (keyboard.sKey.wasPressedThisFrame && p1Index + columns <= maxIndex) p1Index += columns;
 
-                if (keyboard.jKey.wasPressedThisFrame) { p1Locked = true; }
+                if (keyboard.jKey.wasPressedThisFrame) 
+                { 
+                    p1Locked = true; 
+                    PlayClick();
+                }
             }
 
             if (!p2Locked)
@@ -370,10 +421,19 @@ public class CharacterSelectionManager : MonoBehaviour
                 if (keyboard.upArrowKey.wasPressedThisFrame && p2Index >= columns) p2Index -= columns;
                 if (keyboard.downArrowKey.wasPressedThisFrame && p2Index + columns <= maxIndex) p2Index += columns;
 
-                if (keyboard.numpad1Key.wasPressedThisFrame) { p2Locked = true; }
+                if (keyboard.numpad1Key.wasPressedThisFrame) 
+                { 
+                    p2Locked = true; 
+                    PlayClick();
+                }
             }
 
             if (p1Locked && p2Locked) { LockAndProceed(); }
+        }
+
+        if (p1Index != oldP1Index || p2Index != oldP2Index)
+        {
+            PlaySelectSound();
         }
 
         UpdateVisuals();
@@ -429,6 +489,54 @@ public class CharacterSelectionManager : MonoBehaviour
                         spawnedSlots[i].color = new Color(0.3f, 0.3f, 0.3f, 1f);
                     }
                 }
+            }
+
+            // Prominent Highlight Border behind the slot
+            Transform borderTrans = spawnedSlots[i].transform.Find("BorderHighlight");
+            GameObject borderGo;
+            Image borderImg;
+            if (borderTrans == null)
+            {
+                borderGo = new GameObject("BorderHighlight");
+                borderGo.transform.SetParent(spawnedSlots[i].transform, false);
+                borderGo.transform.SetAsFirstSibling(); // Put it behind the avatar to act as border
+
+                RectTransform rect = borderGo.AddComponent<RectTransform>();
+                rect.anchorMin = Vector2.zero;
+                rect.anchorMax = Vector2.one;
+                rect.offsetMin = new Vector2(-8f, -8f); // Thừa ra 8px xung quanh để làm viền dày nổi bật
+                rect.offsetMax = new Vector2(8f, 8f);
+
+                borderImg = borderGo.AddComponent<Image>();
+                borderImg.sprite = null; // Ảnh trắng phẳng để làm viền vuông phẳng sắc nét
+            }
+            else
+            {
+                borderGo = borderTrans.gameObject;
+                borderImg = borderGo.GetComponent<Image>();
+            }
+
+            bool isP1Selected = (i == p1Index);
+            bool isP2Selected = (SelectionData.CurrentGameMode != GameMode.DeathBattle) && (i == p2Index);
+
+            if (isP1Selected && isP2Selected)
+            {
+                borderGo.SetActive(true);
+                borderImg.color = new Color(0.8f, 0.2f, 0.8f); // Màu Tím khi cả 2 cùng chỉ vào
+            }
+            else if (isP1Selected)
+            {
+                borderGo.SetActive(true);
+                borderImg.color = new Color(0f, 0.6f, 1f); // Màu Xanh Dương cho Player 1
+            }
+            else if (isP2Selected)
+            {
+                borderGo.SetActive(true);
+                borderImg.color = new Color(1f, 0.2f, 0.6f); // Màu Hồng/Đỏ cho Player 2
+            }
+            else
+            {
+                borderGo.SetActive(false);
             }
         }
 
@@ -492,9 +600,21 @@ public class CharacterSelectionManager : MonoBehaviour
         return obj.name;
     }
 
+    private void PlayClick()
+    {
+        if (audioSource != null && clickSound != null)
+            audioSource.PlayOneShot(clickSound);
+    }
+
+    private void PlaySelectSound()
+    {
+        if (audioSource != null && selectCharSound != null)
+            audioSource.PlayOneShot(selectCharSound);
+    }
 
     void LockAndProceed()
     {
+        PlayClick();
         isCounting = false;
 
         if (SelectionData.CurrentGameMode == GameMode.DeathBattle)

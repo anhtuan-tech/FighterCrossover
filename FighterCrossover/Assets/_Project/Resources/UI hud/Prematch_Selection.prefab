@@ -123,14 +123,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c56585311e2ee44901fe7f66e8411d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterSelectionManager
-  allCharacters: []
+  allCharacters:
+  - characterName: Walter White
+    avatarSprite: {fileID: 4723107735738678597, guid: e3012246417246347a3b506076ae11c7, type: 3}
+    standeeSprite: {fileID: 4723107735738678597, guid: e3012246417246347a3b506076ae11c7, type: 3}
+    characterPrefab: {fileID: 6793069832064390034, guid: f8724ad24a2e9f341a2404fbfe2211be, type: 3}
   allSupports: []
   allMaps: []
   p1Preview: {fileID: 7079595634696077072}
   p2Preview: {fileID: 8764510241668716362}
+  bigMapPreview: {fileID: 0}
+  mapNameText: {fileID: 0}
   gridContainer: {fileID: 9208425728619333063}
   charSlotPrefab: {fileID: 781653286070853091, guid: d718ff5ac16741647bd2f41e0d1a30a8, type: 3}
   mapSlotPrefab: {fileID: 6875255160989153572, guid: 272bc473dadc81345a31f26b8c7e9b60, type: 3}
+  deathBattlePanel: {fileID: 0}
+  deathBattleBotPreviews: []
+  phaseTextImage: {fileID: 0}
+  selectFighterSprite: {fileID: 0}
+  supportSprite: {fileID: 0}
+  mapSprite: {fileID: 0}
   characterCellSize: {x: 110, y: 110}
   characterSpacing: {x: 20, y: 20}
   mapCellSize: {x: 800, y: 200}

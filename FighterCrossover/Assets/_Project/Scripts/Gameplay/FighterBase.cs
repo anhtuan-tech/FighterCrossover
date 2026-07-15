@@ -298,7 +298,7 @@ public class FighterBase : MonoBehaviour, IDamageable
     // ===================== MANA SYSTEM =====================
 
     /// <summary>Hồi mana theo % thanh mana tối đa.</summary>
-    protected void GainMana(float percent)
+    public void GainMana(float percent)
     {
         float actualPercent = percent;
         FighterBotAI botAI = GetComponent<FighterBotAI>();

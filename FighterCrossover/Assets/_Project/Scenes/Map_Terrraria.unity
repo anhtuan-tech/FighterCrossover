@@ -223,6 +223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P1
       objectReference: {fileID: 0}
+    - target: {fileID: 2554158799505995502, guid: b7103ffc976404340a277004d04358ed, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -312,6 +316,10 @@ PrefabInstance:
     - target: {fileID: 1554759996543463638, guid: 6c2d185fe8cea5540bcb920e913b91df, type: 3}
       propertyPath: m_Name
       value: HUD_UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1554759996543463638, guid: 6c2d185fe8cea5540bcb920e913b91df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1599010546900023256, guid: 6c2d185fe8cea5540bcb920e913b91df, type: 3}
       propertyPath: m_AnchorMax.x
@@ -685,6 +693,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P2
       objectReference: {fileID: 0}
+    - target: {fileID: 1530347764793153868, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2303152802864856407, guid: f214402fe2c64294586c7b71fafb41ee, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -845,6 +857,22 @@ PrefabInstance:
     - target: {fileID: 3482298539022016160, guid: 54d38a9a9be15784d8b40c8be1cec31d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958307904669210683, guid: 54d38a9a9be15784d8b40c8be1cec31d, type: 3}
+      propertyPath: maxX
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958307904669210683, guid: 54d38a9a9be15784d8b40c8be1cec31d, type: 3}
+      propertyPath: minX
+      value: -3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958307904669210683, guid: 54d38a9a9be15784d8b40c8be1cec31d, type: 3}
+      propertyPath: yOffset
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3958307904669210683, guid: 54d38a9a9be15784d8b40c8be1cec31d, type: 3}
+      propertyPath: paddingX
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9114433658195591234, guid: 54d38a9a9be15784d8b40c8be1cec31d, type: 3}
       propertyPath: m_Name

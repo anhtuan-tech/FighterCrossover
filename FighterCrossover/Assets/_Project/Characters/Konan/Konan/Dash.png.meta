@@ -1,0 +1,359 @@
+fileFormatVersion: 2
+guid: a08284d6a1735024c972d0d776ffb98a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5939324676707185267
+    second: Konan_Dash_0
+  - first:
+      213: -486974254759684780
+    second: Konan_Dash_1
+  - first:
+      213: -5321718711501796656
+    second: Konan_Dash_2
+  - first:
+      213: -7154860950046560903
+    second: Konan_Dash_3
+  - first:
+      213: 9138934513230458514
+    second: Konan_Dash_4
+  - first:
+      213: 7882019762999329689
+    second: Konan_Dash_5
+  - first:
+      213: -8774823002532454840
+    second: Konan_Dash_6
+  - first:
+      213: -8433086969416599673
+    second: Konan_Dash_7
+  - first:
+      213: 4447209728655931626
+    second: Konan_Dash_8
+  - first:
+      213: -3065719407529230367
+    second: Konan_Dash_9
+  - first:
+      213: -3698143536197517205
+    second: Konan_Dash_10
+  - first:
+      213: -5489440248185090728
+    second: Konan_Dash_11
+  - first:
+      213: -6483992618858336886
+    second: Konan_Dash_12
+  - first:
+      213: -1722716338679010366
+    second: Konan_Dash_13
+  - first:
+      213: 154560752914404634
+    second: Konan_Dash_14
+  - first:
+      213: 6403205700019369576
+    second: Konan_Dash_15
+  - first:
+      213: 6984894291589696664
+    second: Konan_Dash_16
+  - first:
+      213: -2526509430555651688
+    second: Konan_Dash_17
+  - first:
+      213: 124924619344176516
+    second: Konan_Dash_18
+  - first:
+      213: -1475029698972771898
+    second: Konan_Dash_19
+  - first:
+      213: 9008724997521885399
+    second: Konan_Dash_20
+  - first:
+      213: 4828498536679170901
+    second: Konan_Dash_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Konan_Dash_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 26
+        height: 81
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8d0827aca7439da0800000000000000
+      internalID: -5939324676707185267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Konan_Dash_1
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 0
+        width: 36
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 455d942de7bed39f0800000000000000
+      internalID: -486974254759684780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Konan_Dash_2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 0
+        width: 54
+        height: 83
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dac26e07057526b0800000000000000
+      internalID: -5321718711501796656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Konan_Dash_3
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 0
+        width: 67
+        height: 64
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97d292fbfd3d4bc90800000000000000
+      internalID: -7154860950046560903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Konan_Dash_4
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 0
+        width: 29
+        height: 65
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29ea8a6058404de70800000000000000
+      internalID: 9138934513230458514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Konan_Dash_10
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 60
+        height: 69
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b604a842c0e8dacc0800000000000000
+      internalID: -3698143536197517205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Konan_Dash_12
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 0
+        width: 113
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8da1ba111b3406a0800000000000000
+      internalID: -6483992618858336886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 142071cd40d8481428f85efb823c5698
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Konan_Dash_0: -5939324676707185267
+      Konan_Dash_1: -486974254759684780
+      Konan_Dash_10: -3698143536197517205
+      Konan_Dash_11: -5489440248185090728
+      Konan_Dash_12: -6483992618858336886
+      Konan_Dash_13: -1722716338679010366
+      Konan_Dash_14: 154560752914404634
+      Konan_Dash_15: 6403205700019369576
+      Konan_Dash_16: 6984894291589696664
+      Konan_Dash_17: -2526509430555651688
+      Konan_Dash_18: 124924619344176516
+      Konan_Dash_19: -1475029698972771898
+      Konan_Dash_2: -5321718711501796656
+      Konan_Dash_20: 9008724997521885399
+      Konan_Dash_21: 4828498536679170901
+      Konan_Dash_3: -7154860950046560903
+      Konan_Dash_4: 9138934513230458514
+      Konan_Dash_5: 7882019762999329689
+      Konan_Dash_6: -8774823002532454840
+      Konan_Dash_7: -8433086969416599673
+      Konan_Dash_8: 4447209728655931626
+      Konan_Dash_9: -3065719407529230367
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

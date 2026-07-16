@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using AnimeFighter.UI;
@@ -21,12 +21,24 @@ public class SpriteTimer : MonoBehaviour
 
 
     [Header("--- Cấu hình thời gian (Nếu không bật Vô Hạn) ---")]
-    public float timeRemaining = 99f;
+    public float timeRemaining = 90f;
     private bool isTimerRunning = false;
     private bool gameEnd = false;
+    private float matchTime = 90f;
 
     void Awake()
     {
+        // Default fallbacks
+        isInfinite = false;
+        matchTime = 90f;
+        timeRemaining = 90f;
+
+        if (SelectionData.CurrentGameMode == GameMode.Training)
+        {
+            isInfinite = true;
+            return;
+        }
+
         // ==========================================================
         // TỰ ĐỌC FILE JSON VÀ SET UP THỜI GIAN TRẬN ĐẤU TẠI ĐÂY
         // ==========================================================
@@ -51,6 +63,7 @@ public class SpriteTimer : MonoBehaviour
                     {
                         isInfinite = false;
                         timeRemaining = data.matchTime; // Gán 60 hoặc 90 giây vào biến chạy của đồng hồ
+                        matchTime = data.matchTime;
                     }
                 }
             }
@@ -112,8 +125,40 @@ public class SpriteTimer : MonoBehaviour
         isTimerRunning = true;
     }
 
+    public void StopTimer()
+    {
+        isTimerRunning = false;
+    }
+
     public bool IsEnd()
     {
         return gameEnd;
+    }
+
+    public void ResetTimer()
+    {
+        gameEnd = false;
+        isTimerRunning = false;
+
+        if (isInfinite)
+        {
+            if (infinityImage != null) infinityImage.gameObject.SetActive(true);
+            if (sec1Image != null) sec1Image.gameObject.SetActive(false);
+            if (sec2Image != null) sec2Image.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (infinityImage != null) infinityImage.gameObject.SetActive(false);
+            if (sec1Image != null) sec1Image.gameObject.SetActive(true);
+            if (sec2Image != null) sec2Image.gameObject.SetActive(true);
+            timeRemaining = matchTime;
+            UpdateSecondsUI(timeRemaining);
+        }
+    }
+
+    public void StartTimerWithTime()
+    {
+        ResetTimer();
+        RunTimer();
     }
 }

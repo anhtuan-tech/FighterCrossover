@@ -1,0 +1,556 @@
+fileFormatVersion: 2
+guid: 1fb9acb3129cce44e9f3431b7e5716b2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7559749562913551978
+    second: Chidori 4_0
+  - first:
+      213: -2466639854385948553
+    second: Chidori 4_1
+  - first:
+      213: 3647777727064180856
+    second: Chidori 4_2
+  - first:
+      213: -6127801299872927610
+    second: Chidori 4_3
+  - first:
+      213: 2557993810852939687
+    second: Chidori 4_4
+  - first:
+      213: -1879284837501525387
+    second: Chidori 4_5
+  - first:
+      213: -1718136891866662755
+    second: Chidori 4_6
+  - first:
+      213: 2981753178533078401
+    second: Chidori 4_7
+  - first:
+      213: 1361494177703826094
+    second: Chidori 4_8
+  - first:
+      213: -4398958473616971778
+    second: Chidori 4_9
+  - first:
+      213: 7947442178936817946
+    second: Chidori 4_10
+  - first:
+      213: 8819287427154494157
+    second: Chidori 4_11
+  - first:
+      213: -3117557782916015636
+    second: Chidori 4_12
+  - first:
+      213: 7655686968980874298
+    second: Chidori 4_13
+  - first:
+      213: 2131942458735956346
+    second: Chidori 4_14
+  - first:
+      213: 422167221227188655
+    second: Chidori 4_15
+  - first:
+      213: 6847764676841093537
+    second: Chidori 4_16
+  - first:
+      213: 5452400586950247062
+    second: Chidori 4_17
+  - first:
+      213: 503913936341944090
+    second: Chidori 4_18
+  - first:
+      213: 8673531125820504622
+    second: Chidori 4_19
+  - first:
+      213: 8913532695632403778
+    second: Chidori 4_20
+  - first:
+      213: 5543958144268033355
+    second: Chidori 4_21
+  - first:
+      213: -3503363802534645945
+    second: Chidori 4_22
+  - first:
+      213: 3798182041414299121
+    second: Chidori 4_23
+  - first:
+      213: -8414414008459092868
+    second: Chidori 4_24
+  - first:
+      213: -3175075919960247060
+    second: Chidori 4_25
+  - first:
+      213: -9158542405943442914
+    second: Chidori 4_26
+  - first:
+      213: 8310977905000800026
+    second: Chidori 4_27
+  - first:
+      213: 1590322944324235910
+    second: Chidori 4_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 60
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Chidori 4_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 74
+        width: 45
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6670689c20a9e860800000000000000
+      internalID: 7559749562913551978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_1
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 74
+        width: 40
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 778118a0f1cb4cdd0800000000000000
+      internalID: -2466639854385948553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_2
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 74
+        width: 43
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8780e3914828f9230800000000000000
+      internalID: 3647777727064180856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 74
+        width: 42
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 680b5ea2f2da5faa0800000000000000
+      internalID: -6127801299872927610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_4
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 74
+        width: 45
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a7898171d1df7320800000000000000
+      internalID: 2557993810852939687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_5
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 74
+        width: 45
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 572a1fca5607be5e0800000000000000
+      internalID: -1879284837501525387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_6
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 74
+        width: 40
+        height: 41
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d983bc49993f728e0800000000000000
+      internalID: -1718136891866662755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_10
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 3
+        width: 49
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a194c7ced8cfa4e60800000000000000
+      internalID: 7947442178936817946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_11
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 2
+        width: 56
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc2cc9b3037646a70800000000000000
+      internalID: 8819287427154494157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_12
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 2
+        width: 67
+        height: 52
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce95986c6b53cb4d0800000000000000
+      internalID: -3117557782916015636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_15
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 2
+        width: 71
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa17f09d9d6dbd500800000000000000
+      internalID: 422167221227188655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_16
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 2
+        width: 53
+        height: 45
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a9b49c41b5280f50800000000000000
+      internalID: 6847764676841093537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_18
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 2
+        width: 71
+        height: 62
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2af699e86ca3e394fa274f076d0fd58d
+      internalID: 503913936341944090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chidori 4_20
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 4
+        width: 77
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76999aa270608ce4cbbd89d50f1c4d5d
+      internalID: 8913532695632403778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 8dc2a064bbc67ac4389901df789698ed
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Chidori 4_0: 7559749562913551978
+      Chidori 4_1: -2466639854385948553
+      Chidori 4_10: 7947442178936817946
+      Chidori 4_11: 8819287427154494157
+      Chidori 4_12: -3117557782916015636
+      Chidori 4_13: 7655686968980874298
+      Chidori 4_14: 2131942458735956346
+      Chidori 4_15: 422167221227188655
+      Chidori 4_16: 6847764676841093537
+      Chidori 4_17: 5452400586950247062
+      Chidori 4_18: 503913936341944090
+      Chidori 4_19: 671136513
+      Chidori 4_2: 3647777727064180856
+      Chidori 4_20: 8913532695632403778
+      Chidori 4_21: 711845113
+      Chidori 4_22: -1604782586
+      Chidori 4_23: -130712597
+      Chidori 4_24: 1940989107
+      Chidori 4_25: -1498904343
+      Chidori 4_26: -1033717624
+      Chidori 4_27: 1786226059
+      Chidori 4_28: -1219766384
+      Chidori 4_3: -6127801299872927610
+      Chidori 4_4: 2557993810852939687
+      Chidori 4_5: -1879284837501525387
+      Chidori 4_6: -1718136891866662755
+      Chidori 4_7: 2981753178533078401
+      Chidori 4_8: 1361494177703826094
+      Chidori 4_9: -4398958473616971778
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

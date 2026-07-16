@@ -4,11 +4,29 @@ using UnityEngine.InputSystem;
 
 public class IchigoController : FighterBase
 {
-    [Header("--- ICHIGO SETTINGS ---")]
-    public int playerNumber = 1;
-    public GameObject rangedProjectilePrefab;
-    public GameObject ultimateEffectPrefab;
-    public float ultimateDuration = 1.0f;
+    [Header("--- ICHIGO SKILLS ---")]
+    public IchigoRangedSkill rangedSkill;
+    public IchigoUltimateSkill ultimateSkill;
+
+    // Obsolete migration fields to prevent breaking existing assignments in inspectors
+    [HideInInspector, System.Obsolete] public GameObject rangedProjectilePrefab;
+    [HideInInspector, System.Obsolete] public GameObject ultimateEffectPrefab;
+    [HideInInspector, System.Obsolete] public float ultimateDuration = 1.0f;
+
+    [Header("--- ULTIMATE FLASH CUTSCENE ---")]
+    [Tooltip("Ảnh hiển thị khi dùng Ultimate (Nếu để trống sẽ tự động load mặc định)")]
+    public Sprite ultimateFlashSprite;
+    [Tooltip("Kích thước ảnh theo tỉ lệ chiều cao màn hình (0.6 = 60% màn hình)")]
+    public float ultimateFlashSizeFactor = 0.6f;
+    [Tooltip("Vị trí ảnh so với tâm màn hình (pixel), ví dụ (0, 100) = lên trên 100px")]
+    public Vector2 ultimateFlashOffset = new Vector2(0f, 100f);
+
+    [Header("--- SOUND ---")]
+    [Tooltip("Âm thanh phát khi dùng Ultimate.")]
+    public AudioClip ultimateVoiceClip;
+    [Range(0f, 1f)]
+    public float ultimateVoiceVolume = 0.6f;
+    private AudioSource audioSource;
 
     [Header("--- DYNAMIC BINDINGS ---")]
     private AnimeFighter.UI.KeybindingsData keys;
@@ -17,7 +35,55 @@ public class IchigoController : FighterBase
     protected override void Awake()
     {
         base.Awake();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+
+        // Auto-acquire or add skill components if not assigned
+        if (rangedSkill == null)
+        {
+            rangedSkill = GetComponent<IchigoRangedSkill>();
+            if (rangedSkill == null)
+            {
+                rangedSkill = gameObject.AddComponent<IchigoRangedSkill>();
+#pragma warning disable 0618
+                if (rangedProjectilePrefab != null)
+                {
+                    rangedSkill.projectilePrefab = rangedProjectilePrefab;
+                }
+#pragma warning restore 0618
+            }
+        }
+
+        if (ultimateSkill == null)
+        {
+            ultimateSkill = GetComponent<IchigoUltimateSkill>();
+            if (ultimateSkill == null)
+            {
+                ultimateSkill = gameObject.AddComponent<IchigoUltimateSkill>();
+#pragma warning disable 0618
+                if (ultimateEffectPrefab != null)
+                {
+                    ultimateSkill.ultimateEffectPrefab = ultimateEffectPrefab;
+                }
+                if (ultimateDuration > 0)
+                {
+                    ultimateSkill.ultimateDuration = ultimateDuration;
+                }
+#pragma warning restore 0618
+            }
+        }
+
         LoadKeybindings();
+        SetupPlayerInputBindings();
+    }
+
+    public override void InitializePlayer(int num)
+    {
+        base.InitializePlayer(num);
+        LoadKeybindings();
+        SetupPlayerInputBindings();
     }
 
     private void LoadKeybindings()
@@ -45,142 +111,164 @@ public class IchigoController : FighterBase
         }
 
         keys = (playerNumber == 1) ? settingsData.player1Keys : settingsData.player2Keys;
+        supportKey = keys.support;
         initializedBindings = true;
         
-        Debug.Log($"[IchigoController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}");
+        Debug.Log($"[IchigoController] Bindings loaded for Player {playerNumber}. Left: {keys.moveLeft}, Right: {keys.moveRight}, Block: {keys.defense}, Attack: {keys.attack}, Jump: {keys.jump}, Dash: {keys.dodge}, Ranged: {keys.rangedAttack}, Ultimate: {keys.specialMove}, Support: {supportKey}");
     }
 
-    protected override void Update()
+    private void SetupPlayerInputBindings()
     {
-        if (CurrentState == FighterState.Dead) return;
+        if (playerInput == null || playerInput.actions == null) return;
 
-        // Grounded check and FSM state logics
-        CheckGrounded();
-        HandleStateLogic();
-        HandleStaminaRegen();
-        UpdateAnimations();
+        // Disable all actions before changing bindings to avoid InvalidOperationException
+        playerInput.actions.Disable();
 
-        // Read direct keyboard inputs using dynamic bindings
-        if (initializedBindings)
+        var playerMap = playerInput.actions.FindActionMap("Player");
+        if (playerMap != null)
         {
-            bool isDefenseHeld = GetKey(keys.defense);
-
-            if (isDefenseHeld)
+            // 1. Setup Move Action (Composite)
+            var moveAction = playerMap.FindAction("Move");
+            if (moveAction != null)
             {
-                // Khi giữ defense: chỉ nhảy xuống platform, không bao giờ nhảy lên
-                if (GetKeyDown(keys.jump) || GetKeyDown(keys.dodge))
+                moveAction.RemoveAllBindingOverrides();
+                for (int i = 0; i < moveAction.bindings.Count; i++)
                 {
-                    TryDropDown();
+                    var binding = moveAction.bindings[i];
+                    if (binding.isPartOfComposite)
+                    {
+                        if (binding.name == "left")
+                        {
+                            moveAction.ApplyBindingOverride(i, GetBindingPath(keys.moveLeft));
+                        }
+                        else if (binding.name == "right")
+                        {
+                            moveAction.ApplyBindingOverride(i, GetBindingPath(keys.moveRight));
+                        }
+                    }
                 }
             }
-            else
-            {
-                if (GetKeyDown(keys.jump))
-                {
-                    ExecuteJump();
-                }
 
-                if (GetKeyDown(keys.dodge))
-                {
-                    TriggerDash();
-                }
+            // 2. Setup Jump Action
+            var jumpAction = playerMap.FindAction("Jump");
+            if (jumpAction != null)
+            {
+                jumpAction.RemoveAllBindingOverrides();
+                jumpAction.ApplyBindingOverride(GetBindingPath(keys.jump));
             }
 
-            if (GetKeyDown(keys.attack))
+            // 3. Setup Attack Action
+            var attackAction = playerMap.FindAction("Attack");
+            if (attackAction != null)
             {
-                TriggerAttack();
+                attackAction.RemoveAllBindingOverrides();
+                attackAction.ApplyBindingOverride(GetBindingPath(keys.attack));
             }
 
-            if (GetKeyDown(keys.rangedAttack))
+            // 4. Setup Block Action
+            var blockAction = playerMap.FindAction("Block");
+            if (blockAction != null)
             {
-                TriggerRanged();
+                blockAction.RemoveAllBindingOverrides();
+                blockAction.ApplyBindingOverride(GetBindingPath(keys.defense));
             }
 
-            if (GetKeyDown(keys.specialMove))
+            // 5. Setup Dash Action
+            var dashAction = playerMap.FindAction("Dash");
+            if (dashAction != null)
             {
-                TriggerUltimate();
+                dashAction.RemoveAllBindingOverrides();
+                dashAction.ApplyBindingOverride(GetBindingPath(keys.dodge));
+                dashAction.performed += ctx => OnDash();
+            }
+
+            // 6. Setup Ranged Action
+            var rangedAction = playerMap.FindAction("Ranged");
+            if (rangedAction != null)
+            {
+                rangedAction.RemoveAllBindingOverrides();
+                rangedAction.ApplyBindingOverride(GetBindingPath(keys.rangedAttack));
+                rangedAction.performed += ctx => OnRanged();
+            }
+
+            // 7. Setup Special Action
+            var specialAction = playerMap.FindAction("Special");
+            if (specialAction != null)
+            {
+                specialAction.RemoveAllBindingOverrides();
+                specialAction.ApplyBindingOverride(GetBindingPath(keys.specialMove));
+                specialAction.performed += ctx => OnSpecial();
+            }
+
+            // 8. Setup Support Action
+            var supportAction = playerMap.FindAction("Support");
+            if (supportAction != null)
+            {
+                supportAction.RemoveAllBindingOverrides();
+                supportAction.ApplyBindingOverride(GetBindingPath(keys.support));
+                supportAction.performed += ctx => OnSupport();
             }
         }
+
+        // Re-enable all actions
+        playerInput.actions.Enable();
     }
 
-    protected override void HandleStateLogic()
+    private string GetBindingPath(KeyCode keyCode)
     {
-        // Reset combo if attack delay exceeds threshold
-        if (comboStep > 0 && Time.time - lastAttackTime > comboResetTime && CurrentState != FighterState.Attacking)
+        switch (keyCode)
         {
-            comboStep = 0;
-        }
-
-        // Horizontal movement control
-        float horizontal = 0f;
-        if (initializedBindings)
-        {
-            if (GetKey(keys.moveLeft)) horizontal -= 1f;
-            if (GetKey(keys.moveRight)) horizontal += 1f;
-        }
-        else
-        {
-            // Fallback to PlayerInput if bindings not yet initialized
-            if (playerInput != null && playerInput.actions != null)
-            {
-                var moveAct = playerInput.actions.FindAction("Move");
-                if (moveAct != null) horizontal = moveAct.ReadValue<Vector2>().x;
-            }
-        }
-        moveInput = new Vector2(horizontal, 0f);
-
-        if (CanAct())
-        {
-            bool isBlockingInput = false;
-            if (initializedBindings)
-            {
-                isBlockingInput = GetKey(keys.defense);
-            }
-            else
-            {
-                if (playerInput != null && playerInput.actions != null)
-                {
-                    var blockAct = playerInput.actions.FindAction("Block");
-                    if (blockAct != null) isBlockingInput = blockAct.IsPressed();
-                }
-            }
-
-            if (isBlockingInput && isGrounded)
-            {
-                ChangeState(FighterState.Blocking);
-            }
-            else if (Mathf.Abs(moveInput.x) > 0.1f)
-            {
-                ChangeState(FighterState.Moving);
-            }
-            else
-            {
-                ChangeState(isGrounded ? FighterState.Idle : FighterState.Jumping);
-            }
+            case KeyCode.LeftArrow: return "<Keyboard>/leftArrow";
+            case KeyCode.RightArrow: return "<Keyboard>/rightArrow";
+            case KeyCode.UpArrow: return "<Keyboard>/upArrow";
+            case KeyCode.DownArrow: return "<Keyboard>/downArrow";
+            case KeyCode.Keypad0: return "<Keyboard>/numpad0";
+            case KeyCode.Keypad1: return "<Keyboard>/numpad1";
+            case KeyCode.Keypad2: return "<Keyboard>/numpad2";
+            case KeyCode.Keypad3: return "<Keyboard>/numpad3";
+            case KeyCode.Keypad4: return "<Keyboard>/numpad4";
+            case KeyCode.Keypad5: return "<Keyboard>/numpad5";
+            case KeyCode.Keypad6: return "<Keyboard>/numpad6";
+            case KeyCode.Keypad7: return "<Keyboard>/numpad7";
+            case KeyCode.Keypad8: return "<Keyboard>/numpad8";
+            case KeyCode.Keypad9: return "<Keyboard>/numpad9";
+            case KeyCode.Space: return "<Keyboard>/space";
+            case KeyCode.Return: return "<Keyboard>/enter";
+            case KeyCode.Escape: return "<Keyboard>/escape";
+            case KeyCode.Tab: return "<Keyboard>/tab";
+            case KeyCode.LeftShift: return "<Keyboard>/leftShift";
+            case KeyCode.RightShift: return "<Keyboard>/rightShift";
+            case KeyCode.LeftControl: return "<Keyboard>/leftCtrl";
+            case KeyCode.RightControl: return "<Keyboard>/rightCtrl";
+            case KeyCode.LeftAlt: return "<Keyboard>/leftAlt";
+            case KeyCode.RightAlt: return "<Keyboard>/rightAlt";
+            default:
+                string name = keyCode.ToString();
+                if (name.StartsWith("Alpha")) name = name.Substring(5);
+                return $"<Keyboard>/{name.ToLower()}";
         }
     }
 
-    // --- COMBAT EXECUTION ---
-    private void TriggerAttack()
-    {
-        if (!CanAct() || !isGrounded) return;
-        ExecuteAttack();
-    }
-
-    private void TriggerRanged()
+    public void OnRanged()
     {
         if (!CanAct() || !isGrounded) return;
         ExecuteRanged();
     }
 
-    private void TriggerUltimate()
+    public void OnSpecial()
     {
         if (!CanAct() || !isGrounded) return;
+        if (!HasMana(50f))
+        {
+            Debug.Log("[MANA] Không đủ mana dùng Ultimate!");
+            return;
+        }
         ExecuteUltimate();
     }
 
     protected override void ExecuteAttack()
     {
+        PlayAttackSound();
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero; // Stop moving when attacking
         lastAttackTime = Time.time;
@@ -202,9 +290,15 @@ public class IchigoController : FighterBase
 
     private void ExecuteRanged()
     {
+        PlayRangedSound();
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
+
+        if (rangedSkill != null)
+        {
+            rangedSkill.StartCast(this);
+        }
 
         if (anim != null)
         {
@@ -220,10 +314,42 @@ public class IchigoController : FighterBase
 
     private void ExecuteUltimate()
     {
+        SpendMana(50f); // Tiêu 50% mana
         ChangeState(FighterState.Attacking);
         rb.linearVelocity = Vector2.zero;
         lastAttackTime = Time.time;
 
+        if (ultimateVoiceClip != null && audioSource != null)
+            audioSource.PlayOneShot(ultimateVoiceClip, ultimateVoiceVolume);
+
+        // Show cutscene flash before triggering animation
+        StartCoroutine(ExecuteUltimateWithFlash());
+    }
+
+    private IEnumerator ExecuteUltimateWithFlash()
+    {
+        Sprite flashSprite = LoadUltimateAvatar();
+        bool flashDone = false;
+
+        if (flashSprite != null)
+        {
+            // Show flash; onComplete fires AFTER the entire flash animation ends
+            UltimateFlashEffect.Show(this, flashSprite, ultimateFlashSizeFactor, ultimateFlashOffset, new Color(1f, 0.3f, 0f), () =>
+            {
+                flashDone = true;
+            });
+
+            // Lock movement every frame until flash is fully done
+            while (!flashDone)
+            {
+                rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+                ChangeState(FighterState.Attacking);
+                yield return null;
+            }
+        }
+
+        // Flash finished (or no sprite) - now trigger the animation
+        rb.linearVelocity = Vector2.zero;
         if (anim != null)
         {
             anim.SetTrigger("Ultimate");
@@ -236,9 +362,35 @@ public class IchigoController : FighterBase
         }
     }
 
+    private Sprite LoadUltimateAvatar()
+    {
+        if (ultimateFlashSprite != null) return ultimateFlashSprite;
+
+        string avatarPath = "Assets/_Project/Resources/Ichigo/avatar/until_ichigo.jpg";
+#if UNITY_EDITOR
+        var assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(avatarPath);
+        foreach (var a in assets)
+        {
+            if (a is Sprite s) return s;
+        }
+        // Fallback: try loading as Texture2D and convert
+        Texture2D tex = UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>(avatarPath);
+        if (tex != null)
+        {
+            return Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f));
+        }
+#else
+        // Runtime: load from Resources folder
+        Sprite s = Resources.Load<Sprite>("Ichigo/avatar/until_ichigo");
+        return s;
+#endif
+        return null;
+    }
+
     // --- OVERRIDE DASH ROUTINE (FLASH STEP) ---
     protected override IEnumerator DashRoutine()
     {
+        PlayDashSound();
         ChangeState(FighterState.Dashing);
         stats.stamina -= 20;
 
@@ -282,6 +434,7 @@ public class IchigoController : FighterBase
         if (attackHitbox == null) return;
 
         Collider2D[] hits = Physics2D.OverlapCircleAll(attackHitbox.position, attackRadius, targetLayer);
+        bool didHit = false;
         foreach (var hit in hits)
         {
             if (hit.gameObject == gameObject) continue;
@@ -293,90 +446,35 @@ public class IchigoController : FighterBase
                 float damage = 12f + (comboStep * 6f); // 18, 24, 30, 36
                 bool isHeavy = (comboStep == 4);
                 damageable.TakeDamage(damage, transform.position.x, isHeavy);
+                didHit = true;
             }
+        }
+
+        // Hồi mana +10% khi đánh trúng địch
+        if (didHit)
+        {
+            GainMana(10f);
+            Debug.Log($"[MANA] Ichigo đánh trúng! +10% mana. Hiện: {stats.currentMana / stats.maxMana * 100f:F0}%");
         }
     }
 
     public void AnimationEvent_SpawnProjectile()
     {
-        float dir = transform.localScale.x;
-        Vector2 spawnPos = (attackHitbox != null) ? (Vector2)attackHitbox.position : (Vector2)transform.position + new Vector2(dir * 1.0f, 0.2f);
-
-        if (rangedProjectilePrefab != null)
+        if (rangedSkill != null)
         {
-            GameObject projObj = Instantiate(rangedProjectilePrefab, spawnPos, Quaternion.identity);
-            RangedProjectile proj = projObj.GetComponent<RangedProjectile>();
-            if (proj != null)
-            {
-                proj.Setup(new Vector2(dir, 0f), gameObject, targetLayer);
-            }
-        }
-        else
-        {
-            // Dynamic fallback projectile if prefab is unassigned
-            Debug.LogWarning("[IchigoController] Ranged Projectile Prefab not assigned! Creating a dynamic projectile.");
-            GameObject projObj = new GameObject("DynamicProjectile");
-            projObj.transform.position = spawnPos;
-            
-            var col = projObj.AddComponent<BoxCollider2D>();
-            col.isTrigger = true;
-            col.size = new Vector2(0.8f, 0.4f);
-
-            var rbProj = projObj.AddComponent<Rigidbody2D>();
-            rbProj.bodyType = RigidbodyType2D.Kinematic;
-
-            // Inner layer
-            GameObject inner = new GameObject("Inner");
-            inner.transform.SetParent(projObj.transform);
-            inner.transform.localPosition = Vector3.zero;
-            var srInner = inner.AddComponent<SpriteRenderer>();
-            srInner.color = new Color(0f, 0.8f, 1f, 0.9f); // Cyan energy
-            srInner.sprite = LoadIchigoSprite("image-removebg-preview_1");
-
-            // Outer layer
-            GameObject outer = new GameObject("Outer");
-            outer.transform.SetParent(projObj.transform);
-            outer.transform.localPosition = Vector3.zero;
-            var srOuter = outer.AddComponent<SpriteRenderer>();
-            srOuter.color = new Color(0f, 0.4f, 1f, 0.7f); // Blue energy
-            srOuter.sprite = LoadIchigoSprite("image-removebg-preview_1");
-            outer.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-
-            RangedProjectile proj = projObj.AddComponent<RangedProjectile>();
-            proj.Setup(new Vector2(dir, 0f), gameObject, targetLayer);
+            rangedSkill.SpawnProjectile(this, targetLayer);
         }
     }
 
     public void AnimationEvent_SpawnUltimate()
     {
-        Vector2 spawnPos = transform.position;
-
-        if (ultimateEffectPrefab != null)
+        if (ultimateSkill != null)
         {
-            GameObject ultObj = Instantiate(ultimateEffectPrefab, spawnPos, Quaternion.identity);
-            UltimateEffect effect = ultObj.GetComponent<UltimateEffect>();
-            if (effect != null)
-            {
-                effect.Setup(gameObject, targetLayer, ultimateDuration);
-            }
-        }
-        else
-        {
-            // Dynamic fallback ultimate effect if prefab is unassigned
-            Debug.LogWarning("[IchigoController] Ultimate Effect Prefab not assigned! Creating a dynamic effect.");
-            GameObject ultObj = new GameObject("DynamicUltimate");
-            ultObj.transform.position = spawnPos;
-
-            var sr = ultObj.AddComponent<SpriteRenderer>();
-            sr.sprite = LoadIchigoSprite("image-removebg-preview (7)_0");
-            sr.color = new Color(0.9f, 0.1f, 0.1f, 0.8f); // Red energy blade aura
-
-            UltimateEffect effect = ultObj.AddComponent<UltimateEffect>();
-            effect.Setup(gameObject, targetLayer, ultimateDuration);
+            ultimateSkill.SpawnUltimate(this, targetLayer);
         }
     }
 
-    private Sprite LoadIchigoSprite(string spriteName)
+    public Sprite LoadIchigoSprite(string spriteName)
     {
         // Utility to load sprite dynamically in case prefab isn't fully configured
         string sheet = "bankai";
@@ -395,6 +493,7 @@ public class IchigoController : FighterBase
         }
 
         string path = $"Assets/_Project/Characters/Ichigo/ichigo/{sheet}.png";
+#if UNITY_EDITOR
         Object[] assets = UnityEditor.AssetDatabase.LoadAllAssetsAtPath(path);
         foreach (var a in assets)
         {
@@ -403,96 +502,9 @@ public class IchigoController : FighterBase
                 return s;
             }
         }
+#endif
         return null;
     }
 
-    // --- NEW INPUT SYSTEM COMPATIBILITY HELPERS ---
-    private bool GetKey(KeyCode keyCode)
-    {
-        if (Keyboard.current == null) return false;
-        Key key = GetInputSystemKey(keyCode);
-        if (key == Key.None) return false;
-        return Keyboard.current[key].isPressed;
-    }
-
-    private bool GetKeyDown(KeyCode keyCode)
-    {
-        if (Keyboard.current == null) return false;
-        Key key = GetInputSystemKey(keyCode);
-        if (key == Key.None) return false;
-        return Keyboard.current[key].wasPressedThisFrame;
-    }
-
-    private Key GetInputSystemKey(KeyCode keyCode)
-    {
-        switch (keyCode)
-        {
-            case KeyCode.A: return Key.A;
-            case KeyCode.B: return Key.B;
-            case KeyCode.C: return Key.C;
-            case KeyCode.D: return Key.D;
-            case KeyCode.E: return Key.E;
-            case KeyCode.F: return Key.F;
-            case KeyCode.G: return Key.G;
-            case KeyCode.H: return Key.H;
-            case KeyCode.I: return Key.I;
-            case KeyCode.J: return Key.J;
-            case KeyCode.K: return Key.K;
-            case KeyCode.L: return Key.L;
-            case KeyCode.M: return Key.M;
-            case KeyCode.N: return Key.N;
-            case KeyCode.O: return Key.O;
-            case KeyCode.P: return Key.P;
-            case KeyCode.Q: return Key.Q;
-            case KeyCode.R: return Key.R;
-            case KeyCode.S: return Key.S;
-            case KeyCode.T: return Key.T;
-            case KeyCode.U: return Key.U;
-            case KeyCode.V: return Key.V;
-            case KeyCode.W: return Key.W;
-            case KeyCode.X: return Key.X;
-            case KeyCode.Y: return Key.Y;
-            case KeyCode.Z: return Key.Z;
-
-            case KeyCode.Alpha0: return Key.Digit0;
-            case KeyCode.Alpha1: return Key.Digit1;
-            case KeyCode.Alpha2: return Key.Digit2;
-            case KeyCode.Alpha3: return Key.Digit3;
-            case KeyCode.Alpha4: return Key.Digit4;
-            case KeyCode.Alpha5: return Key.Digit5;
-            case KeyCode.Alpha6: return Key.Digit6;
-            case KeyCode.Alpha7: return Key.Digit7;
-            case KeyCode.Alpha8: return Key.Digit8;
-            case KeyCode.Alpha9: return Key.Digit9;
-
-            case KeyCode.LeftArrow: return Key.LeftArrow;
-            case KeyCode.RightArrow: return Key.RightArrow;
-            case KeyCode.UpArrow: return Key.UpArrow;
-            case KeyCode.DownArrow: return Key.DownArrow;
-
-            case KeyCode.Keypad0: return Key.Numpad0;
-            case KeyCode.Keypad1: return Key.Numpad1;
-            case KeyCode.Keypad2: return Key.Numpad2;
-            case KeyCode.Keypad3: return Key.Numpad3;
-            case KeyCode.Keypad4: return Key.Numpad4;
-            case KeyCode.Keypad5: return Key.Numpad5;
-            case KeyCode.Keypad6: return Key.Numpad6;
-            case KeyCode.Keypad7: return Key.Numpad7;
-            case KeyCode.Keypad8: return Key.Numpad8;
-            case KeyCode.Keypad9: return Key.Numpad9;
-
-            case KeyCode.Space: return Key.Space;
-            case KeyCode.Return: return Key.Enter;
-            case KeyCode.Escape: return Key.Escape;
-            case KeyCode.Tab: return Key.Tab;
-            case KeyCode.LeftShift: return Key.LeftShift;
-            case KeyCode.RightShift: return Key.RightShift;
-            case KeyCode.LeftControl: return Key.LeftCtrl;
-            case KeyCode.RightControl: return Key.RightCtrl;
-            case KeyCode.LeftAlt: return Key.LeftAlt;
-            case KeyCode.RightAlt: return Key.RightAlt;
-
-            default: return Key.None;
-        }
-    }
+    // Compatibility helpers replaced by dynamic PlayerInput bindings
 }

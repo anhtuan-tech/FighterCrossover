@@ -1,0 +1,1131 @@
+fileFormatVersion: 2
+guid: 954f4939072bfe443a092c764e6ae970
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1688806642489661204
+    second: SuperNhon_Skill1_Effect_EnergyBall_0
+  - first:
+      213: -4078583851160353747
+    second: SuperNhon_Skill1_Effect_EnergyBall_1
+  - first:
+      213: -4921601031974349081
+    second: SuperNhon_Skill1_Effect_EnergyBall_2
+  - first:
+      213: -17441265096180910
+    second: SuperNhon_Skill1_Effect_EnergyBall_3
+  - first:
+      213: 4062708668821731061
+    second: SuperNhon_Skill1_Effect_EnergyBall_4
+  - first:
+      213: 7218256023676315362
+    second: SuperNhon_Skill1_Effect_EnergyBall_5
+  - first:
+      213: -8927349054892287817
+    second: SuperNhon_Skill1_Effect_EnergyBall_6
+  - first:
+      213: -3849078733952138153
+    second: SuperNhon_Skill1_Effect_EnergyBall_7
+  - first:
+      213: -8994080767561888644
+    second: SuperNhon_Skill1_Effect_EnergyBall_8
+  - first:
+      213: 7671839241240860522
+    second: SuperNhon_Skill1_Effect_EnergyBall_9
+  - first:
+      213: -2768743894727820443
+    second: SuperNhon_Skill1_Effect_EnergyBall_10
+  - first:
+      213: -8434136485267948293
+    second: SuperNhon_Skill1_Effect_EnergyBall_11
+  - first:
+      213: -4592820186299671964
+    second: SuperNhon_Skill1_Effect_EnergyBall_12
+  - first:
+      213: -8291011161417729867
+    second: SuperNhon_Skill1_Effect_EnergyBall_13
+  - first:
+      213: -2132288859090976884
+    second: SuperNhon_Skill1_Effect_EnergyBall_14
+  - first:
+      213: -1774649265971326026
+    second: SuperNhon_Skill1_Effect_EnergyBall_15
+  - first:
+      213: 1463747326562567297
+    second: SuperNhon_Skill1_Effect_EnergyBall_16
+  - first:
+      213: -8639135852804181550
+    second: SuperNhon_Skill1_Effect_EnergyBall_17
+  - first:
+      213: 6469566059169619498
+    second: SuperNhon_Skill1_Effect_EnergyBall_18
+  - first:
+      213: 8565401971094984135
+    second: SuperNhon_Skill1_Effect_EnergyBall_19
+  - first:
+      213: -4638775533563841921
+    second: SuperNhon_Skill1_Effect_EnergyBall_20
+  - first:
+      213: -4840956276036623860
+    second: SuperNhon_Skill1_Effect_EnergyBall_21
+  - first:
+      213: 3099719189224380759
+    second: SuperNhon_Skill1_Effect_EnergyBall_22
+  - first:
+      213: 5083557799268328996
+    second: SuperNhon_Skill1_Effect_EnergyBall_23
+  - first:
+      213: -3478437473453468019
+    second: SuperNhon_Skill1_Effect_EnergyBall_24
+  - first:
+      213: 7373424238189469409
+    second: SuperNhon_Skill1_Effect_EnergyBall_25
+  - first:
+      213: 7358793912455034713
+    second: SuperNhon_Skill1_Effect_EnergyBall_26
+  - first:
+      213: -5609901937748801799
+    second: SuperNhon_Skill1_Effect_EnergyBall_27
+  - first:
+      213: 2178034393510935122
+    second: SuperNhon_Skill1_Effect_EnergyBall_28
+  - first:
+      213: 310883054146014923
+    second: SuperNhon_Skill1_Effect_EnergyBall_29
+  - first:
+      213: 7897366103272295658
+    second: SuperNhon_Skill1_Effect_EnergyBall_30
+  - first:
+      213: -5622628756393641701
+    second: SuperNhon_Skill1_Effect_EnergyBall_31
+  - first:
+      213: -1599954860995284415
+    second: SuperNhon_Skill1_Effect_EnergyBall_32
+  - first:
+      213: -94499020912215971
+    second: SuperNhon_Skill1_Effect_EnergyBall_33
+  - first:
+      213: 8444824978708072679
+    second: SuperNhon_Skill1_Effect_EnergyBall_34
+  - first:
+      213: 1384094104807546234
+    second: SuperNhon_Skill1_Effect_EnergyBall_35
+  - first:
+      213: -893927658150737787
+    second: SuperNhon_Skill1_Effect_EnergyBall_36
+  - first:
+      213: -5946845231244479674
+    second: SuperNhon_Skill1_Effect_EnergyBall_37
+  - first:
+      213: -1367652058451475868
+    second: SuperNhon_Skill1_Effect_EnergyBall_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_0
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 288
+        width: 39
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4179ae391b8df6710800000000000000
+      internalID: 1688806642489661204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_1
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 268
+        width: 74
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2441fcb895f567c0800000000000000
+      internalID: -4078583851160353747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 268
+        width: 78
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e619faefe5f2bbb0800000000000000
+      internalID: -4921601031974349081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_3
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 251
+        width: 111
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25b3285034902cff0800000000000000
+      internalID: -17441265096180910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_4
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 130
+        width: 110
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f6f4075204a16830800000000000000
+      internalID: 4062708668821731061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_5
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 237
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e6ec0d0c956c2460800000000000000
+      internalID: 7218256023676315362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_6
+      rect:
+        serializedVersion: 2
+        x: 367
+        y: 132
+        width: 111
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b8d93d655fab1480800000000000000
+      internalID: -8927349054892287817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_7
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 132
+        width: 107
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 754c546e843559ac0800000000000000
+      internalID: -3849078733952138153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_8
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 137
+        width: 92
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7c0d40d13b9e2380800000000000000
+      internalID: -8994080767561888644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_9
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 198
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a67501c8429d77a60800000000000000
+      internalID: 7671839241240860522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_10
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 158
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56b77b0e8127399d0800000000000000
+      internalID: -2768743894727820443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_11
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 15
+        width: 98
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfc31787d8de3fa80800000000000000
+      internalID: -8434136485267948293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_12
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 21
+        width: 89
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46a5d56df560340c0800000000000000
+      internalID: -4592820186299671964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_13
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 100
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b8b5eeb64960fc80800000000000000
+      internalID: -8291011161417729867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_14
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 97
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8ffb5b74969862e0800000000000000
+      internalID: -2132288859090976884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_15
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 37
+        width: 52
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b31fd425ed2f57e0800000000000000
+      internalID: -1774649265971326026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_16
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 88
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18480b03076405410800000000000000
+      internalID: 1463747326562567297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_17
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 91
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d1f347c6bf9b1880800000000000000
+      internalID: -8639135852804181550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_18
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 91
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2e9ab7bd0488c950800000000000000
+      internalID: 6469566059169619498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_19
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 91
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c51c8516bb6ed670800000000000000
+      internalID: 8565401971094984135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_20
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 88
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f727721ca32cf9fb0800000000000000
+      internalID: -4638775533563841921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_21
+      rect:
+        serializedVersion: 2
+        x: 452
+        y: 74
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c02a3a95ae771dcb0800000000000000
+      internalID: -4840956276036623860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_22
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 82
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7595e29fd2a640b20800000000000000
+      internalID: 3099719189224380759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_23
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 77
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4262e8472ec6c8640800000000000000
+      internalID: 5083557799268328996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_24
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 74
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8616652c8b1abfc0800000000000000
+      internalID: -3478437473453468019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_25
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 71
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eed98f474aa35660800000000000000
+      internalID: 7373424238189469409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_26
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 60
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95770372310bf1660800000000000000
+      internalID: 7358793912455034713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_27
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 63
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f605bff8ef9522b0800000000000000
+      internalID: -5609901937748801799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_28
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 51
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 25a7dcdbdbee93e10800000000000000
+      internalID: 2178034393510935122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_29
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 49
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcecf099d7a705400800000000000000
+      internalID: 310883054146014923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_30
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 51
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aec81cef0a4199d60800000000000000
+      internalID: 7897366103272295658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_31
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 45
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b19b24f9fe868f1b0800000000000000
+      internalID: -5622628756393641701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_32
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 43
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14277b5e781dbc9e0800000000000000
+      internalID: -1599954860995284415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_33
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 40
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d58b7e224a540bef0800000000000000
+      internalID: -94499020912215971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_34
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 28
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e88d36539b023570800000000000000
+      internalID: 8444824978708072679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_35
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 32
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7d14cc414a453310800000000000000
+      internalID: 1384094104807546234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_36
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 29
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5884709f7812893f0800000000000000
+      internalID: -893927658150737787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_37
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 28
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 643727915cf887da0800000000000000
+      internalID: -5946845231244479674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SuperNhon_Skill1_Effect_EnergyBall_38
+      rect:
+        serializedVersion: 2
+        x: 581
+        y: 23
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4620bafe2bf150de0800000000000000
+      internalID: -1367652058451475868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SuperNhon_Skill1_Effect_EnergyBall_0: 1688806642489661204
+      SuperNhon_Skill1_Effect_EnergyBall_1: -4078583851160353747
+      SuperNhon_Skill1_Effect_EnergyBall_10: -2768743894727820443
+      SuperNhon_Skill1_Effect_EnergyBall_11: -8434136485267948293
+      SuperNhon_Skill1_Effect_EnergyBall_12: -4592820186299671964
+      SuperNhon_Skill1_Effect_EnergyBall_13: -8291011161417729867
+      SuperNhon_Skill1_Effect_EnergyBall_14: -2132288859090976884
+      SuperNhon_Skill1_Effect_EnergyBall_15: -1774649265971326026
+      SuperNhon_Skill1_Effect_EnergyBall_16: 1463747326562567297
+      SuperNhon_Skill1_Effect_EnergyBall_17: -8639135852804181550
+      SuperNhon_Skill1_Effect_EnergyBall_18: 6469566059169619498
+      SuperNhon_Skill1_Effect_EnergyBall_19: 8565401971094984135
+      SuperNhon_Skill1_Effect_EnergyBall_2: -4921601031974349081
+      SuperNhon_Skill1_Effect_EnergyBall_20: -4638775533563841921
+      SuperNhon_Skill1_Effect_EnergyBall_21: -4840956276036623860
+      SuperNhon_Skill1_Effect_EnergyBall_22: 3099719189224380759
+      SuperNhon_Skill1_Effect_EnergyBall_23: 5083557799268328996
+      SuperNhon_Skill1_Effect_EnergyBall_24: -3478437473453468019
+      SuperNhon_Skill1_Effect_EnergyBall_25: 7373424238189469409
+      SuperNhon_Skill1_Effect_EnergyBall_26: 7358793912455034713
+      SuperNhon_Skill1_Effect_EnergyBall_27: -5609901937748801799
+      SuperNhon_Skill1_Effect_EnergyBall_28: 2178034393510935122
+      SuperNhon_Skill1_Effect_EnergyBall_29: 310883054146014923
+      SuperNhon_Skill1_Effect_EnergyBall_3: -17441265096180910
+      SuperNhon_Skill1_Effect_EnergyBall_30: 7897366103272295658
+      SuperNhon_Skill1_Effect_EnergyBall_31: -5622628756393641701
+      SuperNhon_Skill1_Effect_EnergyBall_32: -1599954860995284415
+      SuperNhon_Skill1_Effect_EnergyBall_33: -94499020912215971
+      SuperNhon_Skill1_Effect_EnergyBall_34: 8444824978708072679
+      SuperNhon_Skill1_Effect_EnergyBall_35: 1384094104807546234
+      SuperNhon_Skill1_Effect_EnergyBall_36: -893927658150737787
+      SuperNhon_Skill1_Effect_EnergyBall_37: -5946845231244479674
+      SuperNhon_Skill1_Effect_EnergyBall_38: -1367652058451475868
+      SuperNhon_Skill1_Effect_EnergyBall_4: 4062708668821731061
+      SuperNhon_Skill1_Effect_EnergyBall_5: 7218256023676315362
+      SuperNhon_Skill1_Effect_EnergyBall_6: -8927349054892287817
+      SuperNhon_Skill1_Effect_EnergyBall_7: -3849078733952138153
+      SuperNhon_Skill1_Effect_EnergyBall_8: -8994080767561888644
+      SuperNhon_Skill1_Effect_EnergyBall_9: 7671839241240860522
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

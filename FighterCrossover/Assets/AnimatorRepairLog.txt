@@ -1,0 +1,8 @@
+=== Animator Sanity Fixer Report ===
+Run time: 7/1/2026 2:37:20 PM
+
+Checking: Assets/_Project/Characters/Ichigo/IchigoAnimatorController.controller
+Controller check completed.
+
+Checking: Assets/_Project/Characters/Gray/GrayAnimatorController.controller
+Controller check completed.
